@@ -1,45 +1,57 @@
 import fitz  # 导入 PyMuPDF
 
-# ================= 1. 核心参数设置 =================
-# 在这里调整你的剪刀位置 (0.0 到 1.0 之间)
-# 例如：0.10 表示切掉左边 10%，0.90 表示切掉右边 10%
-LEFT_CROP_RATIO = 0.12  
-RIGHT_CROP_RATIO = 0.88 
+# ================= 1. 核心参数设置 (上下左右全方位裁剪) =================
+LEFT_CROP_RATIO = 0.08    # 左侧边界
+RIGHT_CROP_RATIO = 0.98   # 右侧边界
+TOP_CROP_RATIO = 0.122    # 顶部边界
+BOTTOM_CROP_RATIO = 0.95  # 底部边界
 
-def debug_crop_box(pdf_path, test_page_index=10):
+def debug_crop_box(pdf_path, num_samples=10):
     """
-    【调试神器】抽查一页，画出红色的裁剪框，并保存为图片供你预览。
+    【升级版调试神器】从全书中均匀抽取多页，画出红色的全方位裁剪框。
     """
-    print(f"🛠️ 正在生成第 {test_page_index + 1} 页的裁剪预览图...")
+    print(f"🛠️ 正在从全书中均匀抽取 {num_samples} 页生成裁剪预览图...")
     doc = fitz.open(pdf_path)
+    total_pages = len(doc)
     
-    if test_page_index >= len(doc):
-        test_page_index = len(doc) - 1
+    # 避免抽样数大于总页数
+    num_samples = min(num_samples, total_pages)
+    
+    # 计算均匀分布的页码索引
+    step = total_pages / num_samples
+    test_pages = [int(i * step) for i in range(num_samples)]
+    
+    for page_index in test_pages:
+        page = doc[page_index]
+        rect = page.rect
+        width, height = rect.width, rect.height
         
-    page = doc[test_page_index]
-    rect = page.rect
-    width, height = rect.width, rect.height
-    
-    # 计算安全区域的物理坐标
-    safe_rect = fitz.Rect(width * LEFT_CROP_RATIO, 0, width * RIGHT_CROP_RATIO, height)
-    
-    # 在页面上画一个红色的矩形框 (RGB: 1,0,0)
-    page.draw_rect(safe_rect, color=(1, 0, 0), width=2)
-    
-    # 导出为图片
-    pix = page.get_pixmap(matrix=fitz.Matrix(2, 2))
-    preview_img = "crop_preview.png"
-    pix.save(preview_img)
+        # 应用上下左右四个边界
+        safe_rect = fitz.Rect(
+            width * LEFT_CROP_RATIO, 
+            height * TOP_CROP_RATIO, 
+            width * RIGHT_CROP_RATIO, 
+            height * BOTTOM_CROP_RATIO
+        )
+        
+        # 在页面上画一个红色的矩形框 (RGB: 1,0,0)
+        page.draw_rect(safe_rect, color=(1, 0, 0), width=2)
+        
+        # 导出为图片 (名字里带上真实的页码，方便你对照查找)
+        pix = page.get_pixmap(matrix=fitz.Matrix(2, 2))
+        preview_img = f"crop_preview_page_{page_index + 1}.png"
+        pix.save(preview_img)
+        print(f"  ✅ 生成预览图: {preview_img}")
+        
     doc.close()
-    
-    print(f"✅ 预览图已生成: {preview_img}")
-    print("👉 请打开这张图片看看红框。正文必须全在红框内，水印必须全在红框外！")
-    print("👉 如果不满意，请微调代码顶部的 LEFT_CROP_RATIO 和 RIGHT_CROP_RATIO。\n")
+    print("\n👉 请在当前文件夹下查看这批图片。")
+    print("👉 确保这 10 张图的红框都完美包住了正文，且避开了干扰信息。")
+    print("👉 如果有任何一张切偏了，请按 Ctrl+C 退出，微调顶部的 4 个参数后再试。\n")
 
 
 def extract_pdf_with_toc(pdf_path, output_md):
     """
-    正式提取函数：利用目录生成标题，并进行物理防篡改裁剪。
+    正式提取函数：利用目录生成标题，并进行全方位物理防篡改裁剪。
     """
     print(f"📖 正在打开 PDF 进行全文提取: {pdf_path}")
     doc = fitz.open(pdf_path)
@@ -66,9 +78,15 @@ def extract_pdf_with_toc(pdf_path, output_md):
                     md_header = "#" * level
                     f.write(f"\n\n{md_header} {title}\n\n")
             
-            # 应用裁剪区域
+            # 应用上下左右全方位裁剪区域
             rect = page.rect
-            safe_rect = fitz.Rect(rect.width * LEFT_CROP_RATIO, 0, rect.width * RIGHT_CROP_RATIO, rect.height)
+            width, height = rect.width, rect.height
+            safe_rect = fitz.Rect(
+                width * LEFT_CROP_RATIO, 
+                height * TOP_CROP_RATIO, 
+                width * RIGHT_CROP_RATIO, 
+                height * BOTTOM_CROP_RATIO
+            )
             
             # 提取安全框内的文本
             text = page.get_text("text", clip=safe_rect)
@@ -87,15 +105,12 @@ def extract_pdf_with_toc(pdf_path, output_md):
 
 # ================= 3. 运行逻辑 =================
 if __name__ == "__main__":
-    # ⚠️ 请确认你的文件名和路径
-    input_pdf = "123.pdf" 
-    output_markdown = "123_extracted.md"
+    input_pdf = "G:\\书籍\\中文\\倪柝声\\倪柝声《旷野的筵席》.pdf" 
+    output_markdown = "Kuangye.md"
     
-    # 第一步：先生成一张预览图让你检查剪刀位置（默认抽查第10页）
-    # 如果报错说超出页码，可以把 10 改成 2 或 3
-    debug_crop_box(input_pdf, test_page_index=10)
+    # 自动生成 10 张均匀分布的测试图
+    debug_crop_box(input_pdf, num_samples=10)
     
-    # 第二步：如果你看了预览图觉得没问题，直接按回车键开始全文提取
-    user_input = input("请查看生成的 crop_preview.png。红框位置准吗？\n准的话按【回车键】开始全文转换，不准请按【Ctrl+C】退出并修改比例代码：")
+    user_input = input("请查看生成的这批预览图。红框位置准吗？\n准的话按【回车键】开始全文转换，不准请按【Ctrl+C】退出：")
     
     extract_pdf_with_toc(input_pdf, output_markdown)
