@@ -99,7 +99,6 @@
 
         #loading-status { text-align: center; color: var(--primary); font-size: 14px; margin: 15px 0; font-weight: 800;}
 
-        /* ZW 仓库特有：三个进度条 */
         .stats-dashboard { display: grid; grid-template-columns: 1fr; gap: 15px; margin: 0 0 25px 0; }
         @media (min-width: 600px) { .stats-dashboard { grid-template-columns: repeat(3, 1fr); } }
 
@@ -139,7 +138,7 @@
         .btn-weekly { background: #f2f2f7; color: var(--secondary); }
         .btn-success { background: var(--success) !important; color: white !important; }
 
-        /* ================= 📊 底部数据大盘样式 (带滑动适配) ================= */
+        /* ================= 📊 底部数据大盘样式 ================= */
         .dash-card { background: var(--card-bg); border-radius: 24px; padding: 25px 20px; margin-top: 10px; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
         .dash-header { text-align: center; margin-bottom: 20px; }
         .dash-title { font-size: 18px; font-weight: 900; color: var(--text-main); margin: 0; }
@@ -163,33 +162,19 @@
         
         .btn-close-modal { background: var(--primary); color: white; width: 100%; padding: 15px; border-radius: 16px; font-size: 16px; font-weight: 800; border: none; margin-top: 15px; cursor: pointer; }
 
-        /* ================= 阅读大弹窗 ================= */
-        .reading-modal {
-            max-width: 680px; width: 92%; height: 85vh; max-height: 850px; padding: 0;
-            margin: 0 auto; display: flex; flex-direction: column; text-align: left;
-            background: #ffffff; border-radius: 28px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.15);
-        }
+        .reading-modal { max-width: 680px; width: 92%; height: 85vh; max-height: 850px; padding: 0; margin: 0 auto; display: flex; flex-direction: column; text-align: left; background: #ffffff; border-radius: 28px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.15); }
         .reading-header { background: #ffffff; padding: 20px 24px 15px 24px; display: flex; justify-content: center; align-items: center; position: relative; border-bottom: 1px solid rgba(0,0,0,0.05); z-index: 10; }
         .reading-header::before { content: ''; position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 40px; height: 5px; background: #e2e8f0; border-radius: 10px; }
         .reading-header h2 { margin: 10px 0 0 0; font-size: 18px; font-weight: 800; color: var(--text-main); letter-spacing: 1px; text-align: center; max-width: 80%;}
-        
         .btn-close-reading { position: absolute; right: 15px; top: 15px; background: #f1f5f9; border: none; color: #64748b; width: 30px; height: 30px; border-radius: 50%; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-        .btn-close-reading:active { transform: scale(0.9); background: #e2e8f0; color: var(--text-main); }
-        
-        .reading-body {
-            padding: 30px 24px; overflow-y: auto; flex: 1; font-size: 18px; color: #2c2c2e; background: #fcfcfc;
-            word-wrap: break-word; text-align: justify; font-family: "Noto Serif SC", "Songti SC", STSong, "FangSong", Georgia, serif; font-weight: 400; 
-        }
+        .reading-body { padding: 30px 24px; overflow-y: auto; flex: 1; font-size: 18px; color: #2c2c2e; background: #fcfcfc; word-wrap: break-word; text-align: justify; font-family: "Noto Serif SC", "Songti SC", STSong, "FangSong", Georgia, serif; font-weight: 400; }
         .reading-body p { margin: 0 0 1.2em 0; line-height: 1.9; }
         .reading-body h1, .reading-body h2 { color: var(--text-main); margin: 0 0 25px 0; text-align: left; font-weight: 900; font-size: 1.6em; line-height: 1.4; border-bottom: 2px solid var(--primary-light); padding-bottom: 10px;}
         .reading-body h3 { color: var(--primary); margin: 25px 0 10px 0; text-align: left; font-weight: 900; font-size: 1.2em;}
         .reading-body strong { color: var(--text-main); font-weight: 900; }
-        
         .reading-footer { padding: 15px 24px 25px 24px; background: #fcfcfc; border-top: 1px solid rgba(0,0,0,0.05);}
         .btn-reading-done { background: var(--primary); color: white; width: 100%; padding: 15px; border-radius: 16px; font-size: 16px; font-weight: 800; border: none; cursor: pointer; box-shadow: 0 4px 15px var(--primary-light); }
-        .btn-reading-done:active { opacity: 0.8; }
 
-        /* ================= 视频沉浸弹窗 ================= */
         .video-modal-overlay { visibility: hidden; opacity: 0; pointer-events: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100vw; height: 100vh; height: 100dvh; background: rgba(0, 0, 0, 0.92); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); z-index: 3000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: all 0.35s cubic-bezier(0.15, 1, 0.3, 1); }
         .video-modal-overlay.show { visibility: visible; opacity: 1; pointer-events: auto; }
         .video-modal-content { max-width: 900px; width: 90%; position: relative; transform: scale(0.9); transition: all 0.4s cubic-bezier(0.15, 1, 0.3, 1.1); }
@@ -197,8 +182,6 @@
         .video-modal-header { width: 100%; padding: 15px 20px; display: flex; justify-content: center; align-items: center; color: white; box-sizing: border-box; background: rgba(255, 255, 255, 0.04); border-radius: 18px 18px 0 0; position: relative; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .video-modal-header h2 { font-size: 16px; font-weight: 900; color: #fff; margin: 0; letter-spacing: 0.8px; text-align: center; max-width: 80%; text-transform: uppercase; display: flex; align-items: center; gap: 8px;}
         .btn-close-video { position: absolute; right: 15px; top: 12px; background: rgba(255,255,255,0.15); border: none; color: rgba(255,255,255,0.7); width: 34px; height: 34px; border-radius: 50%; font-size: 18px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;}
-        .btn-close-video:hover { background: var(--secondary); color: white; transform: rotate(90deg); }
-        .btn-close-video:active { background: rgba(255,255,255,0.3); transform: scale(0.9); }
         .video-player-container { width: 100%; aspect-ratio: 16 / 9; background: #000; box-shadow: 0 20px 60px rgba(0,0,0,0.8); border-radius: 0 0 18px 18px; overflow: hidden; position: relative; border: 2px solid rgba(255,255,255,0.02); }
         .video-player-container video { width: 100%; height: 100%; border-radius: 0 0 16px 16px; outline: none; }
 
@@ -364,10 +347,7 @@
                 <button class="btn-close-reading" onclick="closeReading()">✕</button>
             </div>
             <div class="reading-body" id="reading-body">
-                <div style="text-align:center; padding: 40px 0;">
-                    <div style="font-size:30px; margin-bottom:15px; animation: flowingWatermark 1.5s infinite;">⏳</div>
-                    正在加载文档...
-                </div>
+                <div style="text-align:center; padding: 40px 0;"><div style="font-size:30px; margin-bottom:15px; animation: flowingWatermark 1.5s infinite;">⏳</div>正在加载文档...</div>
             </div>
             <div class="reading-footer">
                 <button class="btn-reading-done" onclick="closeReading()">我读完了</button>
@@ -401,33 +381,25 @@
         const API_TOKEN = "awAGCSLcP-P-ABUja1yMxNopjD_cX4OnfbKO2cR0"; 
         const NOCODB_API_URL = "http://mouss.synology.me:32771/api/v2/tables/md6q8riiyslkw6p/records"; 
         
-        // ZW专属 24人名单
         const MEMBERS = ["迦密", "恩惠","以琳", "陈蜜", "诚志", "信凯", "周睿", "家乐", "可心", "佳音", "李好", "文琪",  "奕豪", "爱赐", "梓楠", "思恩", "浙君", "丹萍", "天宇", "恩悯", "翠翠", "慕智", "蒙恩", "贝贝"]; 
         const TOTAL_MEMBERS = MEMBERS.length;
 
-        // 📅 为了兼容后续排期，加入排期引擎骨架，默认使用占位数据
         const WEEKLY_SCHEDULE = [
-            { 
-                start: "2026-01-01", end: "2026-12-31", 
-                title: "《基督是一切》马太福音：基督是我们的王", 
-                verse: "约翰福音17:1-2"
-                // url: "http://nas...", video: "视频名字" (若后续增加视频，可补入这两个参数)
-            }
+            { start: "2026-01-01", end: "2026-12-31", title: "《基督是一切》马太福音：基督是我们的王", verse: "约翰福音17:1-2" }
         ];
 
         let REAL_TODAY = new Date(), viewingDate = new Date(), globalRecords = [], currentProfileName = "", pendingCancel = null;
         const fontStackQuotes = `"Noto Serif SC", "Kaiti SC", STKaiti, "Songti SC", FangSong, STFangsong, serif`;
-        let chartInstances = {}; // 图表实例管理
+        let chartInstances = {}; 
 
         function getSafeDateString(d) { return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; }
         function getIsoWithTimezoneForViewing() { const now = new Date(); return `${getSafeDateString(viewingDate)}T${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}+08:00`; }
-        function getMonday(d) { let tempDate = new Date(d); let day = tempDate.getDay(); let diff = tempDate.getDate() - day + (day === 0 ? -6 : 1); tempDate.setDate(diff); return getSafeDateString(tempDate); }
         
-        // 🗓️ 周历引擎重构：找周日作为每周第一天
+        // 🗓️ 找周日作为每周第一天
         function getWeekStart(d) { 
             let tempDate = new Date(d); 
-            let day = tempDate.getDay(); // 0 是周日
-            let diff = tempDate.getDate() - day; // 退回到周日
+            let day = tempDate.getDay(); 
+            let diff = tempDate.getDate() - day; 
             tempDate.setDate(diff); 
             return getSafeDateString(tempDate); 
         }
@@ -447,7 +419,6 @@
             return matchScore >= 4;
         }
 
-        // ================= 🎬 视频播放引擎 =================
         function openVideo(url, title) {
             let cleanTitle = title.split('211209-')[1] || title; 
             document.getElementById('video-modal-title').innerText = cleanTitle;
@@ -462,7 +433,6 @@
             document.getElementById('video-overlay').classList.remove('show');
         }
 
-        // ================= 🌍 WordProject 经文引擎 =================
         async function openScriptureOnline(refStr) {
             document.getElementById('reading-title').innerText = `背经 | ${refStr}`;
             document.getElementById('reading-overlay').classList.add('show');
@@ -474,13 +444,11 @@
             try {
                 const match = refStr.replace(/\s/g, '').match(/^([\u4e00-\u9fa5]+)(\d+)(?::(\d+)(?:-(\d+))?)?$/);
                 if (!match || !wpBookMap[match[1]]) throw new Error("Format error");
-                
                 let bookId = wpBookMap[match[1]]; let chapter = match[2]; let startVerse = match[3] ? parseInt(match[3]) : null;
                 bodyEl.innerHTML = `<div style="font-family: ${fontStackQuotes}; padding: 10px;"><h2 style="text-align:center; color:var(--text-main); font-weight:900; margin-bottom: 20px; border:none;">${refStr}</h2></div><iframe src="https://www.wordproject.org/bibles/gb/${bookId}/${chapter}.htm${startVerse ? '#'+startVerse : ''}" style="width:100%; height:70vh; border:none; border-radius:12px; background:#fff;"></iframe>`;
-            } catch (error) { bodyEl.innerHTML = `<div style="text-align:center; color:var(--warning); margin-top:30px;"><span style="font-size:40px;">⚠️</span><br><br><strong>经文格式解析失败</strong><br><span style="font-size:14px; color:var(--text-sub);">请检查格式（如：罗马书7:1-5）</span></div>`; }
+            } catch (error) { bodyEl.innerHTML = `<div style="text-align:center; color:var(--warning); margin-top:30px;"><span style="font-size:40px;">⚠️</span><br><br><strong>经文格式解析失败</strong><br></div>`; }
         }
 
-        // ================= 🛠️ AI 级异常换行自动缝合算法 =================
         function formatMarkdownBlocks(contentLines) {
             function isNewBlockStart(str) {
                 if (/^#/.test(str)) return true; if (/^([0-9]+|[一二三四五六七八九十]+)[\.、]/.test(str)) return true; if (/^[-*+]\s/.test(str)) return true; 
@@ -505,7 +473,6 @@
             let html = `<p>${joined.replace(/\n\n+/g, '</p><p>').replace(/\n/g, '<br>')}</p>`; html = html.replace(/<p><h([1-6])>(.*?)<\/h\1><\/p>/g, '<h$1>$2</h$1>'); return html;
         }
 
-        // ================= 📚 双抓取引擎 (ZW版本专属源) =================
         async function openDailyReading() {
             const month = viewingDate.getMonth() + 1; const day = viewingDate.getDate();
             const targetChineseDate = `${toChineseNum(month)}月${toChineseNum(day)}日`;
@@ -530,8 +497,7 @@
                     if (!isCapturing) {
                         const match = line.match(dateLineRegex);
                         if (match && line.length < 100) { 
-                            isCapturing = true; 
-                            mdRealTitle = match[1].replace(/^[-\s|:：]+/, '').trim();
+                            isCapturing = true; mdRealTitle = match[1].replace(/^[-\s|:：]+/, '').trim();
                             if(mdRealTitle) contentLines.push(`# ${mdRealTitle}`);
                         }
                     } else {
@@ -539,11 +505,7 @@
                         contentLines.push(rawLine); 
                     }
                 }
-                
-                while (contentLines.length > 0 && (contentLines[0].trim() === '' || contentLines[0].trim() === target2 || contentLines[0].trim() === target1)) {
-                    contentLines.shift();
-                }
-
+                while (contentLines.length > 0 && (contentLines[0].trim() === '' || contentLines[0].trim() === target2 || contentLines[0].trim() === target1)) { contentLines.shift(); }
                 if (contentLines.length > 0) bodyEl.innerHTML = formatMarkdownBlocks(contentLines);
                 else bodyEl.innerHTML = `<div style="text-align:center; color:var(--text-sub); margin-top:30px;"><span style="font-size:40px;">📭</span><br><br><strong>没有在文档里找到 ${target1} 的内容。</strong></div>`;
             } catch (e) { bodyEl.innerHTML = `<div style="text-align:center; color:var(--warning); margin-top:30px;"><span style="font-size:40px;">⚠️</span><br><br><strong>读取 Yonghuo.md 失败</strong></div>`; }
@@ -566,35 +528,27 @@
                     if (!isCapturing) {
                         const titleMatch = line.match(/^##\s+(.*)/);
                         if (titleMatch && isTitleMatch(titleMatch[1].trim(), targetTitle)) { 
-                            isCapturing = true; 
-                            mdRealTitle = titleMatch[1].trim(); 
-                            contentLines.push(`## ${mdRealTitle}`); 
+                            isCapturing = true; mdRealTitle = titleMatch[1].trim(); contentLines.push(`## ${mdRealTitle}`); 
                         }
                     } else {
                         if (/^##\s/.test(line)) break;
                         contentLines.push(rawLine); 
                     }
                 }
-
                 if (isCapturing) { bodyEl.innerHTML = formatMarkdownBlocks(contentLines); }
                 else bodyEl.innerHTML = `<div style="text-align:center; color:var(--text-sub); margin-top:30px;"><span style="font-size:40px;">📭</span><br><br><strong>未找到周课内容。</strong></div>`;
-            } catch (e) {
-                bodyEl.innerHTML = `<div style="text-align:center; color:var(--warning); margin-top:30px;"><span style="font-size:40px;">⚠️</span><br><br><strong>读取失败</strong></div>`;
-            }
+            } catch (e) { bodyEl.innerHTML = `<div style="text-align:center; color:var(--warning); margin-top:30px;"><span style="font-size:40px;">⚠️</span><br><br><strong>读取失败</strong></div>`; }
         }
 
         function closeReading() { document.getElementById('reading-overlay').classList.remove('show'); }
 
-        // ================= 🌟 每日计划渲染引擎 (结合排期) =================
         function getTodayPlan() {
             const month = viewingDate.getMonth() + 1; const day = viewingDate.getDate();
             const viewStr = getSafeDateString(viewingDate);
             
             let currentWeekData = WEEKLY_SCHEDULE[0];
             for (let weekPlan of WEEKLY_SCHEDULE) {
-                if (viewStr >= weekPlan.start && viewStr <= weekPlan.end) {
-                    currentWeekData = weekPlan; break;
-                }
+                if (viewStr >= weekPlan.start && viewStr <= weekPlan.end) { currentWeekData = weekPlan; break; }
             }
 
             const weeklyTitleStr = currentWeekData.title; 
@@ -762,18 +716,35 @@
 
         function setSuccess(btn, txt) { if(btn){ btn.innerHTML = `✔ ${txt}`; btn.className = "btn-success"; btn.disabled = false; } }
 
+        // ================= 📝 提交打卡 (100%弹窗 + 生成详细内容) =================
         async function submitCheckin(name, type, btn) {
             if (btn.classList.contains('btn-success')) { pendingCancel = { name, type, btn }; document.getElementById('cancel-modal-overlay').classList.add('show'); return; }
             const oldTxt = btn.innerHTML; btn.innerHTML = "..."; btn.disabled = true;
             const isPast = getSafeDateString(viewingDate) < getSafeDateString(REAL_TODAY);
-            let payload = { "姓名": name, "打卡时间": getIsoWithTimezoneForViewing(), "是否补签": isPast ? "是" : "否", [type]: "已完成" };
+            
+            // 组装打卡详情字符串
+            const vMonth = viewingDate.getMonth() + 1;
+            const vDay = viewingDate.getDate();
+            const dateLabel = `${vMonth}月${vDay}日`;
+            let detailStr = (isPast ? "【补签】" : "【按时】") + dateLabel + " " + type;
+
+            let payload = { 
+                "姓名": name, 
+                "打卡时间": getIsoWithTimezoneForViewing(), 
+                "是否补签": isPast ? "是" : "否", 
+                [type]: "已完成",
+                "打卡详情": detailStr
+            };
+            
             try {
                 await fetchWithRetry(NOCODB_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', 'xc-token': API_TOKEN }, body: JSON.stringify([payload]) }, 3);
+                
+                // 100% 保障弹窗立即显示
                 document.getElementById('modal-action-title').innerText = isPast ? "补签成功！" : "打卡成功！"; 
                 showSuccess(); 
                 
-                await new Promise(r => setTimeout(r, 800)); // 等待后端落盘
-                await fetchStatus(); 
+                // 解绑后台拉取，不阻塞弹窗
+                setTimeout(() => { fetchStatus(); }, 800); 
             } catch (e) {
                 await new Promise(r => setTimeout(r, 600)); await fetchStatus();
                 if (btn.classList.contains('btn-success')) { document.getElementById('modal-action-title').innerText = isPast ? "补签成功！" : "打卡成功！"; showSuccess(); } 
@@ -793,11 +764,15 @@
                 try {
                     await fetchWithRetry(NOCODB_API_URL, { method: 'DELETE', headers: { 'Content-Type': 'application/json', 'xc-token': API_TOKEN }, body: JSON.stringify([{ "Id": recordToCancel.Id }]) }, 3);
                     const isPast = getSafeDateString(viewingDate) < getSafeDateString(REAL_TODAY);
-                    let cancelPayload = { "姓名": name, "打卡时间": getIsoWithTimezoneForViewing(), "是否补签": isPast ? "是" : "否", [type]: "已撤回" };
+                    
+                    const vMonth = viewingDate.getMonth() + 1;
+                    const vDay = viewingDate.getDate();
+                    let detailStr = "【撤销】" + `${vMonth}月${vDay}日` + " " + type;
+
+                    let cancelPayload = { "姓名": name, "打卡时间": getIsoWithTimezoneForViewing(), "是否补签": isPast ? "是" : "否", [type]: "已撤回", "打卡详情": detailStr };
                     await fetchWithRetry(NOCODB_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', 'xc-token': API_TOKEN }, body: JSON.stringify([cancelPayload]) }, 3);
                     
-                    await new Promise(r => setTimeout(r, 800)); // 等待落盘
-                    await fetchStatus(); 
+                    setTimeout(() => { fetchStatus(); }, 800); 
                 } catch (e) { 
                     await new Promise(r => setTimeout(r, 600)); await fetchStatus(); 
                     if (btn.classList.contains('btn-success')) { alert("撤销失败，请重试"); btn.innerHTML = originalText; btn.disabled = false; }
@@ -839,7 +814,7 @@
             event.target.value = '';
         }
 
-          const BIBLE_VERSES = [
+         const BIBLE_VERSES = [
             {content: "你当刚强壮胆！不要惧怕，也不要惊惶。因为你无论往哪里去，耶和华你的神必与你同在。", ref: "约书亚记 1:9"},
             {content: "疲乏的，他赐能力；软弱的，他加力量。", ref: "以赛亚书 40:29"},
             {content: "但那等候耶和华的必重新得力。他们必如鹰展翅上腾；他们奔跑却不困倦，行走却不疲乏。", ref: "以赛亚书 40:31"},
@@ -1017,7 +992,7 @@
             document.getElementById('profile-overlay').classList.add('show');
         }
 
-        // ================= 📊 底部数据大盘渲染引擎 (带严格去重) =================
+        // ================= 📊 底部数据大盘渲染引擎 =================
         function switchDashTab(tabId, btnEl) {
             document.querySelectorAll('.dash-tab-btn').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.dash-content').forEach(c => c.classList.remove('active'));
@@ -1046,7 +1021,6 @@
                 if (r['每日灵修'] === '已完成') userDailyDates[name].add(rDateStr);
                 if (r['每日读经'] === '已完成') userReadingDates[name].add(rDateStr);
                 if (r['周任务'] === '已完成') {
-                    // 周记录按周日作为唯一ID去重
                     const weekID = getWeekStart(new Date(rDateStr));
                     userWeeklyDates[name].add(weekID);
                 }
