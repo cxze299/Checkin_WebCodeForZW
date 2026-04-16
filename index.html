@@ -29,17 +29,7 @@
             --border-color: #e5e5ea;
         }
 
-        body {
-            font-family: "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
-            background-color: var(--bg-color);
-            margin: 0;
-            padding: 0;
-            color: var(--text-main);
-            -webkit-font-smoothing: antialiased;
-            -webkit-tap-highlight-color: transparent;
-            -webkit-touch-callout: none;
-        }
-
+        body { font-family: "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background-color: var(--bg-color); margin: 0; padding: 0; color: var(--text-main); -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
         .container { max-width: 1100px; margin: 0 auto; padding: 10px 16px calc(30px + env(safe-area-inset-bottom)) 16px; }
 
         .header { text-align: center; margin: 0 -16px 20px -16px; padding: calc(20px + env(safe-area-inset-top)) 16px 20px 16px; background: #fff; border-bottom: 1px solid var(--border-color); border-radius: 0 0 32px 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
@@ -52,7 +42,6 @@
         
         .date-navigator { display: inline-flex; align-items: center; background: #f1f5f9; padding: 3px; border-radius: 100px; }
         .nav-btn { background: transparent; border: none; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: #64748b; cursor: pointer; transition: all 0.2s; }
-        .nav-btn svg { width: 20px; height: 20px; transition: transform 0.2s; }
         .nav-btn:active:not(:disabled) { transform: scale(0.85); background: white; }
         .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
         .current-date-badge { font-size: 15px; font-weight: 800; color: var(--text-main); padding: 0 12px; min-width: 100px; text-align: center; }
@@ -76,29 +65,13 @@
             .task-content { padding-left: 0; font-size: 18px; padding-top: 5px;}
         }
 
-        /* ================= 🔔 周六提醒模块样式 ================= */
-        .saturday-reminder-card {
-            background: linear-gradient(135deg, #fef08a 0%, #fde047 100%);
-            border-radius: 18px;
-            padding: 16px 20px;
-            margin: 0 0 20px 0;
-            color: #854d0e;
-            font-size: 15px;
-            line-height: 1.5;
-            text-align: left;
-            box-shadow: 0 8px 20px rgba(253, 224, 71, 0.3);
-            border: 1px solid rgba(250, 204, 21, 0.5);
-            animation: pulseReminder 2.5s infinite ease-in-out;
-        }
+        .saturday-reminder-card { background: linear-gradient(135deg, #fef08a 0%, #fde047 100%); border-radius: 18px; padding: 16px 20px; margin: 0 0 20px 0; color: #854d0e; font-size: 15px; line-height: 1.5; text-align: left; box-shadow: 0 8px 20px rgba(253, 224, 71, 0.3); border: 1px solid rgba(250, 204, 21, 0.5); animation: pulseReminder 2.5s infinite ease-in-out; }
         .saturday-reminder-card strong { font-weight: 900; color: #713f12; }
-        @keyframes pulseReminder {
-            0% { transform: scale(1); box-shadow: 0 8px 20px rgba(253, 224, 71, 0.3); }
-            50% { transform: scale(1.015); box-shadow: 0 12px 25px rgba(253, 224, 71, 0.5); }
-            100% { transform: scale(1); box-shadow: 0 8px 20px rgba(253, 224, 71, 0.3); }
-        }
+        @keyframes pulseReminder { 0% { transform: scale(1); box-shadow: 0 8px 20px rgba(253, 224, 71, 0.3); } 50% { transform: scale(1.015); box-shadow: 0 12px 25px rgba(253, 224, 71, 0.5); } 100% { transform: scale(1); box-shadow: 0 8px 20px rgba(253, 224, 71, 0.3); } }
 
         #loading-status { text-align: center; color: var(--primary); font-size: 14px; margin: 15px 0; font-weight: 800;}
 
+        /* 三大进度条 */
         .stats-dashboard { display: grid; grid-template-columns: 1fr; gap: 15px; margin: 0 0 25px 0; }
         @media (min-width: 600px) { .stats-dashboard { grid-template-columns: repeat(3, 1fr); } }
 
@@ -131,7 +104,8 @@
 
         .btn-group { display: flex; gap: 8px; }
         button { flex: 1; border: none; border-radius: 12px; padding: 12px 0; font-size: 13px; font-weight: 800; cursor: pointer; transition: all 0.2s; }
-        button:active { transform: scale(0.94); background: #eee; }
+        button:active:not(:disabled) { transform: scale(0.94); background: #e2e8f0; }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
         
         .btn-daily { background: #f2f2f7; color: var(--primary); }
         .btn-reading { background: #f2f2f7; color: var(--reading); }
@@ -145,11 +119,11 @@
         .dash-tabs { display: flex; gap: 8px; background: #f1f5f9; padding: 6px; border-radius: 16px; margin-bottom: 20px; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
         .dash-tab-btn { flex-shrink: 0; padding: 10px 18px; border-radius: 12px; background: transparent; color: var(--text-sub); font-weight: 800; font-size: 13px; border: none; cursor: pointer; transition: all 0.2s; }
         .dash-tab-btn.active { background: white; color: var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .dash-content { display: none; width: 100%; height: 300px; position: relative; }
+        .dash-content { display: none; width: 100%; height: 320px; position: relative; }
         .dash-content.active { display: block; animation: fadeIn 0.4s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* ================= 各种弹窗样式 ================= */
+        /* ================= 各类弹窗 ================= */
         .modal-overlay { visibility: hidden; opacity: 0; pointer-events: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100vw; height: 100vh; height: 100dvh; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 2000; display: flex; justify-content: center; align-items: center; transition: all 0.3s; }
         .modal-overlay.show { visibility: visible; opacity: 1; pointer-events: auto; }
         .modal-content { background: white; padding: 40px 24px 30px 24px; border-radius: 30px; max-width: 360px; width: 85%; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.2); transform: scale(0.85); transition: all 0.4s cubic-bezier(0.15, 1, 0.3, 1.1); position: relative; }
@@ -159,7 +133,6 @@
         #modal-verse-content::before, #modal-verse-content::after { position: absolute; font-size: 80px; color: rgba(90, 103, 216, 0.1); font-family: Georgia, serif; z-index: -1; line-height: 1; }
         #modal-verse-content::before { content: "“"; top: -35px; left: -5px; }
         #modal-verse-content::after { content: "”"; bottom: -35px; right: -5px; }
-        
         .btn-close-modal { background: var(--primary); color: white; width: 100%; padding: 15px; border-radius: 16px; font-size: 16px; font-weight: 800; border: none; margin-top: 15px; cursor: pointer; }
 
         .reading-modal { max-width: 680px; width: 92%; height: 85vh; max-height: 850px; padding: 0; margin: 0 auto; display: flex; flex-direction: column; text-align: left; background: #ffffff; border-radius: 28px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.15); }
@@ -404,6 +377,16 @@
             return getSafeDateString(tempDate); 
         }
 
+        // ================= 🛠️ 智能日期抽取 (解决 NocoDB 时区错乱) =================
+        function extractDateStr(dateVal) {
+            if (!dateVal) return "";
+            try {
+                let d = new Date(dateVal);
+                if (!isNaN(d)) return getSafeDateString(d); // 强制转换为北京时间的 YYYY-MM-DD
+            } catch(e) {}
+            return dateVal.substring(0, 10);
+        }
+
         function toChineseNum(num) { const chars = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十']; if (num <= 10) return chars[num]; if (num < 20) return '十' + (num % 10 === 0 ? '' : chars[num % 10]); if (num < 100) return chars[Math.floor(num / 10)] + '十' + (num % 10 === 0 ? '' : chars[num % 10]); return num; }
 
         function isTitleMatch(mdTitle, targetTitle) {
@@ -592,7 +575,7 @@
             // 🔔 周六提醒逻辑
             const reminderEl = document.getElementById('saturday-reminder');
             if (reminderEl) {
-                if (viewingDate.getDay() === 6) { // 0是周日，6是周六
+                if (viewingDate.getDay() === 6) { 
                     reminderEl.style.display = 'block';
                 } else {
                     reminderEl.style.display = 'none';
@@ -607,16 +590,16 @@
             let lastErr;
             for (let i = 0; i < retries; i++) {
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 12000); // 12秒给NAS反应
+                const timeoutId = setTimeout(() => controller.abort(), 12000); 
                 try {
                     const response = await fetch(url, { ...options, signal: controller.signal });
                     clearTimeout(timeoutId);
                     if (!response.ok) throw new Error(`HTTP Error ${response.status}`);
-                    return response; // 成功直接返回
+                    return response; 
                 } catch (err) {
                     clearTimeout(timeoutId);
                     lastErr = err;
-                    if (i < retries - 1) await new Promise(res => setTimeout(res, 1000 * (i + 1))); // 指数退避
+                    if (i < retries - 1) await new Promise(res => setTimeout(res, 1000 * (i + 1))); 
                 }
             }
             throw lastErr; 
@@ -636,8 +619,8 @@
             try { 
                 updateDateUI(); 
                 renderMembers(); 
-                loadLocalCache(); // 优先加载缓存
-                fetchStatus();    // 后台静默拉取真实数据
+                loadLocalCache(); 
+                fetchStatus();    
             } catch(e) { document.getElementById('loading-status').innerHTML = `⚠️ 初始化错误: ${e.message}`; } 
         };
 
@@ -667,20 +650,35 @@
             });
         }
 
+        // ================= 🔄 深度挖掘读取算法 (破除1000条限制) =================
         async function fetchStatus() {
             const loadingEl = document.getElementById('loading-status');
             if (globalRecords.length === 0) { loadingEl.style.display = 'block'; loadingEl.innerHTML = "🔄 正在连接云端数据库..."; } 
             else { loadingEl.style.display = 'block'; loadingEl.innerHTML = "<span style='font-size:12px; color:var(--text-sub);'>🔄 后台数据同步中...</span>"; }
 
             try {
-                // 使用重试引擎拉取，并强行清理浏览器缓存
-                const response = await fetchWithRetry(`${NOCODB_API_URL}?limit=1000&_t=${Date.now()}`, { 
-                    method: 'GET', 
-                    headers: { 'xc-token': API_TOKEN, 'Cache-Control': 'no-cache, no-store, must-revalidate' } 
-                }, 3);
+                let allRecords = [];
+                let offset = 0;
+                const limit = 1000;
+                let hasMore = true;
                 
-                const data = await response.json();
-                globalRecords = data.list || []; 
+                // 循环翻页，榨干数据库每一条记录
+                while(hasMore) {
+                    const response = await fetchWithRetry(`${NOCODB_API_URL}?limit=${limit}&offset=${offset}&_t=${Date.now()}`, { 
+                        method: 'GET', headers: { 'xc-token': API_TOKEN, 'Cache-Control': 'no-cache, no-store, must-revalidate' } 
+                    }, 3);
+                    const data = await response.json();
+                    
+                    if (data.list && data.list.length > 0) {
+                        allRecords.push(...data.list);
+                        if (data.list.length < limit) hasMore = false;
+                        else offset += limit;
+                    } else {
+                        hasMore = false;
+                    }
+                }
+                
+                globalRecords = allRecords; 
                 localStorage.setItem('zw_checkin_cache', JSON.stringify(globalRecords)); // 刷新缓存
 
                 resetButtons(); renderStatus(); renderDashboard(); 
@@ -700,10 +698,12 @@
             const weekEndStr = getSafeDateString(new Date(new Date(viewWeekStart).getTime() + 7*86400000));
             
             globalRecords.forEach(r => {
-                const name = r['姓名'], rDate = (r['打卡时间'] || '').substring(0, 10), isRetro = r['是否补签'] === '是';
+                const name = r['姓名'], isRetro = r['是否补签'] === '是';
+                const rDate = extractDateStr(r['打卡时间']); // 使用智能防时区错乱解析
+                
                 if (rDate === viewStr && r['每日灵修'] === '已完成') { doneD.add(name); setSuccess(document.getElementById(`daily-${name}`), isRetro ? "已补签" : "已完成"); }
                 if (rDate === viewStr && r['每日读经'] === '已完成') { doneR.add(name); setSuccess(document.getElementById(`reading-${name}`), isRetro ? "已补签" : "已完成"); }
-                // 采用周日作为起始的严格窗口判定
+                
                 if (rDate >= viewWeekStart && rDate < weekEndStr && r['周任务'] === '已完成') { doneW.add(name); setSuccess(document.getElementById(`weekly-${name}`), isRetro ? "周课已补" : "已完成"); }
             });
             
@@ -716,68 +716,71 @@
 
         function setSuccess(btn, txt) { if(btn){ btn.innerHTML = `✔ ${txt}`; btn.className = "btn-success"; btn.disabled = false; } }
 
-        // ================= 📝 提交打卡 (100%弹窗 + 生成详细内容) =================
-        async function submitCheckin(name, type, btn) {
+        // ================= 📝 乐观提交打卡 (100%瞬间弹窗) =================
+        function submitCheckin(name, type, btn) {
             if (btn.classList.contains('btn-success')) { pendingCancel = { name, type, btn }; document.getElementById('cancel-modal-overlay').classList.add('show'); return; }
-            const oldTxt = btn.innerHTML; btn.innerHTML = "..."; btn.disabled = true;
-            const isPast = getSafeDateString(viewingDate) < getSafeDateString(REAL_TODAY);
             
-            // 组装打卡详情字符串
-            const vMonth = viewingDate.getMonth() + 1;
-            const vDay = viewingDate.getDate();
-            const dateLabel = `${vMonth}月${vDay}日`;
-            let detailStr = (isPast ? "【补签】" : "【按时】") + dateLabel + " " + type;
+            const isPast = getSafeDateString(viewingDate) < getSafeDateString(REAL_TODAY);
+            const oldHtml = btn.innerHTML; const oldClass = btn.className;
+            
+            // 1. 瞬间视觉反馈 (不等待网络)
+            btn.innerHTML = isPast ? "✔ 已补签" : "✔ 已完成"; 
+            btn.className = "btn-success"; 
+            btn.disabled = false;
+            
+            document.getElementById('modal-action-title').innerText = isPast ? "补签成功！" : "打卡成功！"; 
+            showSuccess(); 
+            
+            // 2. 组装打卡详情字符串
+            const vMonth = viewingDate.getMonth() + 1; const vDay = viewingDate.getDate();
+            let detailStr = (isPast ? "【补签】" : "【按时】") + `${vMonth}月${vDay}日 ` + type;
 
             let payload = { 
-                "姓名": name, 
-                "打卡时间": getIsoWithTimezoneForViewing(), 
-                "是否补签": isPast ? "是" : "否", 
-                [type]: "已完成",
-                "打卡详情": detailStr
+                "姓名": name, "打卡时间": getIsoWithTimezoneForViewing(), "是否补签": isPast ? "是" : "否", 
+                [type]: "已完成", "打卡详情": detailStr
             };
             
-            try {
-                await fetchWithRetry(NOCODB_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', 'xc-token': API_TOKEN }, body: JSON.stringify([payload]) }, 3);
-                
-                // 100% 保障弹窗立即显示
-                document.getElementById('modal-action-title').innerText = isPast ? "补签成功！" : "打卡成功！"; 
-                showSuccess(); 
-                
-                // 解绑后台拉取，不阻塞弹窗
-                setTimeout(() => { fetchStatus(); }, 800); 
-            } catch (e) {
-                await new Promise(r => setTimeout(r, 600)); await fetchStatus();
-                if (btn.classList.contains('btn-success')) { document.getElementById('modal-action-title').innerText = isPast ? "补签成功！" : "打卡成功！"; showSuccess(); } 
-                else { alert("网络异常导致多次请求均失败，请检查网络后重试"); btn.innerHTML = oldTxt; btn.disabled = false; }
-            }
+            // 3. 后台静默发送与重试
+            fetchWithRetry(NOCODB_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', 'xc-token': API_TOKEN }, body: JSON.stringify([payload]) }, 3)
+            .then(() => { setTimeout(() => { fetchStatus(); }, 1000); })
+            .catch(e => {
+                // 万一真失败了，恢复按钮
+                btn.innerHTML = oldHtml; btn.className = oldClass;
+                alert("严重网络异常，打卡未保存，请检查网络！");
+            });
         }
 
-        async function confirmCancelCheckin() {
-            if (!pendingCancel) return; const { name, type, btn } = pendingCancel; const originalText = btn.innerHTML; btn.innerHTML = "撤销中"; btn.disabled = true; closeCancelModal();
+        function confirmCancelCheckin() {
+            if (!pendingCancel) return; const { name, type, btn } = pendingCancel; 
+            const originalText = btn.innerHTML; const oldClass = btn.className;
+            
+            // 瞬间视觉反馈
+            btn.innerHTML = "撤销中"; btn.disabled = true; closeCancelModal();
+            
             const viewDateStr = getSafeDateString(viewingDate); const viewWeekStartStr = getWeekStart(viewingDate);
             let recordToCancel = globalRecords.find(r => {
-                const rDate = (r['打卡时间'] || '').substring(0, 10);
+                const rDate = extractDateStr(r['打卡时间']);
                 if (type === '周任务') return r['姓名'] === name && rDate >= viewWeekStartStr && rDate < getSafeDateString(new Date(new Date(viewWeekStartStr).getTime() + 7*86400000)) && r[type] === '已完成';
                 return r['姓名'] === name && rDate === viewDateStr && r[type] === '已完成';
             });
+            
             if (recordToCancel) {
-                try {
-                    await fetchWithRetry(NOCODB_API_URL, { method: 'DELETE', headers: { 'Content-Type': 'application/json', 'xc-token': API_TOKEN }, body: JSON.stringify([{ "Id": recordToCancel.Id }]) }, 3);
-                    const isPast = getSafeDateString(viewingDate) < getSafeDateString(REAL_TODAY);
-                    
-                    const vMonth = viewingDate.getMonth() + 1;
-                    const vDay = viewingDate.getDate();
-                    let detailStr = "【撤销】" + `${vMonth}月${vDay}日` + " " + type;
-
-                    let cancelPayload = { "姓名": name, "打卡时间": getIsoWithTimezoneForViewing(), "是否补签": isPast ? "是" : "否", [type]: "已撤回", "打卡详情": detailStr };
-                    await fetchWithRetry(NOCODB_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', 'xc-token': API_TOKEN }, body: JSON.stringify([cancelPayload]) }, 3);
-                    
-                    setTimeout(() => { fetchStatus(); }, 800); 
-                } catch (e) { 
-                    await new Promise(r => setTimeout(r, 600)); await fetchStatus(); 
-                    if (btn.classList.contains('btn-success')) { alert("撤销失败，请重试"); btn.innerHTML = originalText; btn.disabled = false; }
-                }
-            } else { await fetchStatus(); }
+                const isPast = getSafeDateString(viewingDate) < getSafeDateString(REAL_TODAY);
+                const vMonth = viewingDate.getMonth() + 1; const vDay = viewingDate.getDate();
+                let detailStr = "【撤销】" + `${vMonth}月${vDay}日 ` + type;
+                let cancelPayload = { "姓名": name, "打卡时间": getIsoWithTimezoneForViewing(), "是否补签": isPast ? "是" : "否", [type]: "已撤回", "打卡详情": detailStr };
+                
+                // 并发执行 DELETE 和 POST
+                Promise.all([
+                    fetchWithRetry(NOCODB_API_URL, { method: 'DELETE', headers: { 'Content-Type': 'application/json', 'xc-token': API_TOKEN }, body: JSON.stringify([{ "Id": recordToCancel.Id }]) }, 3),
+                    fetchWithRetry(NOCODB_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', 'xc-token': API_TOKEN }, body: JSON.stringify([cancelPayload]) }, 3)
+                ]).then(() => {
+                    setTimeout(() => { fetchStatus(); }, 1000); 
+                }).catch(e => {
+                    btn.innerHTML = originalText; btn.className = oldClass; btn.disabled = false;
+                    alert("撤销失败，请重试");
+                });
+            } else { fetchStatus(); }
         }
 
         function resetButtons() {
@@ -814,7 +817,7 @@
             event.target.value = '';
         }
 
-         const BIBLE_VERSES = [
+       const BIBLE_VERSES = [
             {content: "你当刚强壮胆！不要惧怕，也不要惊惶。因为你无论往哪里去，耶和华你的神必与你同在。", ref: "约书亚记 1:9"},
             {content: "疲乏的，他赐能力；软弱的，他加力量。", ref: "以赛亚书 40:29"},
             {content: "但那等候耶和华的必重新得力。他们必如鹰展翅上腾；他们奔跑却不困倦，行走却不疲乏。", ref: "以赛亚书 40:31"},
@@ -973,7 +976,7 @@
             const activeDates = new Set();
             globalRecords.forEach(r => {
                 if(r['姓名'] === name && (r['每日灵修'] === '已完成' || r['每日读经'] === '已完成')) {
-                    activeDates.add(r['打卡时间'].substring(0, 10));
+                    activeDates.add(extractDateStr(r['打卡时间']));
                 }
             });
             let recent7Count = 0; let calendarHTML = '';
@@ -1016,7 +1019,7 @@
 
             globalRecords.forEach(r => {
                 const name = r['姓名']; if (!stats[name]) return;
-                const rDateStr = (r['打卡时间'] || '').substring(0, 10);
+                const rDateStr = extractDateStr(r['打卡时间']);
                 
                 if (r['每日灵修'] === '已完成') userDailyDates[name].add(rDateStr);
                 if (r['每日读经'] === '已完成') userReadingDates[name].add(rDateStr);
