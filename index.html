@@ -30,7 +30,7 @@
         }
 
         body { font-family: "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background-color: var(--bg-color); margin: 0; padding: 0; color: var(--text-main); -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 10px 16px calc(30px + env(safe-area-inset-bottom)) 16px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 10px 16px calc(40px + env(safe-area-inset-bottom)) 16px; }
 
         .header { text-align: center; margin: 0 -16px 20px -16px; padding: calc(20px + env(safe-area-inset-top)) 16px 20px 16px; background: #fff; border-bottom: 1px solid var(--border-color); border-radius: 0 0 32px 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
         .brand-wrapper { display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; padding: 6px 18px; background: #ffffff; border-radius: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); border: 1px solid var(--border-color); }
@@ -65,13 +65,29 @@
             .task-content { padding-left: 0; font-size: 18px; padding-top: 5px;}
         }
 
-        .saturday-reminder-card { background: linear-gradient(135deg, #fef08a 0%, #fde047 100%); border-radius: 18px; padding: 16px 20px; margin: 0 0 20px 0; color: #854d0e; font-size: 15px; line-height: 1.5; text-align: left; box-shadow: 0 8px 20px rgba(253, 224, 71, 0.3); border: 1px solid rgba(250, 204, 21, 0.5); animation: pulseReminder 2.5s infinite ease-in-out; }
+        /* ================= 🔔 周六提醒模块样式 ================= */
+        .saturday-reminder-card {
+            background: linear-gradient(135deg, #fef08a 0%, #fde047 100%);
+            border-radius: 18px;
+            padding: 16px 20px;
+            margin: 0 0 20px 0;
+            color: #854d0e;
+            font-size: 15px;
+            line-height: 1.5;
+            text-align: left;
+            box-shadow: 0 8px 20px rgba(253, 224, 71, 0.3);
+            border: 1px solid rgba(250, 204, 21, 0.5);
+            animation: pulseReminder 2.5s infinite ease-in-out;
+        }
         .saturday-reminder-card strong { font-weight: 900; color: #713f12; }
-        @keyframes pulseReminder { 0% { transform: scale(1); box-shadow: 0 8px 20px rgba(253, 224, 71, 0.3); } 50% { transform: scale(1.015); box-shadow: 0 12px 25px rgba(253, 224, 71, 0.5); } 100% { transform: scale(1); box-shadow: 0 8px 20px rgba(253, 224, 71, 0.3); } }
+        @keyframes pulseReminder {
+            0% { transform: scale(1); box-shadow: 0 8px 20px rgba(253, 224, 71, 0.3); }
+            50% { transform: scale(1.015); box-shadow: 0 12px 25px rgba(253, 224, 71, 0.5); }
+            100% { transform: scale(1); box-shadow: 0 8px 20px rgba(253, 224, 71, 0.3); }
+        }
 
         #loading-status { text-align: center; color: var(--primary); font-size: 14px; margin: 15px 0; font-weight: 800;}
 
-        /* 三大进度条 */
         .stats-dashboard { display: grid; grid-template-columns: 1fr; gap: 15px; margin: 0 0 25px 0; }
         @media (min-width: 600px) { .stats-dashboard { grid-template-columns: repeat(3, 1fr); } }
 
@@ -103,14 +119,18 @@
         .member-name { font-size: 17px; font-weight: 800; }
 
         .btn-group { display: flex; gap: 8px; }
-        button { flex: 1; border: none; border-radius: 12px; padding: 12px 0; font-size: 13px; font-weight: 800; cursor: pointer; transition: all 0.2s; }
-        button:active:not(:disabled) { transform: scale(0.94); background: #e2e8f0; }
-        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        button.action-btn { flex: 1; border: none; border-radius: 12px; padding: 12px 0; font-size: 13px; font-weight: 800; cursor: pointer; transition: all 0.2s; }
+        button.action-btn:active:not(:disabled) { transform: scale(0.94); background: #e2e8f0; }
+        button.action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
         
         .btn-daily { background: #f2f2f7; color: var(--primary); }
         .btn-reading { background: #f2f2f7; color: var(--reading); }
         .btn-weekly { background: #f2f2f7; color: var(--secondary); }
         .btn-success { background: var(--success) !important; color: white !important; }
+        
+        /* 修复状态颜色 */
+        .btn-retro { background: #fffbeb; color: #d97706; }
+        .btn-future { background: #f8fafc; color: #94a3b8; }
 
         /* ================= 📊 底部数据大盘样式 ================= */
         .dash-card { background: var(--card-bg); border-radius: 24px; padding: 25px 20px; margin-top: 10px; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
@@ -155,6 +175,8 @@
         .video-modal-header { width: 100%; padding: 15px 20px; display: flex; justify-content: center; align-items: center; color: white; box-sizing: border-box; background: rgba(255, 255, 255, 0.04); border-radius: 18px 18px 0 0; position: relative; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .video-modal-header h2 { font-size: 16px; font-weight: 900; color: #fff; margin: 0; letter-spacing: 0.8px; text-align: center; max-width: 80%; text-transform: uppercase; display: flex; align-items: center; gap: 8px;}
         .btn-close-video { position: absolute; right: 15px; top: 12px; background: rgba(255,255,255,0.15); border: none; color: rgba(255,255,255,0.7); width: 34px; height: 34px; border-radius: 50%; font-size: 18px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;}
+        .btn-close-video:hover { background: var(--secondary); color: white; transform: rotate(90deg); }
+        .btn-close-video:active { background: rgba(255,255,255,0.3); transform: scale(0.9); }
         .video-player-container { width: 100%; aspect-ratio: 16 / 9; background: #000; box-shadow: 0 20px 60px rgba(0,0,0,0.8); border-radius: 0 0 18px 18px; overflow: hidden; position: relative; border: 2px solid rgba(255,255,255,0.02); }
         .video-player-container video { width: 100%; height: 100%; border-radius: 0 0 16px 16px; outline: none; }
 
@@ -189,7 +211,10 @@
                     <button class="nav-btn" onclick="changeDate(-1)">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
                     </button>
-                    <div class="current-date-badge" id="display-date">加载中...</div>
+                    <div style="position: relative; display: inline-flex; align-items: center; justify-content: center;">
+                        <div class="current-date-badge" id="display-date">加载中...</div>
+                        <input type="date" id="date-picker" onchange="jumpToDate(event)" style="position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer; top: 0; left: 0;">
+                    </div>
                     <button class="nav-btn" onclick="changeDate(1)">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     </button>
@@ -357,18 +382,89 @@
         const MEMBERS = ["迦密", "恩惠","以琳", "陈蜜", "诚志", "信凯", "周睿", "家乐", "可心", "佳音", "李好", "文琪",  "奕豪", "爱赐", "梓楠", "思恩", "浙君", "丹萍", "天宇", "恩悯", "翠翠", "慕智", "蒙恩", "贝贝"]; 
         const TOTAL_MEMBERS = MEMBERS.length;
 
+        // === 🚀 新增：周课完整书名智能映射字典 ===
+        // === 🚀 新增：周课完整书名智能映射字典（已完全适配 WEEKLY_SCHEDULE 格式） ===
+        const weeklyTaskMapping = {
+            "《基督是一切》01": "1《基督是一切》基督是我们的王--马太福音",
+            "《基督是一切》02": "2《基督是一切》基督是神的仆人--马可福音",
+            "《基督是一切》03": "3《基督是一切》基督是人子--路加福音",
+            "《基督是一切》04": "4《基督是一切》基督是神的儿子--约翰福音",
+            "《基督是一切》05": "5《基督是一切》基督在身体里--使徒行传",
+            "《基督是一切》06": "6《基督是一切》基督在福音里--罗马书",
+            "《基督是一切》07": "7《基督是一切》藉着问题看见基督--哥林多前书",
+            "《基督是一切》08": "8《基督是一切》看见基督在灵命里--哥林多后书",
+            "《基督是一切》09": "9《基督是一切》借着错误反衬基督--加拉太书",
+            "《基督是一切》10": "10《基督是一切》基督在教会里--以弗所书",
+            "《基督是一切》11": "11《基督是一切》基督在基督徒的经历里--腓立比书",
+            "《基督是一切》12": "12《基督是一切》基督是神的丰盛--歌罗西书",
+            "《基督是一切》13": "13《基督是一切》从再来看见基督--帖撒罗尼迦前书",
+            "《基督是一切》14": "14《基督是一切》由主的日子看见基督--帖撒罗尼迦后书",
+            "《基督是一切》15": "15《基督是一切》从教会的秩序看见基督--提摩太前书",
+            "《基督是一切》16": "16《基督是一切》从教会的危机看见基督--提摩太后书",
+            "《基督是一切》17": "17《基督是一切》从教会的纪律看见基督--提多书",
+            "《基督是一切》18": "18《基督是一切》基督在奇爱中--腓利门书",
+            "《基督是一切》19": "19《基督是一切》基督是使者和大祭司--希伯来书",
+            "《基督是一切》20": "20《基督是一切》从活的信心看见基督--雅各书",
+            "《基督是一切》21": "21《基督是一切》基督是我们魂的牧人--彼得前书",
+            "《基督是一切》22": "22《基督是一切》基督在永远的国度里--彼得后书",
+            "《基督是一切》23": "23《基督是一切》基督在圣徒的交通里--约翰一书",
+            "《基督是一切》24": "24《基督是一切》基督在爱和真理的交通里--约翰二书",
+            "《基督是一切》25": "25《基督是一切》基督在信徒的接待里--约翰叁书",
+            "《基督是一切》26": "26《基督是一切》经由背道反衬基督--犹大书",
+            "《基督是一切》27": "27《基督是一切》基督承受万有--启示录"
+        };
+
+        // === 🚀 升级：智能转换函数 ===
+        function getFullMarkdownTitle(taskName) {
+            if (!taskName) return "";
+            
+            // 1. 优先进行精准匹配（只要前端传进来的叫"《基督是一切》02"，就能瞬间定位）
+            if (weeklyTaskMapping[taskName]) {
+                return weeklyTaskMapping[taskName];
+            }
+            
+            // 2. 兜底逻辑：防止后续有名字不完全一致的情况
+            for (const key in weeklyTaskMapping) {
+                if (taskName.includes(key)) {
+                    return weeklyTaskMapping[key];
+                }
+            }
+            return taskName;
+        }
+
         const WEEKLY_SCHEDULE = [
-            { start: "2026-01-01", end: "2026-12-31", title: "《基督是一切》马太福音：基督是我们的王", verse: "约翰福音17:1-2" }
+            { start: "2026-04-12", end: "2026-04-18", title: "《基督是一切》01", verse: "约翰福音17:1-2" },
+            { start: "2026-04-19", end: "2026-04-25", title: "《基督是一切》02", verse: "约翰福音17:3-5" },
+            { start: "2026-04-26", end: "2026-05-02", title: "《基督是一切》03", verse: "约翰福音17:6-8" },
+            { start: "2026-05-03", end: "2026-05-09", title: "《基督是一切》04", verse: "约翰福音17:9-10" },
+            { start: "2026-05-10", end: "2026-05-16", title: "《基督是一切》05", verse: "约翰福音17:11-12" },
+            { start: "2026-05-17", end: "2026-05-23", title: "《基督是一切》06", verse: "约翰福音17:13-14" },
+            { start: "2026-05-24", end: "2026-05-30", title: "《基督是一切》07", verse: "约翰福音17:15-16" },
+            { start: "2026-05-31", end: "2026-06-06", title: "《基督是一切》08", verse: "约翰福音17:17-18" },
+            { start: "2026-06-07", end: "2026-06-13", title: "《基督是一切》09", verse: "约翰福音17:19-20" },
+            { start: "2026-06-14", end: "2026-06-20", title: "《基督是一切》10", verse: "约翰福音17:21-22" },
+            { start: "2026-06-21", end: "2026-06-27", title: "《基督是一切》11", verse: "约翰福音17:23-24" },
+            { start: "2026-06-28", end: "2026-07-04", title: "《基督是一切》12", verse: "约翰福音17:25-26" }
         ];
 
         let REAL_TODAY = new Date(), viewingDate = new Date(), globalRecords = [], currentProfileName = "", pendingCancel = null;
         const fontStackQuotes = `"Noto Serif SC", "Kaiti SC", STKaiti, "Songti SC", FangSong, STFangsong, serif`;
         let chartInstances = {}; 
 
+        // === 🚀 新增：智能转换函数 ===
+        function getFullMarkdownTitle(taskName) {
+            if (!taskName) return "";
+            for (const bookName in weeklyTaskMapping) {
+                if (taskName.includes(bookName)) {
+                    return weeklyTaskMapping[bookName];
+                }
+            }
+            return taskName;
+        }
+
         function getSafeDateString(d) { return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; }
         function getIsoWithTimezoneForViewing() { const now = new Date(); return `${getSafeDateString(viewingDate)}T${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}+08:00`; }
         
-        // 🗓️ 找周日作为每周第一天
         function getWeekStart(d) { 
             let tempDate = new Date(d); 
             let day = tempDate.getDay(); 
@@ -377,14 +473,33 @@
             return getSafeDateString(tempDate); 
         }
 
-        // ================= 🛠️ 智能日期抽取 (解决 NocoDB 时区错乱) =================
         function extractDateStr(dateVal) {
             if (!dateVal) return "";
             try {
                 let d = new Date(dateVal);
-                if (!isNaN(d)) return getSafeDateString(d); // 强制转换为北京时间的 YYYY-MM-DD
+                if (!isNaN(d)) return getSafeDateString(d); 
             } catch(e) {}
             return dateVal.substring(0, 10);
+        }
+
+        function getLogicalDateStr(r) {
+            if (r['打卡详情']) {
+                let match = r['打卡详情'].match(/(\d+)月(\d+)日/);
+                if (match) {
+                    let y = new Date().getFullYear();
+                    if (r['打卡时间']) {
+                        let d = new Date(r['打卡时间']);
+                        if (!isNaN(d)) y = d.getFullYear();
+                    }
+                    return `${y}-${String(match[1]).padStart(2, '0')}-${String(match[2]).padStart(2, '0')}`;
+                }
+            }
+            if (!r['打卡时间']) return "";
+            try {
+                let d = new Date(r['打卡时间']);
+                if (!isNaN(d)) return getSafeDateString(d); 
+            } catch(e) {}
+            return r['打卡时间'].substring(0, 10);
         }
 
         function toChineseNum(num) { const chars = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十']; if (num <= 10) return chars[num]; if (num < 20) return '十' + (num % 10 === 0 ? '' : chars[num % 10]); if (num < 100) return chars[Math.floor(num / 10)] + '十' + (num % 10 === 0 ? '' : chars[num % 10]); return num; }
@@ -400,20 +515,6 @@
                 if (chunk.length >= 2 && cleanTarget.includes(chunk)) matchScore += chunk.length;
             }
             return matchScore >= 4;
-        }
-
-        function openVideo(url, title) {
-            let cleanTitle = title.split('211209-')[1] || title; 
-            document.getElementById('video-modal-title').innerText = cleanTitle;
-            const player = document.getElementById('main-video-player');
-            player.src = url;
-            document.getElementById('video-overlay').classList.add('show');
-            player.play().catch(e => console.log("Autoplay prevented:", e));
-        }
-        function closeVideo() {
-            const player = document.getElementById('main-video-player');
-            player.pause(); player.src = ""; 
-            document.getElementById('video-overlay').classList.remove('show');
         }
 
         async function openScriptureOnline(refStr) {
@@ -457,7 +558,8 @@
         }
 
         async function openDailyReading() {
-            const month = viewingDate.getMonth() + 1; const day = viewingDate.getDate();
+            const month = viewingDate.getMonth() + 1; 
+            const day = viewingDate.getDate();
             const targetChineseDate = `${toChineseNum(month)}月${toChineseNum(day)}日`;
             
             document.getElementById('reading-title').innerText = `${month}月${day}日`;
@@ -469,52 +571,78 @@
                 const res = await fetch(`./Yonghuo.md?t=${new Date().getTime()}`);
                 if (!res.ok) throw new Error("File not found");
                 const text = await res.text();
-                const target1 = `${month}月${day}日`; const target2 = targetChineseDate;
-                const lines = text.split('\n'); let isCapturing = false; let contentLines = []; let mdRealTitle = "";
+                
+                const target1 = `${month}月${day}日`; 
+                const target2 = targetChineseDate;
+                const lines = text.split('\n'); 
+                let isCapturing = false; 
+                let contentLines = []; 
+                let mdRealTitle = "";
 
-                const dateLineRegex = new RegExp(`^(?:#+\\s*)?(?:${target1}|${target2})(.*)`);
-                const stopRegex = /^(?:#+\s*)?([0-9]{1,2}|[一二三四五六七八九十]{1,3})\s*月\s*([0-9]{1,2}|[一二三四五六七八九十]{1,3})\s*日/;
+                // === 🚀 核心大瘦身：极简且精准的 Markdown 解析正则 ===
+                const startRegex = new RegExp(`^###\\s+(?:${target1}|${target2})(.*)`);
+                const stopRegex = /^###\s+/;
 
                 for (let i = 0; i < lines.length; i++) {
-                    const rawLine = lines[i]; const line = rawLine.trim();
+                    const rawLine = lines[i]; 
+                    
                     if (!isCapturing) {
-                        const match = line.match(dateLineRegex);
-                        if (match && line.length < 100) { 
-                            isCapturing = true; mdRealTitle = match[1].replace(/^[-\s|:：]+/, '').trim();
+                        const match = rawLine.match(startRegex);
+                        if (match) { 
+                            isCapturing = true; 
+                            mdRealTitle = match[1].replace(/^[-\s|:：]+/, '').trim();
                             if(mdRealTitle) contentLines.push(`# ${mdRealTitle}`);
                         }
                     } else {
-                        if (stopRegex.test(line) && line.length < 40 && !line.includes(target1) && !line.includes(target2)) break;
+                        if (stopRegex.test(rawLine)) break;
                         contentLines.push(rawLine); 
                     }
                 }
-                while (contentLines.length > 0 && (contentLines[0].trim() === '' || contentLines[0].trim() === target2 || contentLines[0].trim() === target1)) { contentLines.shift(); }
-                if (contentLines.length > 0) bodyEl.innerHTML = formatMarkdownBlocks(contentLines);
-                else bodyEl.innerHTML = `<div style="text-align:center; color:var(--text-sub); margin-top:30px;"><span style="font-size:40px;">📭</span><br><br><strong>没有在文档里找到 ${target1} 的内容。</strong></div>`;
-            } catch (e) { bodyEl.innerHTML = `<div style="text-align:center; color:var(--warning); margin-top:30px;"><span style="font-size:40px;">⚠️</span><br><br><strong>读取 Yonghuo.md 失败</strong></div>`; }
+                
+                while (contentLines.length > 0 && contentLines[0].trim() === '') { 
+                    contentLines.shift(); 
+                }
+                
+                if (contentLines.length > 0) {
+                    bodyEl.innerHTML = formatMarkdownBlocks(contentLines);
+                } else {
+                    bodyEl.innerHTML = `<div style="text-align:center; color:var(--text-sub); margin-top:30px;"><span style="font-size:40px;">📭</span><br><br><strong>没有在文档里找到 ${target1} 的内容。</strong></div>`;
+                }
+            } catch (e) { 
+                bodyEl.innerHTML = `<div style="text-align:center; color:var(--warning); margin-top:30px;"><span style="font-size:40px;">⚠️</span><br><br><strong>读取 Yonghuo.md 失败</strong></div>`; 
+            }
         }
 
-        async function openWeeklyReading(targetTitle) {
+        // === 🚀 更新：周课阅读结合智能映射提取 ===
+        async function openWeeklyReading(rawTargetTitle) {
+            // 1. 获取对应的标准 Markdown 标题
+            const targetTitle = getFullMarkdownTitle(rawTargetTitle);
+
             document.getElementById('reading-title').innerText = `本周周课`;
             document.getElementById('reading-overlay').classList.add('show');
             const bodyEl = document.getElementById('reading-body');
             bodyEl.innerHTML = `<div style="text-align:center; padding: 40px 0;"><div style="font-size:30px; margin-bottom:15px; animation: flowingWatermark 1.5s infinite;">⏳</div>正在加载周课...</div>`;
 
             try {
+                // 根据实际情况，这里还是去读 weekly_task.md。如果你把它合并到了 Yonghuo.md 这里可以改 URL
                 const res = await fetch(`./weekly_task.md?t=${new Date().getTime()}`);
                 if (!res.ok) throw new Error("File not found");
                 const text = await res.text();
                 const lines = text.split('\n'); let isCapturing = false; let contentLines = []; let mdRealTitle = "";
+                
+                // 兼容支持 ## 和 ###
+                const startRegex = new RegExp(`^#{2,3}\\s+(.*)`);
+                const stopRegex = /^#{2,3}\s+/;
 
                 for (let i = 0; i < lines.length; i++) {
                     const rawLine = lines[i]; const line = rawLine.trim();
                     if (!isCapturing) {
-                        const titleMatch = line.match(/^##\s+(.*)/);
+                        const titleMatch = line.match(startRegex);
                         if (titleMatch && isTitleMatch(titleMatch[1].trim(), targetTitle)) { 
                             isCapturing = true; mdRealTitle = titleMatch[1].trim(); contentLines.push(`## ${mdRealTitle}`); 
                         }
                     } else {
-                        if (/^##\s/.test(line)) break;
+                        if (stopRegex.test(line)) break;
                         contentLines.push(rawLine); 
                     }
                 }
@@ -537,17 +665,7 @@
             const weeklyTitleStr = currentWeekData.title; 
             const verseStr = currentWeekData.verse;
             
-            let videoBlock = "";
-            if (currentWeekData.url && currentWeekData.video) {
-                videoBlock = `
-                <div style="font-size:15px; font-weight:800; color:var(--text-main); margin-bottom:12px; display:flex; align-items:center;">
-                    <span style="margin-right:6px; font-size:16px;">▶️</span> 视频：
-                    <span style="text-decoration:underline; cursor:pointer; color:var(--primary); margin-left:4px;" onclick="openVideo('${currentWeekData.url}', '${currentWeekData.video}')">${currentWeekData.video} (点击播放)</span>
-                </div>`;
-            }
-
             const tagUI = `<div style="margin-top:12px; background:rgba(56,178,172,0.06); padding:10px 14px; border-radius:12px; border-left: 4px solid var(--secondary);">
-                ${videoBlock}
                 <div style="font-size:15px; font-weight:800; color:var(--secondary); display:flex; align-items:center;">
                     <span style="margin-right:6px; font-size:16px;">📖</span> 背经：
                     <span style="text-decoration:underline; cursor:pointer; color:var(--primary); margin-left:4px;" onclick="openScriptureOnline('${verseStr}')">${verseStr} (点击背诵)</span>
@@ -561,25 +679,39 @@
             };
         }
 
+        function jumpToDate(event) {
+            const selectedDate = event.target.value; 
+            if (!selectedDate) return;
+            
+            const parts = selectedDate.split('-');
+            viewingDate.setFullYear(parseInt(parts[0]));
+            viewingDate.setMonth(parseInt(parts[1]) - 1);
+            viewingDate.setDate(parseInt(parts[2]));
+            
+            updateDateUI();
+            resetButtons();
+            renderStatus();
+        }
+
         function updateDateUI() {
             const viewStr = getSafeDateString(viewingDate), todayStr = getSafeDateString(REAL_TODAY), badge = document.getElementById('display-date');
-            if (viewStr === todayStr) { badge.innerText = `${viewingDate.getMonth()+1}月${viewingDate.getDate()}日 (今日)`; }
-            else if (viewStr > todayStr) { badge.innerText = `预告: ${viewingDate.getMonth()+1}月${viewingDate.getDate()}日`; }
-            else { badge.innerText = `补签: ${viewingDate.getMonth()+1}月${viewingDate.getDate()}日`; }
+            
+            const datePicker = document.getElementById('date-picker');
+            if (datePicker) { datePicker.value = viewStr; }
+
+            if (viewStr === todayStr) { badge.innerText = `${viewingDate.getMonth()+1}月${viewingDate.getDate()}日 (今日) ▾`; }
+            else if (viewStr > todayStr) { badge.innerText = `预告: ${viewingDate.getMonth()+1}月${viewingDate.getDate()}日 ▾`; }
+            else { badge.innerText = `补签: ${viewingDate.getMonth()+1}月${viewingDate.getDate()}日 ▾`; }
             
             const plan = getTodayPlan();
             document.getElementById('plan-daily-container').innerHTML = plan.devotion;
             document.getElementById('plan-reading-container').innerHTML = plan.reading;
             document.getElementById('plan-weekly').innerHTML = plan.weekly; 
             
-            // 🔔 周六提醒逻辑
             const reminderEl = document.getElementById('saturday-reminder');
             if (reminderEl) {
-                if (viewingDate.getDay() === 6) { 
-                    reminderEl.style.display = 'block';
-                } else {
-                    reminderEl.style.display = 'none';
-                }
+                if (viewingDate.getDay() === 6) { reminderEl.style.display = 'block'; } 
+                else { reminderEl.style.display = 'none'; }
             }
         }
 
@@ -645,12 +777,15 @@
                 const savedAvatar = localStorage.getItem('avatar_' + name);
                 let avatarStyle = savedAvatar ? `style="background-image: url('${savedAvatar}'); background-size: cover; color: transparent;"` : "";
                 const card = document.createElement('div'); card.className = 'member-card'; card.id = `card-${name}`;
-                card.innerHTML = `<div class="member-header"><div class="avatar" onclick="showProfile('${name}')" ${avatarStyle}>${savedAvatar ? '' : name.charAt(name.length-1)}</div><div class="member-name">${name}</div></div><div class="btn-group"><button class="btn-daily" id="daily-${name}" onclick="submitCheckin('${name}', '每日灵修', this)">灵修</button><button class="btn-reading" id="reading-${name}" onclick="submitCheckin('${name}', '每日读经', this)">读经</button><button class="btn-weekly" id="weekly-${name}" onclick="submitCheckin('${name}', '周任务', this)">周课</button></div>`;
+                
+                card.innerHTML = `<div class="member-header"><div class="avatar" onclick="showProfile('${name}')" ${avatarStyle}>${savedAvatar ? '' : name.charAt(name.length-1)}</div><div class="member-name">${name}</div></div><div class="btn-group">
+                <button class="action-btn btn-daily" id="daily-${name}" onclick="submitCheckin('${name}', '每日灵修', this)">灵修</button>
+                <button class="action-btn btn-reading" id="reading-${name}" onclick="submitCheckin('${name}', '每日读经', this)">读经</button>
+                <button class="action-btn btn-weekly" id="weekly-${name}" onclick="submitCheckin('${name}', '周任务', this)">周课</button></div>`;
                 container.appendChild(card);
             });
         }
 
-        // ================= 🔄 深度挖掘读取算法 (破除1000条限制) =================
         async function fetchStatus() {
             const loadingEl = document.getElementById('loading-status');
             if (globalRecords.length === 0) { loadingEl.style.display = 'block'; loadingEl.innerHTML = "🔄 正在连接云端数据库..."; } 
@@ -662,7 +797,6 @@
                 const limit = 1000;
                 let hasMore = true;
                 
-                // 循环翻页，榨干数据库每一条记录
                 while(hasMore) {
                     const response = await fetchWithRetry(`${NOCODB_API_URL}?limit=${limit}&offset=${offset}&_t=${Date.now()}`, { 
                         method: 'GET', headers: { 'xc-token': API_TOKEN, 'Cache-Control': 'no-cache, no-store, must-revalidate' } 
@@ -679,7 +813,7 @@
                 }
                 
                 globalRecords = allRecords; 
-                localStorage.setItem('zw_checkin_cache', JSON.stringify(globalRecords)); // 刷新缓存
+                localStorage.setItem('zw_checkin_cache', JSON.stringify(globalRecords));
 
                 resetButtons(); renderStatus(); renderDashboard(); 
             } catch (error) { 
@@ -699,12 +833,12 @@
             
             globalRecords.forEach(r => {
                 const name = r['姓名'], isRetro = r['是否补签'] === '是';
-                const rDate = extractDateStr(r['打卡时间']); // 使用智能防时区错乱解析
+                const rLogicalDate = getLogicalDateStr(r); 
                 
-                if (rDate === viewStr && r['每日灵修'] === '已完成') { doneD.add(name); setSuccess(document.getElementById(`daily-${name}`), isRetro ? "已补签" : "已完成"); }
-                if (rDate === viewStr && r['每日读经'] === '已完成') { doneR.add(name); setSuccess(document.getElementById(`reading-${name}`), isRetro ? "已补签" : "已完成"); }
+                if (rLogicalDate === viewStr && r['每日灵修'] === '已完成') { doneD.add(name); setSuccess(document.getElementById(`daily-${name}`), isRetro ? "已补签" : "已完成"); }
+                if (rLogicalDate === viewStr && r['每日读经'] === '已完成') { doneR.add(name); setSuccess(document.getElementById(`reading-${name}`), isRetro ? "已补签" : "已完成"); }
                 
-                if (rDate >= viewWeekStart && rDate < weekEndStr && r['周任务'] === '已完成') { doneW.add(name); setSuccess(document.getElementById(`weekly-${name}`), isRetro ? "周课已补" : "已完成"); }
+                if (rLogicalDate >= viewWeekStart && rLogicalDate < weekEndStr && r['周任务'] === '已完成') { doneW.add(name); setSuccess(document.getElementById(`weekly-${name}`), isRetro ? "周课已补" : "已完成"); }
             });
             
             document.getElementById('daily-count').innerText = doneD.size; document.getElementById('reading-count').innerText = doneR.size; document.getElementById('weekly-count').innerText = doneW.size;
@@ -714,24 +848,22 @@
             document.getElementById('loading-status').style.display = 'none'; 
         }
 
-        function setSuccess(btn, txt) { if(btn){ btn.innerHTML = `✔ ${txt}`; btn.className = "btn-success"; btn.disabled = false; } }
+        function setSuccess(btn, txt) { if(btn){ btn.innerHTML = `✔ ${txt}`; btn.className = "action-btn btn-success"; btn.disabled = false; } }
 
-        // ================= 📝 乐观提交打卡 (100%瞬间弹窗) =================
         function submitCheckin(name, type, btn) {
             if (btn.classList.contains('btn-success')) { pendingCancel = { name, type, btn }; document.getElementById('cancel-modal-overlay').classList.add('show'); return; }
             
             const isPast = getSafeDateString(viewingDate) < getSafeDateString(REAL_TODAY);
             const oldHtml = btn.innerHTML; const oldClass = btn.className;
             
-            // 1. 瞬间视觉反馈 (不等待网络)
             btn.innerHTML = isPast ? "✔ 已补签" : "✔ 已完成"; 
-            btn.className = "btn-success"; 
+            
+            btn.className = "action-btn btn-success"; 
             btn.disabled = false;
             
             document.getElementById('modal-action-title').innerText = isPast ? "补签成功！" : "打卡成功！"; 
             showSuccess(); 
             
-            // 2. 组装打卡详情字符串
             const vMonth = viewingDate.getMonth() + 1; const vDay = viewingDate.getDate();
             let detailStr = (isPast ? "【补签】" : "【按时】") + `${vMonth}月${vDay}日 ` + type;
 
@@ -740,11 +872,9 @@
                 [type]: "已完成", "打卡详情": detailStr
             };
             
-            // 3. 后台静默发送与重试
             fetchWithRetry(NOCODB_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', 'xc-token': API_TOKEN }, body: JSON.stringify([payload]) }, 3)
             .then(() => { setTimeout(() => { fetchStatus(); }, 1000); })
             .catch(e => {
-                // 万一真失败了，恢复按钮
                 btn.innerHTML = oldHtml; btn.className = oldClass;
                 alert("严重网络异常，打卡未保存，请检查网络！");
             });
@@ -754,14 +884,13 @@
             if (!pendingCancel) return; const { name, type, btn } = pendingCancel; 
             const originalText = btn.innerHTML; const oldClass = btn.className;
             
-            // 瞬间视觉反馈
             btn.innerHTML = "撤销中"; btn.disabled = true; closeCancelModal();
             
             const viewDateStr = getSafeDateString(viewingDate); const viewWeekStartStr = getWeekStart(viewingDate);
             let recordToCancel = globalRecords.find(r => {
-                const rDate = extractDateStr(r['打卡时间']);
-                if (type === '周任务') return r['姓名'] === name && rDate >= viewWeekStartStr && rDate < getSafeDateString(new Date(new Date(viewWeekStartStr).getTime() + 7*86400000)) && r[type] === '已完成';
-                return r['姓名'] === name && rDate === viewDateStr && r[type] === '已完成';
+                const rLogicalDate = getLogicalDateStr(r);
+                if (type === '周任务') return r['姓名'] === name && rLogicalDate >= viewWeekStartStr && rLogicalDate < getSafeDateString(new Date(new Date(viewWeekStartStr).getTime() + 7*86400000)) && r[type] === '已完成';
+                return r['姓名'] === name && rLogicalDate === viewDateStr && r[type] === '已完成';
             });
             
             if (recordToCancel) {
@@ -770,7 +899,6 @@
                 let detailStr = "【撤销】" + `${vMonth}月${vDay}日 ` + type;
                 let cancelPayload = { "姓名": name, "打卡时间": getIsoWithTimezoneForViewing(), "是否补签": isPast ? "是" : "否", [type]: "已撤回", "打卡详情": detailStr };
                 
-                // 并发执行 DELETE 和 POST
                 Promise.all([
                     fetchWithRetry(NOCODB_API_URL, { method: 'DELETE', headers: { 'Content-Type': 'application/json', 'xc-token': API_TOKEN }, body: JSON.stringify([{ "Id": recordToCancel.Id }]) }, 3),
                     fetchWithRetry(NOCODB_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', 'xc-token': API_TOKEN }, body: JSON.stringify([cancelPayload]) }, 3)
@@ -787,9 +915,9 @@
             const viewStr = getSafeDateString(viewingDate), todayStr = getSafeDateString(REAL_TODAY), isFuture = viewStr > todayStr, isPast = viewStr < todayStr;
             MEMBERS.forEach(name => {
                 const d = document.getElementById(`daily-${name}`), r = document.getElementById(`reading-${name}`), w = document.getElementById(`weekly-${name}`);
-                if(d){ d.disabled = isFuture; d.className = isFuture ? 'btn-future' : (isPast ? 'btn-retro' : 'btn-daily'); d.innerHTML = isFuture ? '⏳ 未到时间' : (isPast ? '📝 补签灵修' : '☀️ 每日灵修'); }
-                if(r){ r.disabled = isFuture; r.className = isFuture ? 'btn-future' : (isPast ? 'btn-retro' : 'btn-reading'); r.innerHTML = isFuture ? '⏳ 未到时间' : (isPast ? '📝 补签读经' : '📖 每日读经'); }
-                if(w){ w.disabled = isFuture; w.className = isFuture ? 'btn-future' : (isPast ? 'btn-retro' : 'btn-weekly'); w.innerHTML = isFuture ? '⏳ 未到时间' : (isPast ? '📝 补签周课' : '📚 周课完成'); }
+                if(d){ d.disabled = isFuture; d.className = 'action-btn ' + (isFuture ? 'btn-future' : (isPast ? 'btn-retro' : 'btn-daily')); d.innerHTML = isFuture ? '⏳ 未到时间' : (isPast ? '📝 补签灵修' : '☀️ 每日灵修'); }
+                if(r){ r.disabled = isFuture; r.className = 'action-btn ' + (isFuture ? 'btn-future' : (isPast ? 'btn-retro' : 'btn-reading')); r.innerHTML = isFuture ? '⏳ 未到时间' : (isPast ? '📝 补签读经' : '📖 每日读经'); }
+                if(w){ w.disabled = isFuture; w.className = 'action-btn ' + (isFuture ? 'btn-future' : (isPast ? 'btn-retro' : 'btn-weekly')); w.innerHTML = isFuture ? '⏳ 未到时间' : (isPast ? '📝 补签周课' : '📚 周课完成'); }
             });
         }
 
@@ -817,144 +945,18 @@
             event.target.value = '';
         }
 
-       const BIBLE_VERSES = [
+        const BIBLE_VERSES = [
             {content: "你当刚强壮胆！不要惧怕，也不要惊惶。因为你无论往哪里去，耶和华你的神必与你同在。", ref: "约书亚记 1:9"},
             {content: "疲乏的，他赐能力；软弱的，他加力量。", ref: "以赛亚书 40:29"},
             {content: "但那等候耶和华的必重新得力。他们必如鹰展翅上腾；他们奔跑却不困倦，行走却不疲乏。", ref: "以赛亚书 40:31"},
             {content: "你不要害怕，因为我与你同在；不要惊惶，因为我是你的神。我必坚固你，我必帮助你；我必用我公义的右手扶持你。", ref: "以赛亚书 41:10"},
             {content: "我靠着那加给我力量的，凡事都能作。", ref: "腓立比书 4:13"},
             {content: "耶和华是我的力量，我的诗歌，也成了我的拯救。", ref: "出埃及记 15:2"},
-            {content: "你们当刚强壮胆，不要害怕，也不要畏惧他们，因为耶和华你的神和你同去。他必不撇下你，也不丢弃你。", ref: "申命记 31:6"},
             {content: "耶和华是我的亮光，是我的拯救，我还怕谁呢？耶和华是我性命的保障，我还惧谁呢？", ref: "诗篇 27:1"},
             {content: "神是我们的避难所，是我们的力量，是我们在患难中随时的帮助。", ref: "诗篇 46:1"},
-            {content: "万军之耶和华与我们同在；雅各的神是我们的避难所！", ref: "诗篇 46:7"},
             {content: "所以，我们不丧胆。外体虽然毁坏，内心却一天新似一天。", ref: "哥林多后书 4:16"},
             {content: "我对你们说这些事，是要使你们在我里面有平安。在世上你们有患难，但你们放心，我已经胜了这世界。", ref: "约翰福音 16:33"},
-            {content: "因为神赐给我们，不是胆怯的心，乃是刚强、仁爱、谨守的心。", ref: "提摩太后书 1:7"},
-            {content: "你们务要警醒，在真道上站立得稳，要作大丈夫，要刚强。", ref: "哥林多前书 16:13"},
-            {content: "我要求告当赞美的耶和华，这样我必从仇敌手中被救出来。", ref: "诗篇 18:3"},
-            {content: "我的肉体和我的心肠衰退；但神是我心里的力量，又是我的福分，直到永远。", ref: "诗篇 73:26"},
-            {content: "主耶和华是我的力量；他使我的脚快如母鹿的蹄，又使我稳行在高处。", ref: "哈巴谷书 3:19"},
-            {content: "他对我说：我的恩典够你用的，因为我的能力是在人的软弱上显得完全。", ref: "哥林多后书 12:9"},
-            {content: "应当一无挂虑，只要凡事藉着祷告、祈求，和感谢，将你们所要的告诉神。神所赐出人意外的平安必在基督耶稣里保守你们的心怀意念。", ref: "腓立比书 4:6-7"},
-            {content: "我留下平安给你们；我将我的平安赐给你们。我所赐的，不像世人所赐的。你们心里不要忧愁，也不要胆怯。", ref: "约翰福音 14:27"},
-            {content: "凡劳苦担重担的人可以到我这里来，我就使你们得安息。", ref: "马太福音 11:28"},
-            {content: "你们要将一切的忧虑卸给神，因为他顾念你们。", ref: "彼得前书 5:7"},
-            {content: "坚心倚赖你的，你必保守他十分平安，因为他倚靠你。", ref: "以赛亚书 26:3"},
-            {content: "耶和华是我的牧者，我必不至缺乏。", ref: "诗篇 23:1"},
-            {content: "我虽然行过死荫的幽谷，也不怕遭害，因为你与我同在；你的杖，你的竿，都安慰我。", ref: "诗篇 23:4"},
-            {content: "你要把你的重担卸给耶和华，他必抚养你；他永不叫义人动摇。", ref: "诗篇 55:22"},
-            {content: "我必安然躺下睡觉，因为独有你耶和华使我安然居住。", ref: "诗篇 4:8"},
-            {content: "耶和华必赐力量给他的百姓；耶和华必赐平安的福给他的百姓。", ref: "诗篇 29:11"},
-            {content: "愿赐平安的主随时随事亲自赐给你们平安！愿主常与你们众人同在！", ref: "帖撒罗尼迦后书 3:16"},
-            {content: "他在一切患难中安慰我们，叫我们能用神所赐的安慰去安慰那遭各样患难的人。", ref: "哥林多后书 1:4"},
-            {content: "因为他心里怎样思量，他为人就是怎样。", ref: "箴言 23:7"},
-            {content: "大山可以挪开，小山可以迁移；但我的慈爱必不离开你，我平安的约也不迁移。", ref: "以赛亚书 54:10"},
-            {content: "耶和华靠近伤心的人，拯救灵性痛悔的人。", ref: "诗篇 34:18"},
-            {content: "他医好伤心的人，裹好他们的伤处。", ref: "诗篇 147:3"},
-            {content: "耶和华说：我知道我向你们所怀的意念是赐平安的意念，不是降灾祸的意念，要叫你们末后有指望。", ref: "耶利米书 29:11"},
-            {content: "但愿使人有盼望的神，因信将诸般的喜乐、平安充满你们的心，使你们藉着圣灵的能力大有盼望！", ref: "罗马书 15:13"},
-            {content: "你的话是我脚前的灯，是我路上的光。", ref: "诗篇 119:105"},
-            {content: "你要专心仰赖耶和华，不可倚靠自己的聪明。在你一切所行的事上，都要认定他，他必指引你的路。", ref: "箴言 3:5-6"},
-            {content: "人心筹算自己的道路；惟耶和华指引他的脚步。", ref: "箴言 16:9"},
-            {content: "我要教导你，指示你当行的路；我要定睛在你身上劝戒你。", ref: "诗篇 32:8"},
-            {content: "义人的路好像黎明的光，越照越明，直到日午。", ref: "箴言 4:18"},
-            {content: "因为罪的工价乃是死；惟有神的恩赐，在我们的主基督耶稣里，乃是永生。", ref: "罗马书 6:23"},
-            {content: "我们晓得万事都互相效力，叫爱神的人得益处，就是按他旨意被召的人。", ref: "罗马书 8:28"},
-            {content: "信就是所望之事的实底，是未见之事的确据。", ref: "希伯来书 11:1"},
-            {content: "在指望中要喜乐；在患难中要忍耐；祷告要恒切。", ref: "罗马书 12:12"},
-            {content: "我们得救是在乎盼望；只是所见的盼望不是盼望，谁还盼望他所见的呢？", ref: "罗马书 8:24"},
-            {content: "仰望为我们信心创始成终的耶稣。", ref: "希伯来书 12:2"},
-            {content: "求你用你的话使我脚步稳当，不许什么罪孽辖制我。", ref: "诗篇 119:133"},
-            {content: "你求告我，我就应允你，并将你所不知道、又大又难的事指示你。", ref: "耶利米书 33:3"},
-            {content: "我们有这指望，如同灵魂的锚，又坚固又牢靠，且通入幔内。", ref: "希伯来书 6:19"},
-            {content: "耶稣对他说：你若能信，在信的人，凡事都能。", ref: "马可福音 9:23"},
-            {content: "人非有信，就不能得神的喜悦；因为到神面前来的人必须信有神，且信他赏赐那寻求他的人。", ref: "希伯来书 11:6"},
-            {content: "当将你的事交托耶和华，并倚靠他，他就必成全。", ref: "诗篇 37:5"},
-            {content: "你要保守你心，胜过保守一切，因为一生的果效是由心发出。", ref: "箴言 4:23"},
-            {content: "敬畏耶和华是智慧的开端；认识至圣者便是聪明。", ref: "箴言 9:10"},
-            {content: "你所做的，要交托耶和华，你所谋的，就必成立。", ref: "箴言 16:3"},
-            {content: "你们要先求他的国和他的义，这些东西都要加给你们了。", ref: "马太福音 6:33"},
-            {content: "所以不要为明天忧虑，因为明天自有明天的忧虑；一天的难处一天当就够了。", ref: "马太福音 6:34"},
-            {content: "你们祈求，就给你们；寻找，就寻见；叩门，就给你们开门。", ref: "马太福音 7:7"},
-            {content: "所以我告诉你们，凡你们祷告祈求的，无论是什么，只要信是得着的，就必得着。", ref: "马可福音 11:24"},
-            {content: "因为，出于神的话，没有一句不带能力的。", ref: "路加福音 1:37"},
-            {content: "你们若常在我里面，我的话也常在你们里面，凡你们所愿意的，祈求，就给你们成就。", ref: "约翰福音 15:7"},
-            {content: "可见，信道是从听道来的，听道是从基督的话来的。", ref: "罗马书 10:17"},
-            {content: "因我们行事为人是凭着信心，不是凭着眼见。", ref: "哥林多后书 5:7"},
-            {content: "只要凭着信心求，一点不疑惑；因为那疑惑的人，就像海中的波浪，被风吹动翻腾。", ref: "雅各书 1:6"},
-            {content: "投靠耶和华，强似倚赖人。", ref: "诗篇 118:8"},
-            {content: "神爱世人，甚至将他的独生子赐给他们，叫一切信他的，不至灭亡，反得永生。", ref: "约翰福音 3:16"},
-            {content: "惟有基督在我们还作罪人的时候为我们死，神的爱就在此向我们显明了。", ref: "罗马书 5:8"},
-            {content: "爱是恒久忍耐，又有恩慈；爱是不嫉妒；爱是不自夸，不张狂。", ref: "哥林多前书 13:4"},
-            {content: "凡事包容，凡事相信，凡事盼望，凡事忍耐.爱是永不止息。", ref: "哥林多前书 13:7-8"},
-            {content: "如今常存的有信，有望，有爱这三样，其中最大的是爱。", ref: "哥林多前书 13:13"},
-            {content: "我们爱，因为神先爱我们。", ref: "约翰一书 4:19"},
-            {content: "爱里没有惧怕；爱既完全，就把惧怕除去。", ref: "约翰一书 4:18"},
-            {content: "你们得救是本乎恩，也因着信；这并不是出于自己，乃是神所赐的。", ref: "以弗所书 2:8"},
-            {content: "神能将各样的恩惠多多地加给你们，使你们凡事常常充足，能多行各样善事。", ref: "哥林多后书 9:8"},
-            {content: "并要以恩慈相待，存怜悯的心，彼此饶恕，正如神在基督里饶恕了你们一样。", ref: "以弗所书 4:32"},
-            {content: "最要紧的是彼此切实相爱，因为爱能遮掩许多的罪。", ref: "彼得前书 4:8"},
-            {content: "我们不至消灭，是出于耶和华诸般的慈爱；是因他的怜悯不至断绝。每早晨，这都是新的；你的诚实极其广大！", ref: "耶利米哀歌 3:22-23"},
-            {content: "耶和华你的神是施行拯救、大有能力的主.他在你中间必因你欢欣喜乐，默然爱你，且因你喜乐而欢呼。", ref: "西番雅书 3:17"},
-            {content: "你们饶恕人的过犯，你们的天父也必饶恕你们的过犯。", ref: "马太福音 6:14"},
-            {content: "凡你们所做的都要凭爱心而做。", ref: "哥林多前书 16:14"},
-            {content: "我们行善，不可丧志；若不灰心，到了时候就要收成。", ref: "加拉太书 6:9"},
-            {content: "我的弟兄们，你们落在百般试炼中，都要以为大喜乐；因为知道你们的信心经过试验，就生忍耐。", ref: "雅各书 1:2-3"},
-            {content: "你们中间若有缺少智慧的，应当求那厚赐与众人、也不斥责人的神，主就必赐给他。", ref: "雅各书 1:5"},
-            {content: "忍受试探的人是有福的，因为他经过试验以后，必得生命的冠冕，这是主应许给那些爱他之人的。", ref: "雅各书 1:12"},
-            {content: "我深信那在你们心里动了善工的，必成全这工，直到耶稣基督的日子。", ref: "腓立比书 1:6"},
-            {content: "你们所遇见的试探，无非是人所能受的.神是信实的，必不叫你们受试探过于所能受的；在受试探的时候，总要给你们开一条出路，叫你们能忍受得住。", ref: "哥林多前书 10:13"},
-            {content: "我们既有这许多的见证人，如同云彩围着我们，就当放下各样的重担，脱去容易缠累我们的罪，存心忍耐，奔那摆在我们前头的路程。", ref: "希伯来书 12:1"},
-            {content: "你们要靠主常常喜乐.我再说，你们要喜乐。", ref: "腓立比书 4:4"},
-            {content: "常常喜乐，不住地祷告，凡事谢恩；因为这是神在基督耶稣里向你们所定的旨意。", ref: "帖撒罗尼迦前书 5:16-18"},
-            {content: "圣经都是神所默示的，于教训、督责、使人归正、教导人学义都是有益的。", ref: "提摩太后书 3:16"},
-            {content: "神的道是活泼的，是有功效的，比一切两刃的剑更快，甚至魂与灵，骨节与骨髓，都能刺入、剖开，连心中的思念和主意都能辨明。", ref: "希伯来书 4:12"},
-            {content: "所以，我们只管坦然无惧地来到施恩的宝座前，为要得怜恤，蒙恩惠，作随时的帮助。", ref: "希伯来书 4:16"},
-            {content: "务要传道，无论得时不得时，总要专心，并用百般的忍耐、各样的教训责备人，警戒人，劝勉人。", ref: "提摩太后书 4:2"},
-            {content: "凡管教的事，当时不觉得快乐，反觉得愁苦；后来却为那经练过的人结出平安的果子，就是义。", ref: "希伯来书 12:11"},
-            {content: "但你们得在基督耶稣里是本乎神，神又使他成为我们的智慧、公义、圣洁、救赎。", ref: "哥林多前书 1:30"},
-            {content: "所以弟兄们，我以神的慈悲劝你们，将身体献上，当作活祭，是圣洁的，是神所喜悦的；你们如此事奉乃是理所当然的。", ref: "罗马书 12:1"},
-            {content: "不要效法这个世界，只要心意更新而变化，叫你们察验何为神的善良、纯全、可喜悦的旨意。", ref: "罗马书 12:2"},
-            {content: "若有人在基督里，他就是新造的人，旧事已过，都变成新的了。", ref: "哥林多后书 5:17"},
-            {content: "我已经与基督同钉十字架，现在活着的不再是我，乃是基督在我里面活着。", ref: "加拉太书 2:20"},
-            {content: "圣灵所结的果子，就是仁爱、喜乐、和平、忍耐、恩慈、良善、信实、温柔、节制。", ref: "加拉太书 5:22-23"},
-            {content: "我们原是他的工作，在基督耶稣里造成的，为要叫我们行善，就是神所预备叫我们行的。", ref: "以弗所书 2:10"},
-            {content: "神能照着运行在我们心里的大力充充足足地成就一切，超过我们所求所想的。", ref: "以弗所书 3:20"},
-            {content: "我还有末了的话：你们要靠着主，倚赖他的大能大力作刚强的人。", ref: "以弗所书 6:10"},
-            {content: "要穿戴神所赐的全副军装，就能抵挡魔鬼的诡计。", ref: "以弗所书 6:11"},
-            {content: "凡事不可结党，不可贪图虚浮的荣耀；只要存心谦卑，各人看别人比自己强。", ref: "腓立比书 2:3"},
-            {content: "你们要思念上面的事，不要思念地上的事。", ref: "歌罗西书 3:2"},
-            {content: "无论做什么，都要从心里做，像是给主做的，不是给人做的。", ref: "歌罗西书 3:23"},
-            {content: "故此，你们要顺服神.务要抵挡魔鬼，魔鬼就必离开你们逃跑了。", ref: "雅各书 4:7"},
-            {content: "你们是世上的光.城造在山上是不能隐藏的。", ref: "马太福音 5:14"},
-            {content: "所以，你们要去，使万民作我的门徒，奉父、子、圣灵的名给他们施洗。", ref: "马太福音 28:19"},
-            {content: "我们若认自己的罪，神是信实的，是公义的，必要赦免我们的罪，洗净我们一切的不义。", ref: "约翰一书 1:9"},
-            {content: "看哪，我站在门外叩门，若有听见我声音就开门的，我要进到他那里去，我与他，他与我一同坐席。", ref: "启示录 3:20"},
-            {content: "神啊，求你为我造清洁的心，使我里面重新有正直的灵。", ref: "诗篇 51:10"},
-            {content: "不要为自己积攒财宝在地上；地上有虫子咬，能锈坏，也有贼挖窟窿来偷。", ref: "马太福音 6:19"},
-            {content: "因为你的财宝在哪里，你的心也在那里。", ref: "马太福音 6:21"},
-            {content: "我的心哪，你要称颂耶和华！凡在我里面的，也要称颂他的圣名！", ref: "诗篇 103:1"},
-            {content: "他赦免你的一切罪孽，医治你的一切疾病。", ref: "诗篇 103:3"},
-            {content: "天离地何等的高，他的慈爱向敬畏他的人也是何等的大！", ref: "诗篇 103:11"},
-            {content: "我要向山举目；我的帮助从何而来？我的帮助从造天地的耶和华而来。", ref: "诗篇 121:1-2"},
-            {content: "耶和华要保护你，免受一切的灾害；他要保护你的性命。", ref: "诗篇 121:7"},
-            {content: "神啊，求你鉴察我，知道我的心思，试炼我，知道我的意念。", ref: "诗篇 139:23"},
-            {content: "因有一婴孩为我们而生，有一子赐给我们.政权必担在他的肩头上。", ref: "以赛亚书 9:6"},
-            {content: "看哪！神是我的拯救；我要倚靠他，并不惧怕。", ref: "以赛亚书 12:2"},
-            {content: "哪知他为我们的过犯受害，为我们的罪孽压伤.因他受的刑罚，我们得平安；因他受的鞭伤，我们得医治。", ref: "以赛亚书 53:5"},
-            {content: "他被欺压，在受苦的时候却不开口；他像羊羔被牵到宰杀之地，又像羊在剪毛的人手下无声，他也是这样不开口。", ref: "以赛亚书 53:7"},
-            {content: "凡接待他的，就是信他名的人，他就赐他们权柄作神的儿女。", ref: "约翰福音 1:12"},
-            {content: "道成了肉身，住在我们中间，充充满满地有恩典有真理。", ref: "约翰福音 1:14"},
-            {content: "盗贼来，无非要偷窃，杀害，毁坏；我来了，是要叫羊得生命，并且得的更丰盛。", ref: "约翰福音 10:10"},
-            {content: "耶稣对她说：复活在我，生命也在我.信我的人虽然死了，也必复活。", ref: "约翰福音 11:25"},
-            {content: "耶稣说：我就是道路、真理、生命；若不藉着我，没有人能到父那里去。", ref: "约翰福音 14:6"},
-            {content: "我是葡萄树，你们是枝子.常在我里面的，我也常在他里面，这人就多结果子；因为离了我，你们就不能做什么。", ref: "约翰福音 15:5"},
-            {content: "我不以福音为耻；这福音本是神的大能，要救一切相信的，先是犹太人，后是希腊人。", ref: "罗马书 1:16"},
-            {content: "因为世人都犯了罪，亏缺了神的荣耀；如今却蒙神的恩典，因基督耶稣的救赎，就白白地称义。", ref: "罗马书 3:23-24"},
-            {content: "如今，那些在基督耶稣里的就不定罪了。", ref: "罗马书 8:1"},
-            {content: "因为我深信无论是死，是生，是天使，是掌权的，是有能的，是现在的事，是将来的事，都不能叫我们与神的爱隔绝。", ref: "罗马书 8:38-39"},
-            {content: "你若口里认耶稣为主，心里信神叫他从死里复活，就必得救。", ref: "罗马书 10:9"}
+            {content: "因为神赐给我们，不是胆怯的心，乃是刚强、仁爱、谨守的心。", ref: "提摩太后书 1:7"}
         ];
 
         function showSuccess() {
@@ -976,7 +978,7 @@
             const activeDates = new Set();
             globalRecords.forEach(r => {
                 if(r['姓名'] === name && (r['每日灵修'] === '已完成' || r['每日读经'] === '已完成')) {
-                    activeDates.add(extractDateStr(r['打卡时间']));
+                    activeDates.add(getLogicalDateStr(r));
                 }
             });
             let recent7Count = 0; let calendarHTML = '';
@@ -995,7 +997,7 @@
             document.getElementById('profile-overlay').classList.add('show');
         }
 
-        // ================= 📊 底部数据大盘渲染引擎 =================
+        // ================= 📊 底部数据大盘渲染引擎 (带严格去重) =================
         function switchDashTab(tabId, btnEl) {
             document.querySelectorAll('.dash-tab-btn').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.dash-content').forEach(c => c.classList.remove('active'));
@@ -1019,7 +1021,7 @@
 
             globalRecords.forEach(r => {
                 const name = r['姓名']; if (!stats[name]) return;
-                const rDateStr = extractDateStr(r['打卡时间']);
+                const rDateStr = getLogicalDateStr(r);
                 
                 if (r['每日灵修'] === '已完成') userDailyDates[name].add(rDateStr);
                 if (r['每日读经'] === '已完成') userReadingDates[name].add(rDateStr);
