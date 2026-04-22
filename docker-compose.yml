@@ -1,0 +1,14 @@
+name: zw-disciple-checkin
+
+services:
+  zw-checkin:
+    build: .
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "9717:6717"
+    volumes:
+      - ./data:/app/data
+      - ./Yonghuo.md:/app/Yonghuo.md:ro
+      - ./weekly_task.md:/app/weekly_task.md:ro
