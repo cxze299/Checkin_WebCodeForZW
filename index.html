@@ -16,8 +16,12 @@
     <style>
         /* ================= iOS 风格全局变量 ================= */
         :root {
-            --primary: #5a67d8; 
-            --primary-light: rgba(90, 103, 216, 0.08);
+            --primary: #027552; 
+            --primary-light: rgba(2, 117, 82, 0.09);
+            --hero-accent: #027552;
+            --hero-accent-soft: rgba(2, 117, 82, 0.09);
+            --hero-accent-line: rgba(2, 117, 82, 0.2);
+            --hero-wash: #f3fbf7;
             --secondary: #38b2ac; 
             --warning: #f59e0b; 
             --success: #10b981; 
@@ -29,7 +33,7 @@
             --border-color: #e5e5ea;
         }
 
-        body { font-family: "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background-color: var(--bg-color); margin: 0; padding: 0; color: var(--text-main); -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
+        body { font-family: "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background-color: var(--bg-color); margin: 0; padding: 0; color: var(--text-main); -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; overflow-x: hidden; }
         .container { max-width: 1100px; margin: 0 auto; padding: 10px 16px calc(40px + env(safe-area-inset-bottom)) 16px; }
 
         .header { text-align: center; margin: 0 -16px 20px -16px; padding: calc(20px + env(safe-area-inset-top)) 16px 20px 16px; background: #fff; border-bottom: 1px solid var(--border-color); border-radius: 0 0 32px 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
@@ -46,14 +50,14 @@
         .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
         .current-date-badge { font-size: 15px; font-weight: 800; color: var(--text-main); padding: 0 12px; min-width: 100px; text-align: center; }
 
-        .task-info-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 24px; padding: 25px 20px; margin-top: 15px; text-align: left; border: 1px solid rgba(90, 103, 216, 0.1); box-shadow: 0 6px 20px rgba(0,0,0,0.03); }
+        .task-info-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 24px; padding: 25px 20px; margin-top: 15px; text-align: left; border: 1px solid rgba(2,117,82,0.10); box-shadow: 0 6px 20px rgba(0,0,0,0.03); }
         .task-row { margin-bottom: 22px; display: flex; flex-direction: column; align-items: flex-start; }
         .task-row:last-child { margin-bottom: 0; }
         .task-row strong { color: var(--primary); font-weight: 900; font-size: 15px; background: var(--primary-light); padding: 5px 12px; border-radius: 10px; margin-bottom: 10px; letter-spacing: 0.02em; display: inline-flex; align-items: center; } 
         .task-content { width: 100%; box-sizing: border-box; font-size: 17px; font-weight: 600; color: var(--text-main); padding: 0 4px; line-height: 1.7; letter-spacing: 0.03em; text-align: justify; }
         .task-highlight { background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 2px 8px; border-radius: 6px; font-weight: 800; margin: 0 2px;}
         
-        .clickable-task { display: inline-block; cursor: pointer; transition: opacity 0.2s; border-bottom: 2px dashed rgba(90, 103, 216, 0.4); padding-bottom: 2px; }
+        .clickable-task { display: inline-block; cursor: pointer; transition: opacity 0.2s; border-bottom: 2px dashed rgba(2,117,82,0.38); padding-bottom: 2px; }
         .clickable-task:active { opacity: 0.6; }
         .read-badge { font-size: 12px; color: var(--primary); background: var(--primary-light); padding: 3px 8px; border-radius: 10px; margin-left: 6px; vertical-align: middle; }
         .read-badge.weekly-badge { color: var(--secondary); background: rgba(56, 178, 172, 0.1); }
@@ -91,7 +95,7 @@
         .stats-dashboard { display: grid; grid-template-columns: 1fr; gap: 15px; margin: 0 0 25px 0; }
         @media (min-width: 600px) { .stats-dashboard { grid-template-columns: repeat(3, 1fr); } }
 
-        .stat-card { background: var(--card-bg); padding: 25px 15px; border-radius: 24px; border: 1px solid var(--border-color); text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.02); }
+        .stat-card { background: linear-gradient(180deg, #ffffff 0%, var(--hero-wash) 100%); padding: 25px 15px; border-radius: 24px; border: 1px solid rgba(2,117,82,0.10); text-align: center; box-shadow: 0 12px 28px rgba(2,117,82,0.06); }
         .stat-icon-wrapper { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px auto; font-size: 18px; }
         .icon-daily { background: rgba(16, 185, 129, 0.12); }
         .icon-reading { background: rgba(236, 72, 153, 0.12); }
@@ -101,7 +105,7 @@
         .stat-number span { font-size: 16px; color: var(--text-sub); font-weight: 700; -webkit-text-fill-color: var(--text-sub); }
         .num-daily { background: linear-gradient(180deg, #10b981, #047857); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .num-reading { background: linear-gradient(180deg, #ec4899, #be185d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .num-weekly { background: linear-gradient(180deg, #8b5cf6, #6d28d9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .num-weekly { background: linear-gradient(180deg, #03966b, #015b40); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
         .progress-bar-bg { height: 10px; background: #f1f5f9; border-radius: 20px; overflow: hidden; margin: 0 10px; position: relative; }
         .progress-bar-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 100%; background: linear-gradient(90deg, var(--success), #34d399); transform-origin: left center; transform: scaleX(0); transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1); }
@@ -112,11 +116,18 @@
         @media (min-width: 600px) { #members-container { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 950px) { #members-container { grid-template-columns: repeat(3, 1fr); } }
 
-        .member-card { background: var(--card-bg); border-radius: 20px; padding: 18px; border: 1px solid var(--border-color); display: flex; flex-direction: column; }
-        .member-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
+        .member-card { background: linear-gradient(180deg, #ffffff 0%, #f7fcfa 100%); border-radius: 20px; padding: 18px; border: 1px solid rgba(2,117,82,0.09); display: flex; flex-direction: column; box-shadow: 0 10px 24px rgba(2,117,82,0.045); }
+        .member-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 15px; }
+        .member-identity { display: flex; align-items: center; gap: 12px; min-width: 0; }
         .avatar { width: 44px; height: 44px; background: var(--primary-light); color: var(--primary); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 16px; font-weight: 800; border: 2px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.2s; }
         .avatar:active { transform: scale(0.9); }
-        .member-name { font-size: 17px; font-weight: 800; }
+        .member-name { font-size: 17px; font-weight: 800; min-width: 0; overflow-wrap: anywhere; }
+        .member-testimonial-btn { flex: 0 0 auto; border: none; background: #eef9f4; color: var(--hero-accent); border-radius: 10px; padding: 9px 12px; font-size: 13px; font-weight: 900; cursor: pointer; box-shadow: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 34px; }
+        .member-testimonial-btn.has-testimonial { background: linear-gradient(135deg, var(--hero-accent), #0b8b65); color: #fff; box-shadow: 0 8px 18px rgba(2,117,82,0.22); }
+        .member-testimonial-btn:active { transform: scale(0.96); }
+        .member-testimonial-count { min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: var(--hero-accent); color: #fff; font-size: 11px; line-height: 18px; font-weight: 900; display: none; align-items: center; justify-content: center; box-sizing: border-box; }
+        .member-testimonial-btn.has-testimonial .member-testimonial-count { background: rgba(255,255,255,0.94); color: var(--hero-accent); }
+        .member-testimonial-count.show { display: inline-flex; }
 
         .btn-group { display: flex; gap: 8px; }
         button.action-btn { flex: 1; border: none; border-radius: 12px; padding: 12px 0; font-size: 13px; font-weight: 800; cursor: pointer; transition: all 0.2s; }
@@ -133,40 +144,53 @@
         .btn-future { background: #f8fafc; color: #94a3b8; }
 
         /* ================= 📊 底部数据大盘样式 ================= */
-        .dash-card { background: var(--card-bg); border-radius: 24px; padding: 25px 20px; margin-top: 10px; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .dash-card { background: linear-gradient(180deg, #ffffff 0%, var(--hero-wash) 100%); border-radius: 24px; padding: 25px 20px; margin-top: 10px; border: 1px solid rgba(2,117,82,0.10); box-shadow: 0 14px 34px rgba(2,117,82,0.06); }
         .dash-header { text-align: center; margin-bottom: 20px; }
         .dash-title { font-size: 18px; font-weight: 900; color: var(--text-main); margin: 0; }
-        .dash-tabs { display: flex; gap: 8px; background: #f1f5f9; padding: 6px; border-radius: 16px; margin-bottom: 20px; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+        .dash-tabs { display: flex; gap: 8px; background: #eef9f4; padding: 6px; border-radius: 16px; margin-bottom: 20px; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
         .dash-tab-btn { flex-shrink: 0; padding: 10px 18px; border-radius: 12px; background: transparent; color: var(--text-sub); font-weight: 800; font-size: 13px; border: none; cursor: pointer; transition: all 0.2s; }
-        .dash-tab-btn.active { background: white; color: var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .dash-content { display: none; width: 100%; height: 320px; position: relative; }
+        .dash-tab-btn.active { background: white; color: var(--hero-accent); box-shadow: 0 2px 10px rgba(2,117,82,0.10); }
+        .dash-content { display: none; width: 100%; height: 320px; position: relative; min-width: 0; }
         .dash-content.active { display: block; animation: fadeIn 0.4s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        .weekly-summary-wrap { display: grid; grid-template-columns: minmax(240px, 0.9fr) minmax(280px, 1.1fr); gap: 18px; height: 100%; align-items: stretch; min-width: 0; }
+        .weekly-summary-chart { min-width: 0; height: 100%; display: flex; align-items: center; justify-content: center; }
+        .weekly-summary-chart canvas { max-width: 100%; max-height: 100%; }
+        .weekly-summary-panel { min-width: 0; overflow-y: auto; overflow-x: hidden; padding-right: 4px; }
+        .weekly-summary-title { margin: 0 0 12px 0; font-size: 18px; font-weight: 900; color: var(--text-main); }
+        .weekly-summary-list { display: grid; gap: 10px; }
+        .weekly-summary-item { background: rgba(255,255,255,0.78); border: 1px solid rgba(2,117,82,0.10); border-radius: 8px; padding: 12px 14px; min-width: 0; }
+        .weekly-summary-name { font-size: 15px; font-weight: 900; color: var(--text-main); margin-bottom: 8px; }
+        .weekly-summary-points { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px 12px; margin: 0; padding: 0; list-style: none; }
+        .weekly-summary-points li { color: #475569; font-size: 13px; font-weight: 800; line-height: 1.45; min-width: 0; overflow-wrap: anywhere; }
+        .weekly-summary-points b { color: var(--primary); }
+        .weekly-summary-empty { color: var(--text-sub); font-weight: 800; padding: 14px; background: rgba(255,255,255,0.72); border: 1px dashed rgba(2,117,82,0.18); border-radius: 8px; }
 
         /* ================= 各类弹窗 ================= */
         .modal-overlay { visibility: hidden; opacity: 0; pointer-events: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100vw; height: 100vh; height: 100dvh; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 2000; display: flex; justify-content: center; align-items: center; transition: all 0.3s; }
         .modal-overlay.show { visibility: visible; opacity: 1; pointer-events: auto; }
-        .modal-content { background: white; padding: 40px 24px 30px 24px; border-radius: 30px; max-width: 360px; width: 85%; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.2); transform: scale(0.85); transition: all 0.4s cubic-bezier(0.15, 1, 0.3, 1.1); position: relative; }
+        .modal-content { background: linear-gradient(180deg, #ffffff 0%, var(--hero-wash) 100%); padding: 40px 24px 30px 24px; border-radius: 30px; max-width: 360px; width: 85%; text-align: center; box-shadow: 0 25px 50px rgba(2,117,82,0.16); transform: scale(0.85); transition: all 0.4s cubic-bezier(0.15, 1, 0.3, 1.1); position: relative; border: 1px solid rgba(2,117,82,0.10); }
         .modal-overlay.show .modal-content { transform: scale(1); }
         
         .modal-verse { font-size: 19px; font-weight: 800; line-height: 1.6; margin: 20px 0; position: relative; color: var(--text-main); z-index: 1;}
-        #modal-verse-content::before, #modal-verse-content::after { position: absolute; font-size: 80px; color: rgba(90, 103, 216, 0.1); font-family: Georgia, serif; z-index: -1; line-height: 1; }
+        #modal-verse-content::before, #modal-verse-content::after { position: absolute; font-size: 80px; color: rgba(2, 117, 82, 0.10); font-family: Georgia, serif; z-index: -1; line-height: 1; }
         #modal-verse-content::before { content: "“"; top: -35px; left: -5px; }
         #modal-verse-content::after { content: "”"; bottom: -35px; right: -5px; }
-        .btn-close-modal { background: var(--primary); color: white; width: 100%; padding: 15px; border-radius: 16px; font-size: 16px; font-weight: 800; border: none; margin-top: 15px; cursor: pointer; }
+        .btn-close-modal { background: linear-gradient(180deg, #03966b, var(--hero-accent)); color: white; width: 100%; padding: 15px; border-radius: 16px; font-size: 16px; font-weight: 800; border: none; margin-top: 15px; cursor: pointer; box-shadow: 0 8px 18px rgba(2,117,82,0.16); }
 
         .reading-modal { max-width: 680px; width: 92%; height: 85vh; max-height: 850px; padding: 0; margin: 0 auto; display: flex; flex-direction: column; text-align: left; background: #ffffff; border-radius: 28px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.15); }
-        .reading-header { background: #ffffff; padding: 20px 24px 15px 24px; display: flex; justify-content: center; align-items: center; position: relative; border-bottom: 1px solid rgba(0,0,0,0.05); z-index: 10; }
-        .reading-header::before { content: ''; position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 40px; height: 5px; background: #e2e8f0; border-radius: 10px; }
+        .reading-header { background: #ffffff; padding: 20px 24px 15px 24px; display: flex; justify-content: center; align-items: center; position: relative; border-bottom: 1px solid rgba(2,117,82,0.10); z-index: 10; }
+        .reading-header::before { content: ''; position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 40px; height: 5px; background: rgba(2,117,82,0.18); border-radius: 10px; }
         .reading-header h2 { margin: 10px 0 0 0; font-size: 18px; font-weight: 800; color: var(--text-main); letter-spacing: 1px; text-align: center; max-width: 80%;}
-        .btn-close-reading { position: absolute; right: 15px; top: 15px; background: #f1f5f9; border: none; color: #64748b; width: 30px; height: 30px; border-radius: 50%; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-        .reading-body { padding: 30px 24px; overflow-y: auto; flex: 1; font-size: 18px; color: #2c2c2e; background: #fcfcfc; word-wrap: break-word; text-align: justify; font-family: "Noto Serif SC", "Songti SC", STSong, "FangSong", Georgia, serif; font-weight: 400; }
+        .btn-close-reading { position: absolute; right: 15px; top: 15px; background: #eef9f4; border: none; color: var(--hero-accent); width: 30px; height: 30px; border-radius: 50%; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+        .reading-body { padding: 30px 24px; overflow-y: auto; flex: 1; font-size: 18px; color: #2c2c2e; background: var(--hero-wash); word-wrap: break-word; text-align: justify; font-family: "Noto Serif SC", "Songti SC", STSong, "FangSong", Georgia, serif; font-weight: 400; }
         .reading-body p { margin: 0 0 1.2em 0; line-height: 1.9; }
-        .reading-body h1, .reading-body h2 { color: var(--text-main); margin: 0 0 25px 0; text-align: left; font-weight: 900; font-size: 1.6em; line-height: 1.4; border-bottom: 2px solid var(--primary-light); padding-bottom: 10px;}
-        .reading-body h3 { color: var(--primary); margin: 25px 0 10px 0; text-align: left; font-weight: 900; font-size: 1.2em;}
+        .reading-body h1, .reading-body h2 { color: var(--text-main); margin: 0 0 25px 0; text-align: left; font-weight: 900; font-size: 1.6em; line-height: 1.4; border-bottom: 2px solid var(--hero-accent-soft); padding-bottom: 10px;}
+        .reading-body h3 { color: var(--hero-accent); margin: 25px 0 10px 0; text-align: left; font-weight: 900; font-size: 1.2em;}
         .reading-body strong { color: var(--text-main); font-weight: 900; }
-        .reading-footer { padding: 15px 24px 25px 24px; background: #fcfcfc; border-top: 1px solid rgba(0,0,0,0.05);}
-        .btn-reading-done { background: var(--primary); color: white; width: 100%; padding: 15px; border-radius: 16px; font-size: 16px; font-weight: 800; border: none; cursor: pointer; box-shadow: 0 4px 15px var(--primary-light); }
+        .reading-footer { padding: 15px 24px 25px 24px; background: var(--hero-wash); border-top: 1px solid rgba(2,117,82,0.10);}
+        .btn-reading-done { background: linear-gradient(180deg, #03966b, var(--hero-accent)); color: white; width: 100%; padding: 15px; border-radius: 16px; font-size: 16px; font-weight: 800; border: none; cursor: pointer; box-shadow: 0 8px 18px rgba(2,117,82,0.16); }
 
         .video-modal-overlay { visibility: hidden; opacity: 0; pointer-events: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100vw; height: 100vh; height: 100dvh; background: rgba(0, 0, 0, 0.92); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); z-index: 3000; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: all 0.35s cubic-bezier(0.15, 1, 0.3, 1); }
         .video-modal-overlay.show { visibility: visible; opacity: 1; pointer-events: auto; }
@@ -180,9 +204,30 @@
         .video-player-container { width: 100%; aspect-ratio: 16 / 9; background: #000; box-shadow: 0 20px 60px rgba(0,0,0,0.8); border-radius: 0 0 18px 18px; overflow: hidden; position: relative; border: 2px solid rgba(255,255,255,0.02); }
         .video-player-container video { width: 100%; height: 100%; border-radius: 0 0 16px 16px; outline: none; }
 
-        .profile-content { padding: 30px 25px; }
+        .profile-content { padding: 28px 26px 26px 26px; max-width: 680px; width: 90%; max-height: 88vh; overflow-y: auto; text-align: left; }
+        .profile-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 22px; }
+        .profile-kicker { color: var(--hero-accent); font-size: 13px; font-weight: 900; letter-spacing: 0.08em; margin-bottom: 6px; }
+        .profile-name { font-size: 22px; font-weight: 900; margin: 0 0 12px 0; color: var(--text-main); }
+        .profile-note { color: var(--text-sub); font-size: 14px; font-weight: 700; margin: 0; line-height: 1.5; }
+        .profile-close-btn { border: none; background: #eef9f4; color: var(--hero-accent); border-radius: 8px; padding: 12px 16px; font-size: 14px; font-weight: 900; cursor: pointer; }
+        .profile-calendar-nav { display: flex; align-items: center; justify-content: center; gap: 34px; margin-bottom: 16px; }
+        .profile-month-btn { width: 34px; height: 34px; border: none; border-radius: 50%; background: #eef9f4; color: var(--hero-accent); font-size: 20px; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .profile-month-title { min-width: 130px; text-align: center; font-size: 18px; font-weight: 900; color: var(--text-main); }
+        .profile-calendar-shell { border: 1px solid var(--border-color); border-radius: 18px; padding: 18px 14px; background: #ffffff; }
+        .profile-weekdays, .profile-calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; }
+        .profile-weekdays { margin-bottom: 10px; }
+        .profile-weekday { text-align: center; color: var(--text-sub); font-size: 13px; font-weight: 900; }
+        .profile-day { min-height: 68px; border: 1px solid #eef0f5; border-radius: 10px; background: #ffffff; position: relative; padding: 10px 9px; box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-start; appearance: none; font: inherit; cursor: pointer; width: 100%; text-align: left; }
+        .profile-day.outside { color: #b8bdc7; background: #fcfcfd; }
+        .profile-day.today { border-color: var(--hero-accent); box-shadow: inset 0 0 0 1px var(--hero-accent); }
+        .profile-day.daily-done { background: var(--hero-accent-soft); border-color: rgba(2, 117, 82, 0.35); }
+        .profile-day.complete { background: rgba(16, 185, 129, 0.12); border-color: rgba(16, 185, 129, 0.35); }
+        .profile-day-number { font-size: 14px; font-weight: 900; color: #3f4654; }
+        .profile-day.outside .profile-day-number { color: #b8bdc7; }
+        .profile-day-badge { position: absolute; left: 8px; bottom: 8px; background: rgba(28, 28, 30, 0.82); color: white; border-radius: 4px; padding: 4px 7px; font-size: 11px; font-weight: 900; white-space: nowrap; }
+        .profile-day.daily-done .profile-day-badge { background: var(--hero-accent); }
+        .profile-day.complete .profile-day-badge { background: var(--success); }
         .profile-avatar { width: 72px; height: 72px; font-size: 28px; margin: 0 auto 5px auto; border: 2px solid var(--border-color); cursor: pointer;}
-        .profile-name { font-size: 22px; font-weight: 800; margin: 0 0 20px 0; }
         .profile-edit-badge { font-size: 11px; color: var(--primary); cursor: pointer; font-weight: 700; margin-bottom: 20px; text-transform: uppercase;}
         .profile-stats { display: flex; gap: 8px; margin-bottom: 25px; }
         .p-stat-box { flex: 1; background: #f8fafc; border-radius: 16px; padding: 15px 5px; border: 1px solid var(--border-color); box-shadow: 0 4px 10px rgba(0,0,0,0.02);}
@@ -194,45 +239,230 @@
         .cal-dot { width: 24px; height: 24px; border-radius: 50%; background: #e2e8f0; display: flex; align-items: center; justify-content: center; font-size: 12px; color: transparent; transition: all 0.3s;}
         .cal-dot.done { background: var(--success); color: white; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3); }
         .cal-label { font-size: 12px; color: var(--text-sub); font-weight: 700; }
+
+        .hero-topline { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
+        .hero-copy { max-width: 720px; }
+        .hero-kicker { color: var(--hero-accent); font-size: 14px; font-weight: 1000; letter-spacing: 0.18em; margin-bottom: 10px; }
+        .hero-copy p { max-width: 620px; margin: 0; color: #4f7468; font-size: 15px; line-height: 1.9; font-weight: 700; }
+        .hero-settings { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(2,117,82,0.16); background: rgba(255,255,255,0.9); color: var(--hero-accent); border-radius: 8px; padding: 11px 16px; font-size: 14px; font-weight: 900; cursor: pointer; box-shadow: 0 4px 14px rgba(2,117,82,0.08); }
+        .hero-settings:active { transform: scale(0.96); }
+        .hero-bottomline { display: flex; flex-direction: column; gap: 16px; align-items: stretch; margin-top: 28px; }
+        .hero-date-wrap { max-width: 370px; width: 100%; margin: 0 auto; position: relative; }
+        .hero-date-nav { display: inline-flex; width: 100%; justify-content: space-between; align-items: center; box-sizing: border-box; padding: 8px; background: #eef9f4; border: 1px solid var(--hero-accent-line); border-radius: 999px; box-shadow: 0 8px 18px rgba(2,117,82,0.08); }
+        .hero-date-badge { border: 0; background: #ffffff; border-radius: 999px; min-width: 190px; cursor: pointer; box-shadow: 0 2px 10px rgba(15,23,42,0.04); }
+
+        .date-calendar-popover { position: absolute; left: 0; top: calc(100% + 10px); width: 292px; padding: 18px 16px; background: #ffffff; border: 1px solid var(--border-color); border-radius: 18px; box-shadow: 0 18px 45px rgba(15,23,42,0.16); z-index: 50; display: none; }
+        .date-calendar-popover.show { display: block; }
+        .date-calendar-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+        .date-calendar-title { font-size: 17px; font-weight: 900; color: var(--text-main); }
+        .date-calendar-month-btn { width: 34px; height: 34px; border: none; border-radius: 50%; background: #f1f5f9; color: #64748b; font-size: 20px; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .date-calendar-weekdays, .date-calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+        .date-calendar-weekdays { margin-bottom: 8px; }
+        .date-calendar-weekday { text-align: center; color: var(--text-sub); font-size: 13px; font-weight: 900; }
+        .date-calendar-day { height: 32px; border: 0; border-radius: 9px; background: transparent; color: var(--text-main); font-size: 15px; font-weight: 900; cursor: pointer; }
+        .date-calendar-day.outside { color: #b8c0cc; }
+        .date-calendar-day.today { background: var(--hero-accent-soft); color: var(--hero-accent); }
+        .date-calendar-day.selected { background: var(--hero-accent); color: #ffffff; }
+        .hero-task-card { margin-top: 0; width: 100%; box-sizing: border-box; border-radius: 8px; padding: 18px 20px; background: rgba(255,255,255,0.88); border: 1px solid rgba(2,117,82,0.10); box-shadow: 0 12px 30px rgba(2,117,82,0.07); }
+        .hero-task-card .task-row { margin-bottom: 16px; display: grid; grid-template-columns: 128px minmax(0, 1fr); gap: 16px; align-items: stretch; }
+        .hero-task-card .task-row:last-child { margin-bottom: 0; }
+        .hero-task-card .task-content { background: var(--hero-wash); border-left: 3px solid var(--hero-accent); border-radius: 8px; padding: 10px 14px; min-height: 40px; display: block; }
+        .hero-task-card .clickable-task { display: inline; }
+        .task-extra-line { display: flex; align-items: baseline; gap: 8px; font-size: 15px; font-weight: 800; line-height: 1.6; color: var(--text-main); margin-top: 8px; }
+        .task-extra-line a { color: var(--hero-accent); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+        .header { text-align: left; padding: calc(30px + env(safe-area-inset-top)) 32px 26px 32px; border-radius: 0 0 28px 28px; background: linear-gradient(180deg, #ffffff 0%, #f3fbf7 100%); border-bottom: 1px solid rgba(2,117,82,0.12); box-shadow: 0 14px 32px rgba(2,117,82,0.08); }
+        .header h1 { font-family: "Noto Serif SC", "Songti SC", serif; font-size: 56px; line-height: 1.05; font-weight: 900; margin: 0 0 14px 0; color: var(--hero-accent); letter-spacing: 0; text-shadow: 0 8px 20px rgba(2,117,82,0.10); }
+        .admin-content { max-width: 720px; width: 92%; max-height: 88vh; overflow-y: auto; text-align: left; padding: 28px 24px; background: linear-gradient(180deg, #ffffff 0%, var(--hero-wash) 100%); border: 1px solid rgba(2,117,82,0.12); box-shadow: 0 28px 70px rgba(2,117,82,0.18); }
+        .admin-title { margin: 0 0 6px 0; font-size: 24px; font-weight: 900; color: var(--hero-accent); text-align: center; letter-spacing: 0; }
+        .admin-subtitle { margin: 0 auto 20px auto; max-width: 560px; color: #4f7468; font-size: 13px; line-height: 1.6; text-align: center; font-weight: 700; }
+        .admin-section { border-top: 1px solid rgba(2,117,82,0.12); padding-top: 18px; margin-top: 18px; }
+        .admin-section:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+        .admin-section h3 { margin: 0 0 12px 0; font-size: 16px; font-weight: 900; color: var(--hero-accent); }
+        .admin-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+        .admin-action-btn { border: none; border-radius: 12px; padding: 12px 10px; font-size: 14px; font-weight: 900; cursor: pointer; background: linear-gradient(180deg, #03966b, var(--hero-accent)); color: white; box-shadow: 0 8px 18px rgba(2,117,82,0.18); }
+        .admin-action-btn.secondary { background: #f3fbf7; color: var(--hero-accent); border: 1px solid rgba(2,117,82,0.14); box-shadow: none; }
+        .admin-action-btn.warning { background: var(--warning); color: white; }
+        .admin-member-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+        .admin-member-chip { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.84); border: 1px solid rgba(2,117,82,0.12); border-radius: 12px; padding: 8px 10px; font-size: 13px; font-weight: 800; color: #3d6659; }
+        .admin-member-chip button { border: none; background: transparent; color: var(--warning); font-weight: 900; cursor: pointer; padding: 0; }
+        .admin-input-row { display: flex; gap: 8px; }
+        .admin-input-row input { flex: 1; border: 1px solid rgba(2,117,82,0.14); border-radius: 12px; padding: 12px; font-size: 15px; outline: none; background: rgba(255,255,255,0.9); }
+        .admin-field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+        .admin-field { display: flex; flex-direction: column; gap: 6px; }
+        .admin-field.full { grid-column: 1 / -1; }
+        .admin-field label { color: #3d6659; font-size: 12px; font-weight: 900; }
+        .admin-field input, .admin-field select { width: 100%; box-sizing: border-box; border: 1px solid rgba(2,117,82,0.14); border-radius: 12px; padding: 11px 12px; font-size: 14px; font-family: inherit; outline: none; background: rgba(255,255,255,0.92); }
+        .admin-field input:focus, .admin-field select:focus, .admin-input-row input:focus { border-color: var(--hero-accent); box-shadow: 0 0 0 3px var(--hero-accent-soft); }
+        .admin-login-box, #admin-tools-panel .admin-section { background: rgba(255,255,255,0.64); border: 1px solid rgba(2,117,82,0.10); border-radius: 18px; padding: 16px; box-shadow: 0 10px 24px rgba(2,117,82,0.045); }
+        #admin-tools-panel .admin-section:first-of-type { border-top: 1px solid rgba(2,117,82,0.10); padding-top: 16px; }
+        .admin-note { color: #5f7d74; font-size: 12px; line-height: 1.6; margin-top: 10px; }
+        .admin-data-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 12px; }
+        .admin-data-card { background: rgba(255,255,255,0.9); border: 1px solid rgba(2,117,82,0.12); border-radius: 12px; padding: 12px; min-height: 64px; }
+        .admin-data-label { color: #5f7d74; font-size: 11px; font-weight: 900; margin-bottom: 6px; }
+        .admin-data-value { color: var(--hero-accent); font-size: 15px; font-weight: 900; word-break: break-word; }
+        .admin-status-ok { color: var(--success); }
+        .admin-status-warn { color: var(--warning); }
+        .admin-recent-list { display: grid; gap: 8px; }
+        .admin-recent-item { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; background: rgba(255,255,255,0.72); border: 1px solid rgba(2,117,82,0.10); border-radius: 10px; padding: 9px 10px; color: #3d6659; font-size: 12px; font-weight: 800; }
+        .admin-recent-item strong { color: var(--hero-accent); }
+        .admin-recent-note { flex-basis: 100%; color: #5f7d74; font-weight: 700; line-height: 1.5; }
+        .records-viewer-content { max-width: 1120px; width: 94%; max-height: 90vh; text-align: left; padding: 24px; }
+        .records-viewer-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+        .records-viewer-title { margin: 0; font-size: 22px; font-weight: 900; color: var(--hero-accent); }
+        .records-viewer-subtitle { margin: 4px 0 0 0; color: #4f7468; font-size: 13px; line-height: 1.6; font-weight: 700; }
+        .records-viewer-toolbar { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+        .records-viewer-toolbar input { flex: 1; min-width: 220px; border: 1px solid rgba(2,117,82,0.14); border-radius: 12px; padding: 11px 12px; font-size: 14px; font-family: inherit; outline: none; background: rgba(255,255,255,0.92); }
+        .records-viewer-toolbar input:focus { border-color: var(--hero-accent); box-shadow: 0 0 0 3px var(--hero-accent-soft); }
+        .records-viewer-stats { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+        .records-viewer-stat { background: rgba(255,255,255,0.85); border: 1px solid rgba(2,117,82,0.10); border-radius: 12px; padding: 10px 12px; font-size: 12px; font-weight: 800; color: #3d6659; }
+        .records-list-wrap { overflow: auto; max-height: calc(90vh - 180px); border: 1px solid rgba(2,117,82,0.12); border-radius: 16px; background: rgba(255,255,255,0.82); }
+        .records-list { display: grid; gap: 0; }
+        .records-list-item { display: grid; grid-template-columns: 84px 1fr; gap: 12px; align-items: center; padding: 12px 14px; border-bottom: 1px solid rgba(2,117,82,0.08); color: #3d6659; font-size: 13px; font-weight: 800; }
+        .records-list-item:nth-child(even) { background: rgba(2,117,82,0.03); }
+        .records-list-item:hover { background: rgba(2,117,82,0.06); }
+        .records-list-id { color: #7d9b92; font-weight: 800; }
+        .records-list-main { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; }
+        .records-list-name { color: var(--hero-accent); font-weight: 900; }
+        .records-list-time { color: #3d6659; font-weight: 800; }
+        .records-list-meta { color: #5f7d74; font-weight: 800; }
+        .records-list-note { grid-column: 2 / -1; color: #5f7d74; font-size: 12px; font-weight: 700; line-height: 1.5; }
+        .checkin-note-content { max-width: 560px; width: 92%; text-align: left; padding: 28px 24px 24px 24px; }
+        .checkin-note-title { margin: 0 0 8px 0; font-size: 20px; font-weight: 900; color: var(--hero-accent); text-align: center; }
+        .checkin-note-subtitle { margin: 0 0 14px 0; color: #5f7d74; font-size: 13px; line-height: 1.6; text-align: center; font-weight: 700; }
+        .checkin-note-textarea { width: 100%; min-height: 110px; resize: vertical; border: 1px solid rgba(2,117,82,0.14); border-radius: 14px; padding: 12px 14px; font-size: 14px; line-height: 1.6; font-family: inherit; outline: none; background: rgba(255,255,255,0.96); box-sizing: border-box; }
+        .checkin-note-textarea:focus { border-color: var(--hero-accent); box-shadow: 0 0 0 3px var(--hero-accent-soft); }
+        .checkin-note-actions { display: flex; gap: 10px; margin-top: 12px; }
+        .checkin-note-actions .btn-close-modal { width: auto; flex: 1; margin-top: 0; }
+        .testimonial-content { max-width: 620px; width: 92%; text-align: left; padding: 28px 24px 24px 24px; }
+        .testimonial-title { margin: 0 0 8px 0; font-size: 20px; font-weight: 900; color: var(--hero-accent); text-align: center; }
+        .testimonial-subtitle { margin: 0 0 14px 0; color: #5f7d74; font-size: 13px; line-height: 1.6; text-align: center; font-weight: 700; }
+        .testimonial-textarea { width: 100%; min-height: 116px; resize: vertical; border: 1px solid rgba(2,117,82,0.14); border-radius: 14px; padding: 12px 14px; font-size: 14px; line-height: 1.6; font-family: inherit; outline: none; background: rgba(255,255,255,0.96); box-sizing: border-box; }
+        .testimonial-textarea:focus { border-color: var(--hero-accent); box-shadow: 0 0 0 3px var(--hero-accent-soft); }
+        .testimonial-list { margin-top: 16px; display: grid; gap: 10px; max-height: 240px; overflow-y: auto; padding-right: 4px; }
+        .testimonial-item { background: rgba(255,255,255,0.82); border: 1px solid rgba(2,117,82,0.10); border-radius: 12px; padding: 12px 14px; }
+        .testimonial-meta { color: var(--hero-accent); font-size: 12px; font-weight: 900; margin-bottom: 6px; }
+        .testimonial-body { color: #3d6659; font-size: 14px; font-weight: 700; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
+        .testimonial-empty { color: #5f7d74; font-size: 13px; font-weight: 800; text-align: center; padding: 14px; border: 1px dashed rgba(2,117,82,0.18); border-radius: 12px; background: rgba(255,255,255,0.68); }
+        .records-empty { padding: 24px; text-align: center; color: #5f7d74; font-size: 13px; font-weight: 800; }
+        .admin-hidden { display: none !important; }
+        @media (max-width: 600px) {
+            .container { padding: 8px 10px calc(28px + env(safe-area-inset-bottom)) 10px; }
+            .admin-actions, .admin-field-grid, .admin-data-grid { grid-template-columns: 1fr; }
+            .admin-input-row { flex-direction: column; }
+            .records-viewer-content { width: 94%; padding: 18px 14px; }
+            .records-viewer-header { flex-direction: column; align-items: flex-start; }
+            .records-list-item { grid-template-columns: 1fr; gap: 6px; }
+            .records-list-note { grid-column: 1 / -1; }
+            .checkin-note-actions { flex-direction: column; }
+            .header { padding: calc(22px + env(safe-area-inset-top)) 18px 22px 18px; }
+            .hero-topline { flex-direction: column; }
+            .header h1 { font-size: 34px; }
+            .hero-copy p { font-size: 14px; }
+            .hero-date-badge { min-width: 140px; }
+            .hero-settings { align-self: flex-end; }
+            .hero-settings span { display: none; }
+            .hero-task-card .task-row { grid-template-columns: 1fr; gap: 10px; }
+            .date-calendar-popover { width: 100%; max-width: 340px; }
+            .profile-content { width: 92%; padding: 24px 16px; }
+            .profile-stats { flex-direction: column; }
+            .profile-calendar-shell { padding: 14px 10px; }
+            .profile-weekdays, .profile-calendar-grid { gap: 6px; }
+            .profile-day { min-height: 58px; padding: 8px 7px; }
+            .profile-day-badge { left: 5px; bottom: 6px; font-size: 10px; padding: 3px 5px; }
+            .profile-top { gap: 10px; }
+            .dash-card { padding: 18px 12px; border-radius: 20px; }
+            .dash-tabs { margin-left: -2px; margin-right: -2px; }
+            .dash-tab-btn { padding: 10px 13px; font-size: 12px; }
+            .dash-content { height: 300px; }
+            .dash-content#dash-weekly-summary.active { height: auto; min-height: 0; }
+            .weekly-summary-wrap { grid-template-columns: 1fr; height: auto; }
+            .weekly-summary-chart { height: 220px; }
+            .weekly-summary-panel { max-height: none; overflow: visible; padding-right: 0; }
+            .weekly-summary-title { font-size: 16px; }
+            .weekly-summary-points { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (max-width: 380px) {
+            .header { padding-left: 14px; padding-right: 14px; }
+            .header h1 { font-size: 30px; }
+            .hero-date-nav { padding: 6px; }
+            .nav-btn { width: 32px; height: 32px; }
+            .hero-date-badge { min-width: 120px; font-size: 14px; }
+            .date-calendar-popover { width: calc(100vw - 32px); padding: 16px 12px; }
+            .date-calendar-weekdays, .date-calendar-grid { gap: 6px; }
+            .date-calendar-day { height: 30px; }
+            .weekly-summary-points { grid-template-columns: 1fr; }
+        }
+
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .container { max-width: 900px; padding-left: 22px; padding-right: 22px; }
+            .header { padding-left: 26px; padding-right: 26px; }
+            .header h1 { font-size: 46px; }
+            .hero-task-card .task-row { grid-template-columns: 116px minmax(0, 1fr); gap: 14px; }
+            .dash-card { padding: 22px 18px; }
+            .weekly-summary-wrap { grid-template-columns: minmax(200px, 0.85fr) minmax(250px, 1.15fr); gap: 14px; }
+            .weekly-summary-points { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .profile-content, .admin-content { width: 88%; }
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
         <div class="header">
-            <div class="brand-wrapper">
-                <div class="logo-text">Amen</div>
-                <div class="brand-name">Grace On Heshan</div>
-            </div>
-            <h1>2026门训打卡</h1>
-            
-            <div class="date-navigator-wrapper">
-                <div class="date-navigator">
-                    <button class="nav-btn" onclick="changeDate(-1)">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                    </button>
-                    <div style="position: relative; display: inline-flex; align-items: center; justify-content: center;">
-                        <div class="current-date-badge" id="display-date">加载中...</div>
-                        <input type="date" id="date-picker" onchange="jumpToDate(event)" style="position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer; top: 0; left: 0;">
-                    </div>
-                    <button class="nav-btn" onclick="changeDate(1)">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </button>
+            <div class="hero-topline">
+                <div class="hero-copy">
+                    <div class="hero-kicker">DISCIPLE TRAINING CHECK-IN</div>
+                    <h1>天路历程</h1>
+                    <p>门训打卡（点击头像可以查看人物月历）</p>
                 </div>
+                <button class="hero-settings" onclick="openAdminPanel()" title="设置">⚙ <span>设置</span></button>
             </div>
 
-            <div class="task-info-card">
-                <div class="task-row">
-                    <strong>☀️ 灵修任务</strong>
-                    <div id="plan-daily-container" class="task-content">加载中...</div>
+            <div class="hero-bottomline">
+                <div class="task-info-card hero-task-card">
+                    <div class="task-row">
+                        <strong>🌞 每日灵修</strong>
+                        <div id="plan-daily-container" class="task-content">加载中...</div>
+                    </div>
+                    <div class="task-row">
+                        <strong>📚 周课任务</strong>
+                        <div id="plan-weekly" class="task-content">加载中...</div>
+                    </div>
                 </div>
-                <div class="task-row">
-                    <strong>📖 读经任务</strong>
-                    <div id="plan-reading-container" class="task-content">加载中...</div>
-                </div>
-                <div class="task-row">
-                    <strong>📚 周课任务</strong>
-                    <div id="plan-weekly" class="task-content">加载中...</div>
+
+                <div class="date-navigator-wrapper hero-date-wrap">
+                    <div class="date-navigator hero-date-nav">
+                        <button class="nav-btn" onclick="changeDate(-1)">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                        </button>
+                        <div style="position: relative; display: inline-flex; align-items: center; justify-content: center;">
+                            <button type="button" class="current-date-badge hero-date-badge" id="display-date" onclick="openDatePicker()" title="选择日期">加载中...</button>
+                        </div>
+                        <button type="button" class="nav-btn" onclick="openDatePicker()" title="选择日期">
+                            📅
+                        </button>
+                        <button class="nav-btn" onclick="changeDate(1)">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </button>
+                    </div>
+                    <div class="date-calendar-popover" id="date-calendar-popover">
+                        <div class="date-calendar-nav">
+                            <button type="button" class="date-calendar-month-btn" onclick="changeDatePickerMonth(-1)">‹</button>
+                            <div class="date-calendar-title" id="date-calendar-title">2026年4月</div>
+                            <button type="button" class="date-calendar-month-btn" onclick="changeDatePickerMonth(1)">›</button>
+                        </div>
+                        <div class="date-calendar-weekdays">
+                            <div class="date-calendar-weekday">日</div>
+                            <div class="date-calendar-weekday">一</div>
+                            <div class="date-calendar-weekday">二</div>
+                            <div class="date-calendar-weekday">三</div>
+                            <div class="date-calendar-weekday">四</div>
+                            <div class="date-calendar-weekday">五</div>
+                            <div class="date-calendar-weekday">六</div>
+                        </div>
+                        <div class="date-calendar-grid" id="date-calendar-grid"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -274,6 +504,7 @@
                 <button class="dash-tab-btn active" onclick="switchDashTab('total', this)">🏆 总打卡榜</button>
                 <button class="dash-tab-btn" onclick="switchDashTab('7days', this)">🔥 近七日活跃</button>
                 <button class="dash-tab-btn" onclick="switchDashTab('streak', this)">⚡ 连续打卡</button>
+                <button class="dash-tab-btn" onclick="switchDashTab('weekly-summary', this)">周总结</button>
             </div>
             
             <div id="dash-total" class="dash-content active" style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
@@ -291,18 +522,30 @@
                     <canvas id="chart-streak"></canvas>
                 </div>
             </div>
+            <div id="dash-weekly-summary" class="dash-content">
+                <div class="weekly-summary-wrap">
+                    <div class="weekly-summary-chart">
+                        <canvas id="chart-weekly-summary"></canvas>
+                    </div>
+                    <div class="weekly-summary-panel">
+                        <h3 class="weekly-summary-title">近七日周总结</h3>
+                        <div id="weekly-summary-list" class="weekly-summary-list"></div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
 
     <input type="file" id="avatar-upload" accept="image/*" style="display: none;" onchange="handleAvatarUpload(event)">
+    <input type="file" id="admin-import-file" accept="application/json,.json" style="display: none;" onchange="importBackupJson(event)">
 
     <div id="modal-overlay" class="modal-overlay" onclick="closeModal()">
         <div class="modal-content" onclick="event.stopPropagation()">
             <div class="avatar" style="width:54px; height:54px; margin:0 auto 15px auto; background:var(--success); color:white; font-size:24px; border:none;">✔</div>
             <div style="font-size:22px; font-weight:900;" id="modal-action-title">打卡成功！</div>
             <p id="modal-verse-content" class="modal-verse"></p>
-            <div style="color:var(--primary); font-weight:800; font-size:14px;" id="modal-verse-ref"></div>
+            <div style="color:var(--hero-accent); font-weight:800; font-size:14px;" id="modal-verse-ref"></div>
             <button class="btn-close-modal" onclick="closeModal()">好的，阿们</button>
         </div>
     </div>
@@ -312,29 +555,206 @@
             <div style="font-size:20px; font-weight:900;">撤销打卡</div>
             <p style="margin:15px 0; font-weight:700; color:var(--text-main);">确定要撤销这条记录吗？</p>
             <div style="display:flex; gap:10px;">
-                <button class="btn-close-modal" style="background:#f2f2f7; color:var(--text-sub); box-shadow:none;" onclick="closeCancelModal()">暂不取消</button>
+                <button class="btn-close-modal" style="background:#eef9f4; color:var(--hero-accent); box-shadow:none;" onclick="closeCancelModal()">暂不取消</button>
                 <button class="btn-close-modal" style="background:var(--warning);" onclick="confirmCancelCheckin()">确认撤销</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="checkin-note-overlay" class="modal-overlay" onclick="closeCheckinNoteModal()">
+        <div class="modal-content checkin-note-content" onclick="event.stopPropagation()">
+            <div class="checkin-note-title" id="checkin-note-title">打卡备注</div>
+            <p class="checkin-note-subtitle">可以写问题、分享、感动，选填；以后大家翻记录时会更容易想起来。</p>
+            <textarea id="checkin-note-input" class="checkin-note-textarea" placeholder="例如：今天对哪一句话有感动？有什么问题想分享？"></textarea>
+            <div class="checkin-note-actions">
+                <button class="btn-close-modal" style="background:#eef9f4; color:var(--hero-accent); box-shadow:none;" onclick="skipCheckinNote()">跳过备注</button>
+                <button class="btn-close-modal" style="background:var(--hero-accent);" onclick="saveCheckinWithNote()">保存打卡</button>
             </div>
         </div>
     </div>
 
     <div id="profile-overlay" class="modal-overlay" onclick="closeProfile()">
         <div class="modal-content profile-content" onclick="event.stopPropagation()">
-            <div class="avatar profile-avatar" id="profile-avatar-icon" onclick="document.getElementById('avatar-upload').click()">X</div>
-            <div class="profile-edit-badge" id="profile-edit-status" onclick="document.getElementById('avatar-upload').click()">更换本地头像</div>
-            <h2 class="profile-name" id="profile-name">姓名</h2>
-            <div class="profile-stats">
-                <div class="p-stat-box">
-                    <div class="p-stat-value"><span id="p-streak">0</span> <span>天</span></div>
-                    <div class="p-stat-label">🔥 当前连续打卡</div>
+            <div class="profile-top">
+                <div>
+                    <div class="profile-kicker">人物月历</div>
+                    <h2 class="profile-name" id="profile-name">姓名</h2>
+                    <p class="profile-note">蓝色表示完成每日操练；绿色表示灵修、读经和周任务有多项完成。</p>
                 </div>
-                <div class="p-stat-box">
-                    <div class="p-stat-value"><span id="p-rate">0</span><span>/7</span></div>
-                    <div class="p-stat-label">📈 近七日完成度</div>
+                <button class="profile-close-btn" onclick="closeProfile()">关闭</button>
+            </div>
+            <div class="profile-calendar-nav">
+                <button class="profile-month-btn" onclick="changeProfileMonth(-1)">‹</button>
+                <div class="profile-month-title" id="profile-month-title">2026年4月</div>
+                <button class="profile-month-btn" onclick="changeProfileMonth(1)">›</button>
+            </div>
+            <div class="profile-calendar-shell">
+                <div class="profile-weekdays">
+                    <div class="profile-weekday">日</div>
+                    <div class="profile-weekday">一</div>
+                    <div class="profile-weekday">二</div>
+                    <div class="profile-weekday">三</div>
+                    <div class="profile-weekday">四</div>
+                    <div class="profile-weekday">五</div>
+                    <div class="profile-weekday">六</div>
+                </div>
+                <div class="profile-calendar-grid" id="profile-calendar"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="testimonial-overlay" class="modal-overlay" onclick="closeTestimonialModal()">
+        <div class="modal-content testimonial-content" onclick="event.stopPropagation()">
+            <div class="testimonial-title" id="testimonial-title">个人得着</div>
+            <p class="testimonial-subtitle">这里可以单独提交得着、问题和分享，不需要重新打卡。</p>
+            <textarea id="testimonial-input" class="testimonial-textarea" placeholder="写下今天的得着..."></textarea>
+            <div class="checkin-note-actions">
+                <button class="btn-close-modal" style="background:#eef9f4; color:var(--hero-accent); box-shadow:none;" onclick="closeTestimonialModal()">关闭</button>
+                <button class="btn-close-modal" style="background:var(--hero-accent);" onclick="submitTestimonial()">提交得着</button>
+            </div>
+            <div id="testimonial-list" class="testimonial-list"></div>
+        </div>
+    </div>
+
+    <div id="admin-overlay" class="modal-overlay" onclick="closeAdminPanel()">
+        <div class="modal-content admin-content" onclick="event.stopPropagation()">
+            <h2 class="admin-title">管理员后台</h2>
+            <p class="admin-subtitle">成员、周任务、导出和当前记录都在这里维护。设置会保存到当前浏览器，打卡记录来自同一后端。</p>
+
+            <div id="admin-login-panel" class="admin-login-box">
+                <div class="admin-section">
+                    <h3 id="admin-login-title">管理员登录</h3>
+                    <div class="admin-field">
+                        <label for="admin-password-input">管理员密码</label>
+                        <input id="admin-password-input" type="password" placeholder="请输入密码" onkeydown="if(event.key === 'Enter') adminLogin()">
+                    </div>
+                    <div class="admin-actions" style="margin-top:12px;">
+                        <button class="admin-action-btn" onclick="adminLogin()">进入后台</button>
+                        <button class="admin-action-btn secondary" onclick="closeAdminPanel()">取消</button>
+                    </div>
+                    <div class="admin-note" id="admin-login-note">首次打开后台时，这里会把你输入的密码保存到当前浏览器。</div>
                 </div>
             </div>
-            <div class="calendar-dots" id="p-calendar"></div>
-            <button class="btn-close-modal" onclick="closeProfile()">关闭</button>
+
+            <div id="admin-tools-panel" class="admin-hidden">
+                <div class="admin-actions" style="margin-bottom:18px;">
+                    <button class="admin-action-btn secondary" onclick="changeAdminPassword()">修改管理员密码</button>
+                    <button class="admin-action-btn secondary" onclick="adminLogout()">退出后台</button>
+                </div>
+
+                <div class="admin-section">
+                    <h3>打卡记录库</h3>
+                    <div class="admin-data-grid">
+                        <div class="admin-data-card">
+                            <div class="admin-data-label">当前存储</div>
+                            <div class="admin-data-value" id="admin-storage-label">读取中</div>
+                        </div>
+                        <div class="admin-data-card">
+                            <div class="admin-data-label">记录总数</div>
+                            <div class="admin-data-value" id="admin-record-count">0</div>
+                        </div>
+                        <div class="admin-data-card">
+                            <div class="admin-data-label">读取状态</div>
+                            <div class="admin-data-value admin-status-ok" id="admin-sync-status">待同步</div>
+                        </div>
+                    </div>
+                    <div class="admin-actions" style="margin-bottom:12px;">
+                        <button class="admin-action-btn secondary" onclick="bindLocalRecordsJsonFile()">绑定本地 JSON</button>
+                        <button class="admin-action-btn secondary" onclick="unbindLocalRecordsJsonFile()">取消绑定</button>
+                    </div>
+                    <div class="admin-note" id="admin-json-file-status">本地 JSON：未绑定</div>
+                    <div class="admin-field-grid" style="margin-bottom:12px;">
+                        <div class="admin-field full">
+                            <label for="admin-record-name-filter">按姓名筛选</label>
+                            <input id="admin-record-name-filter" type="text" placeholder="输入姓名，比如：贝贝" oninput="applyAdminRecordFilters()">
+                        </div>
+                        <div class="admin-field full">
+                            <label for="admin-record-type-filter">按类型筛选</label>
+                            <select id="admin-record-type-filter" onchange="applyAdminRecordFilters()">
+                                <option value="">全部类型</option>
+                                <option value="灵修">灵修</option>
+                                <option value="读经">读经</option>
+                                <option value="周任务">周任务</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="admin-recent-records" class="admin-recent-list"></div>
+                    <div class="admin-note">这里显示页面实际读写的同一个数据库；打卡成功后必须能在这里看到最近记录。</div>
+                </div>
+
+                <div class="admin-section">
+                    <h3>成员名单</h3>
+                    <div id="admin-member-list" class="admin-member-list"></div>
+                    <div class="admin-input-row">
+                        <input id="admin-new-member" type="text" placeholder="输入新成员姓名">
+                        <button class="admin-action-btn" onclick="addAdminMember()">添加</button>
+                    </div>
+                    <div class="admin-note">删除成员只会从当前页面隐藏，不会删除历史打卡记录。</div>
+                </div>
+
+                <div class="admin-section">
+                    <h3>周任务安排</h3>
+                    <div class="admin-field full">
+                        <label for="admin-week-select">选择周次</label>
+                        <select id="admin-week-select" onchange="loadSelectedWeekForEdit()"></select>
+                    </div>
+                    <div class="admin-field-grid" style="margin-top:12px;">
+                        <div class="admin-field">
+                            <label for="admin-week-start">开始日期</label>
+                            <input id="admin-week-start" type="date">
+                        </div>
+                        <div class="admin-field">
+                            <label for="admin-week-end">结束日期</label>
+                            <input id="admin-week-end" type="date">
+                        </div>
+                        <div class="admin-field full">
+                            <label for="admin-week-title">周课标题</label>
+                            <input id="admin-week-title" type="text" placeholder="例如：《基督是一切》03">
+                        </div>
+                        <div class="admin-field full">
+                            <label for="admin-week-verse">背经范围</label>
+                            <input id="admin-week-verse" type="text" placeholder="例如：约翰福音17:6-8">
+                        </div>
+                        <div class="admin-field full">
+                            <label for="admin-week-video">视频标题</label>
+                            <input id="admin-week-video" type="text" placeholder="例如：四福音合参（上）">
+                        </div>
+                        <div class="admin-field full">
+                            <label for="admin-week-url">视频地址</label>
+                            <input id="admin-week-url" type="url" placeholder="例如：http://nas.example.com/video.mp4">
+                        </div>
+                    </div>
+                    <div class="admin-actions" style="margin-top:12px;">
+                        <button class="admin-action-btn" onclick="saveWeekPlanFromAdmin()">保存当前周</button>
+                        <button class="admin-action-btn secondary" onclick="addWeekPlanFromAdmin()">新增一周</button>
+                        <button class="admin-action-btn warning" onclick="deleteWeekPlanFromAdmin()">删除当前周</button>
+                        <button class="admin-action-btn secondary" onclick="resetWeekPlans()">恢复默认周任务</button>
+                    </div>
+                    <div class="admin-note">保存后会立即更新首页任务展示和周任务统计。</div>
+                </div>
+
+                <div class="admin-section">
+                    <h3>数据导出</h3>
+                    <div class="admin-actions">
+                        <button class="admin-action-btn" onclick="openRecordsViewer()">查看打卡记录</button>
+                        <button class="admin-action-btn" onclick="exportRecordsCsv()">导出打卡明细 CSV</button>
+                        <button class="admin-action-btn" onclick="exportDailySummaryCsv()">导出每日汇总 CSV</button>
+                        <button class="admin-action-btn secondary" onclick="exportBackupJson()">导出本地备份 JSON</button>
+                        <button class="admin-action-btn secondary" onclick="document.getElementById('admin-import-file').click()">导入本地备份 JSON</button>
+                    </div>
+                    <div class="admin-note">CSV 可直接用 Excel 打开；JSON 会包含成员名单、周任务安排和当前缓存数据。</div>
+                </div>
+
+                <div class="admin-section">
+                    <h3>同步</h3>
+                    <div class="admin-actions">
+                        <button class="admin-action-btn secondary" onclick="fetchStatus()">刷新当前记录</button>
+                        <button class="admin-action-btn warning" onclick="resetAdminMembers()">恢复默认成员</button>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-close-modal" onclick="closeAdminPanel()">关闭</button>
         </div>
     </div>
 
@@ -368,6 +788,31 @@
         </div>
     </div>
 
+    <div id="records-viewer-overlay" class="modal-overlay" onclick="closeRecordsViewer()">
+        <div class="modal-content records-viewer-content" onclick="event.stopPropagation()">
+            <div class="records-viewer-header">
+                <div>
+                    <h2 class="records-viewer-title">打卡记录</h2>
+                    <p class="records-viewer-subtitle">直接读取当前本地 JSON 的实时明细，结构和数据库表格一样，方便管理员扫记录。</p>
+                </div>
+                <button class="btn-close-modal" style="margin:0;" onclick="closeRecordsViewer()">关闭</button>
+            </div>
+            <div class="records-viewer-toolbar">
+                <input id="records-viewer-search" type="text" placeholder="按姓名、日期、详情搜索" oninput="renderRecordsViewer()">
+                <button class="admin-action-btn secondary" onclick="refreshRecordsViewer()">刷新</button>
+            </div>
+            <div class="records-viewer-stats">
+                <div class="records-viewer-stat" id="records-viewer-count">0 条记录</div>
+                <div class="records-viewer-stat" id="records-viewer-storage">当前存储：-</div>
+                <div class="records-viewer-stat" id="records-viewer-sync">读取状态：-</div>
+            </div>
+            <div class="records-list-wrap">
+                <div id="records-viewer-body" class="records-list"></div>
+            </div>
+            <div id="records-viewer-empty" class="records-empty admin-hidden">没有找到符合条件的记录。</div>
+        </div>
+    </div>
+
     <script>
         window.onerror = function(msg, url, line) {
             const errEl = document.getElementById('loading-status');
@@ -376,11 +821,18 @@
         };
 
         // ============================ ZW 2026门训专属配置区 ============================
-        const API_TOKEN = "awAGCSLcP-P-ABUja1yMxNopjD_cX4OnfbKO2cR0"; 
-        const NOCODB_API_URL = "http://mouss.synology.me:32771/api/v2/tables/md6q8riiyslkw6p/records"; 
+        const DEFAULT_API_BASE = "/api";
+        const NAS_API_BASE = "http://mouss.synology.me:777/api";
+        const LOCAL_API_BASES = ["http://127.0.0.1:6717/api", "http://localhost:6717/api"];
+        const FALLBACK_API_BASE = location.protocol === 'file:'
+            ? NAS_API_BASE
+            : `${location.protocol}//${location.hostname}:6717/api`;
+        let resolvedApiBase = location.protocol === 'file:' ? NAS_API_BASE : DEFAULT_API_BASE;
+        let apiBaseChecked = false;
         
-        const MEMBERS = ["迦密", "恩惠","以琳", "陈蜜", "诚志", "信凯", "周睿", "家乐", "可心", "佳音", "李好", "文琪",  "奕豪", "爱赐", "梓楠", "思恩", "浙君", "丹萍", "天宇", "恩悯", "翠翠", "慕智", "蒙恩", "贝贝"]; 
-        const TOTAL_MEMBERS = MEMBERS.length;
+        const DEFAULT_MEMBERS = ["迦密", "恩惠","以琳", "陈蜜", "诚志", "信凯", "周睿", "家乐", "可心", "佳音", "李好", "文琪",  "奕豪", "爱赐", "梓楠", "思恩", "浙君", "丹萍", "天宇", "恩悯", "翠翠", "慕智", "蒙恩", "贝贝"]; 
+        let MEMBERS = loadMembersConfig();
+        let TOTAL_MEMBERS = MEMBERS.length;
 
         // === 🚀 新增：周课完整书名智能映射字典 ===
         // === 🚀 新增：周课完整书名智能映射字典（已完全适配 WEEKLY_SCHEDULE 格式） ===
@@ -432,24 +884,150 @@
             return taskName;
         }
 
-        const WEEKLY_SCHEDULE = [
-            { start: "2026-04-12", end: "2026-04-18", title: "《基督是一切》01", verse: "约翰福音17:1-2" },
-            { start: "2026-04-19", end: "2026-04-25", title: "《基督是一切》02", verse: "约翰福音17:3-5" },
-            { start: "2026-04-26", end: "2026-05-02", title: "《基督是一切》03", verse: "约翰福音17:6-8" },
-            { start: "2026-05-03", end: "2026-05-09", title: "《基督是一切》04", verse: "约翰福音17:9-10" },
-            { start: "2026-05-10", end: "2026-05-16", title: "《基督是一切》05", verse: "约翰福音17:11-12" },
-            { start: "2026-05-17", end: "2026-05-23", title: "《基督是一切》06", verse: "约翰福音17:13-14" },
-            { start: "2026-05-24", end: "2026-05-30", title: "《基督是一切》07", verse: "约翰福音17:15-16" },
-            { start: "2026-05-31", end: "2026-06-06", title: "《基督是一切》08", verse: "约翰福音17:17-18" },
-            { start: "2026-06-07", end: "2026-06-13", title: "《基督是一切》09", verse: "约翰福音17:19-20" },
-            { start: "2026-06-14", end: "2026-06-20", title: "《基督是一切》10", verse: "约翰福音17:21-22" },
-            { start: "2026-06-21", end: "2026-06-27", title: "《基督是一切》11", verse: "约翰福音17:23-24" },
-            { start: "2026-06-28", end: "2026-07-04", title: "《基督是一切》12", verse: "约翰福音17:25-26" }
+        const DEFAULT_WEEKLY_SCHEDULE = [
+            { start: "2026-04-13", end: "2026-04-18", title: "永活之泉", verse: "约翰福音17:1-2", video: "", url: "" },
+            { start: "2026-04-20", end: "2026-04-25", title: "永活之泉", verse: "约翰福音17:3-5", video: "", url: "" },
+            { start: "2026-04-27", end: "2026-05-02", title: "永活之泉", verse: "约翰福音17:6-8", video: "", url: "" },
+            { start: "2026-05-04", end: "2026-05-09", title: "永活之泉", verse: "约翰福音17:9-10", video: "", url: "" },
+            { start: "2026-05-11", end: "2026-05-16", title: "永活之泉", verse: "约翰福音17:11-12", video: "四福音合参（上）", url: "" },
+            { start: "2026-05-18", end: "2026-05-23", title: "永活之泉", verse: "约翰福音17:13-14", video: "四福音合参（下）", url: "" },
+            { start: "2026-05-25", end: "2026-05-30", title: "永活之泉", verse: "约翰福音17:15-16", video: "马太福音（上）、基督是我们的王（基督的启示—王的受浸）", url: "" },
+            { start: "2026-06-01", end: "2026-06-06", title: "永活之泉", verse: "约翰福音17:17-18", video: "马太福音（下）、基督是我们的王（呼召门徒—十字架的记号）", url: "" },
+            { start: "2026-06-08", end: "2026-06-13", title: "永活之泉", verse: "约翰福音17:19-20", video: "马可福音（上）、基督是神的仆人（小引—事奉的性质）", url: "" },
+            { start: "2026-06-15", end: "2026-06-20", title: "永活之泉", verse: "约翰福音17:21-22", video: "马可福音（下）、基督是神的仆人（事奉的性格）", url: "" },
+            { start: "2026-06-22", end: "2026-06-27", title: "永活之泉", verse: "约翰福音17:23-24", video: "路加福音（上）、基督是人子（神所爱的人—主耶稣的成长）", url: "" },
+            { start: "2026-06-29", end: "2026-07-04", title: "永活之泉", verse: "约翰福音17:25-26", video: "路加福音（下）、基督是人子（主耶稣的工作—主耶稣的人格）", url: "" },
+            { start: "2026-07-06", end: "2026-07-11", title: "永活之泉", verse: "", video: "约翰福音（上）、基督是神的儿子（神儿子的生命—真理-光）", url: "" },
+            { start: "2026-07-13", end: "2026-07-18", title: "永活之泉", verse: "", video: "约翰福音（下）、基督是神的儿子（赐给我们的生命）", url: "" }
         ];
+        let WEEKLY_SCHEDULE = loadWeeklySchedule();
 
-        let REAL_TODAY = new Date(), viewingDate = new Date(), globalRecords = [], currentProfileName = "", pendingCancel = null;
+        let REAL_TODAY = new Date(), viewingDate = new Date(), profileMonthDate = new Date(), datePickerMonthDate = new Date(), globalRecords = [], globalTestimonials = [], currentProfileName = "", pendingCancel = null, pendingCheckin = null, currentStorageInfo = null, lastSyncTime = null;
+        let boundJsonFileHandle = null;
+        let boundJsonFileName = localStorage.getItem('zw_bound_json_name') || '';
+        let adminAuthenticated = false;
+        let adminRecordFilters = { name: '', type: '' };
         const fontStackQuotes = `"Noto Serif SC", "Kaiti SC", STKaiti, "Songti SC", FangSong, STFangsong, serif`;
         let chartInstances = {}; 
+
+        function loadMembersConfig() {
+            try {
+                const saved = JSON.parse(localStorage.getItem('zw_members') || 'null');
+                if (Array.isArray(saved)) {
+                    const cleaned = [...new Set(saved.map(name => String(name).trim()).filter(Boolean))];
+                    if (cleaned.length > 0) return cleaned;
+                }
+            } catch(e) {}
+            return [...DEFAULT_MEMBERS];
+        }
+
+        function persistMembersConfig() {
+            MEMBERS = [...new Set(MEMBERS.map(name => String(name).trim()).filter(Boolean))];
+            TOTAL_MEMBERS = MEMBERS.length || 1;
+            localStorage.setItem('zw_members', JSON.stringify(MEMBERS));
+            updateMemberTotalLabels();
+            renderMembers();
+            resetButtons();
+            renderStatus();
+            renderDashboard();
+            renderAdminMembers();
+        }
+
+        function normalizeWeekPlan(plan) {
+            return {
+                start: String(plan.start || '').trim(),
+                end: String(plan.end || '').trim(),
+                title: String(plan.title || '').trim(),
+                verse: String(plan.verse || '').trim(),
+                video: String(plan.video || '').trim(),
+                url: String(plan.url || plan.videoUrl || '').trim()
+            };
+        }
+
+        function loadWeeklySchedule() {
+            try {
+                const saved = JSON.parse(localStorage.getItem('zw_weekly_schedule') || 'null');
+                if (Array.isArray(saved)) {
+                    const cleaned = saved.map(normalizeWeekPlan).filter(plan => plan.start && plan.end && plan.title);
+                    if (cleaned.length > 0) return cleaned.sort((a, b) => a.start.localeCompare(b.start));
+                }
+            } catch(e) {}
+            return DEFAULT_WEEKLY_SCHEDULE.map(normalizeWeekPlan);
+        }
+
+        function applyWeeklySchedule(schedule, saveLocal = true) {
+            const cleaned = Array.isArray(schedule)
+                ? schedule.map(normalizeWeekPlan).filter(plan => plan.start && plan.end && plan.title).sort((a, b) => a.start.localeCompare(b.start))
+                : [];
+            if (cleaned.length === 0) return false;
+            WEEKLY_SCHEDULE = cleaned;
+            if (saveLocal) localStorage.setItem('zw_weekly_schedule', JSON.stringify(WEEKLY_SCHEDULE));
+            return true;
+        }
+
+        async function saveWeeklyScheduleToServer() {
+            if (isBoundLocalJsonMode()) return;
+            const data = await requestApiJson('/weekly-schedule', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ weeklySchedule: WEEKLY_SCHEDULE })
+            }, 2);
+            if (!data || data.ok !== true || !Array.isArray(data.weeklySchedule)) {
+                throw new Error(data?.error || '周任务 JSON 没有确认保存成功');
+            }
+            applyWeeklySchedule(data.weeklySchedule);
+        }
+
+        async function persistWeeklySchedule() {
+            WEEKLY_SCHEDULE = WEEKLY_SCHEDULE.map(normalizeWeekPlan)
+                .filter(plan => plan.start && plan.end && plan.title)
+                .sort((a, b) => a.start.localeCompare(b.start));
+            localStorage.setItem('zw_weekly_schedule', JSON.stringify(WEEKLY_SCHEDULE));
+            updateDateUI();
+            resetButtons();
+            renderStatus();
+            renderDashboard();
+            renderWeekPlanOptions();
+            try {
+                await saveWeeklyScheduleToServer();
+            } catch (error) {
+                alert(`周任务已先保存到当前浏览器，但写入 NAS JSON 失败：${error.message || '服务不可用'}`);
+            }
+        }
+
+        function escapeHtml(value) {
+            return String(value).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+        }
+
+        function escapeJs(value) {
+            return String(value).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, ' ');
+        }
+
+        function csvCell(value) {
+            const text = value == null ? '' : String(value);
+            return `"${text.replace(/"/g, '""')}"`;
+        }
+
+        function downloadTextFile(filename, content, mimeType) {
+            const payload = mimeType === 'text/csv' ? '\ufeff' + content : content;
+            const blob = new Blob([payload], { type: `${mimeType};charset=utf-8` });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            URL.revokeObjectURL(url);
+        }
+
+        function updateMemberTotalLabels() {
+            ['daily-count', 'reading-count', 'weekly-count'].forEach(id => {
+                const countEl = document.getElementById(id);
+                const totalEl = countEl && countEl.nextElementSibling;
+                if (totalEl) totalEl.innerText = `/${TOTAL_MEMBERS}`;
+            });
+        }
 
         // === 🚀 新增：智能转换函数 ===
         function getFullMarkdownTitle(taskName) {
@@ -463,6 +1041,11 @@
         }
 
         function getSafeDateString(d) { return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; }
+        function parseDateString(dateStr) {
+            const parts = String(dateStr || '').split('-').map(Number);
+            if (parts.length !== 3 || parts.some(part => !Number.isFinite(part))) return null;
+            return new Date(parts[0], parts[1] - 1, parts[2]);
+        }
         function getIsoWithTimezoneForViewing() { const now = new Date(); return `${getSafeDateString(viewingDate)}T${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}+08:00`; }
         
         function getWeekStart(d) { 
@@ -553,7 +1136,7 @@
             }
             let joined = processedLines.join('\n');
             joined = joined.replace(/「([\s\S]*?)」/g, function(match, p1) { return `「${p1.replace(/\n/g, '')}」`; });
-            joined = joined.replace(/^###\s+(.*)/gim, '<h3>$1</h3>').replace(/^##\s+(.*)/gim, '<h2>$1</h2>').replace(/^#\s+(.*)/gim, '<h1>$1</h1>').replace(/^([一二三四五六七八九十廿卅百千万]+、\s*.*)/gim, '<h3 style="color: var(--text-main); font-weight: 900; margin-top: 20px; font-size: 1.15em;">$1</h3>').replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>').replace(/「(.*?)」/g, `<strong style="font-family: ${fontStackQuotes}; color: var(--primary); font-weight: 900; font-size: 1.08em; line-height: 1.8;">「$1」</strong>`).replace(/^(祷告|纲要|读经|核心|结论)([:：])/gim, '<strong style="color: var(--primary); font-weight: 900; font-size: 1.05em;">$1$2</strong>');
+            joined = joined.replace(/^###\s+(.*)/gim, '<h3>$1</h3>').replace(/^##\s+(.*)/gim, '<h2>$1</h2>').replace(/^#\s+(.*)/gim, '<h1>$1</h1>').replace(/^([一二三四五六七八九十廿卅百千万]+、\s*.*)/gim, '<h3 style="color: var(--text-main); font-weight: 900; margin-top: 20px; font-size: 1.15em;">$1</h3>').replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>').replace(/「(.*?)」/g, `<strong style="font-family: ${fontStackQuotes}; color: var(--hero-accent); font-weight: 900; font-size: 1.08em; line-height: 1.8;">「$1」</strong>`).replace(/^(祷告|纲要|读经|核心|结论)([:：])/gim, '<strong style="color: var(--hero-accent); font-weight: 900; font-size: 1.05em;">$1$2</strong>');
             let html = `<p>${joined.replace(/\n\n+/g, '</p><p>').replace(/\n/g, '<br>')}</p>`; html = html.replace(/<p><h([1-6])>(.*?)<\/h\1><\/p>/g, '<h$1>$2</h$1>'); return html;
         }
 
@@ -653,6 +1236,29 @@
 
         function closeReading() { document.getElementById('reading-overlay').classList.remove('show'); }
 
+        function openVideo(url, title) {
+            const cleanUrl = String(url || '').trim();
+            const cleanTitle = String(title || '视频播放').trim();
+            if (!cleanUrl) {
+                alert("这周的视频标题已经加入，请在管理员后台补上视频地址后再播放。");
+                return;
+            }
+            const player = document.getElementById('main-video-player');
+            const titleEl = document.getElementById('video-modal-title');
+            if (titleEl) titleEl.innerText = cleanTitle;
+            if (player) player.src = cleanUrl;
+            document.getElementById('video-overlay').classList.add('show');
+        }
+
+        function closeVideo() {
+            const player = document.getElementById('main-video-player');
+            if (player) {
+                player.pause();
+                player.src = "";
+            }
+            document.getElementById('video-overlay').classList.remove('show');
+        }
+
         function getTodayPlan() {
             const month = viewingDate.getMonth() + 1; const day = viewingDate.getDate();
             const viewStr = getSafeDateString(viewingDate);
@@ -662,20 +1268,19 @@
                 if (viewStr >= weekPlan.start && viewStr <= weekPlan.end) { currentWeekData = weekPlan; break; }
             }
 
-            const weeklyTitleStr = currentWeekData.title; 
+            const weeklyTitleStr = currentWeekData.title;
             const verseStr = currentWeekData.verse;
+            const videoStr = currentWeekData.video;
+            const videoUrl = currentWeekData.url;
             
-            const tagUI = `<div style="margin-top:12px; background:rgba(56,178,172,0.06); padding:10px 14px; border-radius:12px; border-left: 4px solid var(--secondary);">
-                <div style="font-size:15px; font-weight:800; color:var(--secondary); display:flex; align-items:center;">
-                    <span style="margin-right:6px; font-size:16px;">📖</span> 背经：
-                    <span style="text-decoration:underline; cursor:pointer; color:var(--primary); margin-left:4px;" onclick="openScriptureOnline('${verseStr}')">${verseStr} (点击背诵)</span>
-                </div>
-            </div>`;
+            const verseUI = verseStr ? `<div class="task-extra-line"><span>📖</span><span>背经：</span><a onclick="openScriptureOnline('${escapeJs(verseStr)}')">${escapeHtml(verseStr)} (背诵)</a></div>` : '';
+            const videoUI = videoStr ? `<div class="task-extra-line"><span>▶️</span><span>视频：</span><a onclick="openVideo('${escapeJs(videoUrl)}', '${escapeJs(videoStr)}')">${escapeHtml(videoStr)}${videoUrl ? ' (播放)' : ' (待配置)'}</a></div>` : '';
+            const tagUI = `${videoUI}${verseUI}`;
             
             return { 
-                devotion: `<div class="clickable-task" onclick="openDailyReading()">📖 《永活之泉》（<span class="task-highlight">${month}月${day}日</span>）<span class="read-badge">点击阅读</span></div>`, 
-                reading: `<span style="color:var(--primary); font-size:15px; font-weight:700;">愿神的话向你发出亮光！✨</span>`,
-                weekly: `<div class="clickable-task" style="margin-bottom:6px;" onclick="openWeeklyReading('${weeklyTitleStr}')">📚 ${weeklyTitleStr}<span class="read-badge weekly-badge">点击阅读</span></div>${tagUI}` 
+                devotion: `<div class="clickable-task" onclick="openDailyReading()">📖 旷野灵修（<span class="task-highlight">${month}月${day}日</span>）<span class="read-badge">点击阅读</span></div>`, 
+                reading: `<span style="color:var(--hero-accent); font-size:15px; font-weight:700;">愿神的话向你发出亮光！✨</span>`,
+                weekly: `<div class="clickable-task" style="margin-bottom:6px;" onclick="openWeeklyReading('${escapeJs(weeklyTitleStr)}')">📚 ${escapeHtml(weeklyTitleStr)}<span class="read-badge weekly-badge">点击阅读</span></div>${tagUI}` 
             };
         }
 
@@ -693,11 +1298,66 @@
             renderStatus();
         }
 
+        function openDatePicker() {
+            const popover = document.getElementById('date-calendar-popover');
+            if (!popover) return;
+            if (popover.classList.contains('show')) {
+                closeDatePicker();
+                return;
+            }
+            datePickerMonthDate = new Date(viewingDate.getFullYear(), viewingDate.getMonth(), 1);
+            renderDatePickerCalendar();
+            popover.classList.add('show');
+        }
+
+        function closeDatePicker() {
+            const popover = document.getElementById('date-calendar-popover');
+            if (popover) popover.classList.remove('show');
+        }
+
+        function changeDatePickerMonth(offset) {
+            datePickerMonthDate = new Date(datePickerMonthDate.getFullYear(), datePickerMonthDate.getMonth() + offset, 1);
+            renderDatePickerCalendar();
+        }
+
+        function pickCalendarDate(year, month, day) {
+            viewingDate = new Date(year, month, day);
+            closeDatePicker();
+            updateDateUI();
+            resetButtons();
+            renderStatus();
+        }
+
+        function renderDatePickerCalendar() {
+            const grid = document.getElementById('date-calendar-grid');
+            const title = document.getElementById('date-calendar-title');
+            if (!grid || !title) return;
+
+            const year = datePickerMonthDate.getFullYear();
+            const month = datePickerMonthDate.getMonth();
+            title.innerText = `${year}年${month + 1}月`;
+
+            const firstDay = new Date(year, month, 1);
+            const calendarStart = new Date(year, month, 1 - firstDay.getDay());
+            const selectedStr = getSafeDateString(viewingDate);
+            const todayStr = getSafeDateString(REAL_TODAY);
+            let html = '';
+
+            for (let i = 0; i < 42; i++) {
+                const dayDate = new Date(calendarStart);
+                dayDate.setDate(calendarStart.getDate() + i);
+                const dayStr = getSafeDateString(dayDate);
+                const classes = ['date-calendar-day'];
+                if (dayDate.getMonth() !== month) classes.push('outside');
+                if (dayStr === todayStr) classes.push('today');
+                if (dayStr === selectedStr) classes.push('selected');
+                html += `<button type="button" class="${classes.join(' ')}" onclick="pickCalendarDate(${dayDate.getFullYear()}, ${dayDate.getMonth()}, ${dayDate.getDate()})">${dayDate.getDate()}</button>`;
+            }
+            grid.innerHTML = html;
+        }
+
         function updateDateUI() {
             const viewStr = getSafeDateString(viewingDate), todayStr = getSafeDateString(REAL_TODAY), badge = document.getElementById('display-date');
-            
-            const datePicker = document.getElementById('date-picker');
-            if (datePicker) { datePicker.value = viewStr; }
 
             if (viewStr === todayStr) { badge.innerText = `${viewingDate.getMonth()+1}月${viewingDate.getDate()}日 (今日) ▾`; }
             else if (viewStr > todayStr) { badge.innerText = `预告: ${viewingDate.getMonth()+1}月${viewingDate.getDate()}日 ▾`; }
@@ -705,7 +1365,8 @@
             
             const plan = getTodayPlan();
             document.getElementById('plan-daily-container').innerHTML = plan.devotion;
-            document.getElementById('plan-reading-container').innerHTML = plan.reading;
+            const readingContainer = document.getElementById('plan-reading-container');
+            if (readingContainer) readingContainer.innerHTML = plan.reading;
             document.getElementById('plan-weekly').innerHTML = plan.weekly; 
             
             const reminderEl = document.getElementById('saturday-reminder');
@@ -737,6 +1398,139 @@
             throw lastErr; 
         }
 
+        function refreshFromRecords() {
+            localStorage.setItem('zw_checkin_cache', JSON.stringify(globalRecords));
+            updateAdminStorageStatus();
+            if (document.getElementById('records-viewer-overlay')?.classList.contains('show')) {
+                renderRecordsViewer();
+            }
+            updateMemberTestimonialBadges();
+            resetButtons();
+            renderStatus();
+            renderDashboard();
+            if (document.getElementById('profile-overlay')?.classList.contains('show')) {
+                renderProfileCalendar();
+            }
+        }
+
+        function openCheckinNoteModal(context) {
+            pendingCheckin = context;
+            const overlay = document.getElementById('checkin-note-overlay');
+            const title = document.getElementById('checkin-note-title');
+            const input = document.getElementById('checkin-note-input');
+            if (!overlay || !input) return;
+            if (title) title.innerText = `${context.isPast ? '补签备注' : '打卡备注'} · ${context.name} · ${context.type}`;
+            input.value = '';
+            overlay.classList.add('show');
+            setTimeout(() => input.focus(), 50);
+        }
+
+        function closeCheckinNoteModal(restoreButton = true) {
+            const overlay = document.getElementById('checkin-note-overlay');
+            if (overlay) overlay.classList.remove('show');
+            if (restoreButton && pendingCheckin) {
+                const { btn, oldHtml, oldClass } = pendingCheckin;
+                btn.innerHTML = oldHtml;
+                btn.className = oldClass;
+                btn.disabled = false;
+            }
+            pendingCheckin = null;
+        }
+
+        function skipCheckinNote() {
+            const input = document.getElementById('checkin-note-input');
+            if (input) input.value = '';
+            saveCheckinWithNote();
+        }
+
+        async function saveCheckinWithNote() {
+            if (!pendingCheckin) return;
+            const { name, type, btn, isPast, oldHtml, oldClass, detailStr } = pendingCheckin;
+            const input = document.getElementById('checkin-note-input');
+            const note = (input?.value || '').trim();
+            btn.innerHTML = "保存中...";
+            btn.disabled = true;
+            closeCheckinNoteModal(false);
+
+            let payload = {
+                "姓名": name,
+                "打卡时间": getIsoWithTimezoneForViewing(),
+                "是否补签": isPast ? "是" : "否",
+                [type]: "已完成",
+                "打卡详情": detailStr
+            };
+            if (note) payload["打卡备注"] = note;
+
+            try {
+                const savedRecord = await createRecord(payload);
+                globalRecords.push(savedRecord);
+                lastSyncTime = new Date();
+                refreshFromRecords();
+                btn.innerHTML = isPast ? "✔ 已补签" : "✔ 已完成";
+                btn.className = "action-btn btn-success";
+                btn.disabled = false;
+                document.getElementById('modal-action-title').innerText = isPast ? "补签成功！" : "打卡成功！";
+                showSuccess();
+                setTimeout(() => { fetchStatus(); }, 1000);
+            } catch (e) {
+                console.error('Checkin save failed', e);
+                btn.innerHTML = oldHtml;
+                btn.className = oldClass;
+                btn.disabled = false;
+                const extra = location.protocol === 'file:' && !isBoundLocalJsonMode()
+                    ? '\n如果你是用 file:// 打开的页面，请先在管理员后台绑定本地 records.json。'
+                    : '';
+                alert(`打卡没有保存成功，请稍后重试。\n原因：${e.message || '数据库连接失败'}${extra}`);
+            } finally {
+                pendingCheckin = null;
+            }
+        }
+
+        async function createRecord(payload) {
+            if (isBoundLocalJsonMode()) {
+                const records = await readBoundJsonRecords();
+                let nextId = records.reduce((maxId, record) => {
+                    const numericId = Number(record && record.Id);
+                    return Number.isFinite(numericId) ? Math.max(maxId, numericId) : maxId;
+                }, 0) + 1;
+                const savedRecord = { ...payload, Id: payload.Id || nextId };
+                records.push(savedRecord);
+                await writeBoundJsonRecords(records);
+                currentStorageInfo = { mode: 'json-file', label: `本地 JSON 文件 · ${boundJsonFileName || 'records.json'}` };
+                return savedRecord;
+            }
+            const data = await requestApiJson('/records', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify([payload])
+            }, 3);
+            if (!data || data.ok !== true) {
+                throw new Error(data?.error || '本地 JSON 没有确认保存成功');
+            }
+            if (data.storage) currentStorageInfo = data.storage;
+            if (Array.isArray(data.records) && data.records[0] && data.records[0].Id !== undefined) return data.records[0];
+            throw new Error('本地 JSON 没有返回已保存记录');
+        }
+
+        async function deleteRecord(record) {
+            if (isBoundLocalJsonMode()) {
+                const records = await readBoundJsonRecords();
+                const nextRecords = records.filter(item => String(item && item.Id) !== String(record && record.Id));
+                await writeBoundJsonRecords(nextRecords);
+                currentStorageInfo = { mode: 'json-file', label: `本地 JSON 文件 · ${boundJsonFileName || 'records.json'}` };
+                return;
+            }
+            const data = await requestApiJson('/records', {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify([{ "Id": record.Id }])
+            }, 3);
+            if (!data || data.ok !== true) {
+                throw new Error(data?.error || '本地 JSON 没有确认撤销成功');
+            }
+            if (data.storage) currentStorageInfo = data.storage;
+        }
+
         function loadLocalCache() {
             try {
                 const cached = localStorage.getItem('zw_checkin_cache');
@@ -749,12 +1543,20 @@
 
         window.onload = () => { 
             try { 
+                updateMemberTotalLabels();
                 updateDateUI(); 
                 renderMembers(); 
                 loadLocalCache(); 
                 fetchStatus();    
             } catch(e) { document.getElementById('loading-status').innerHTML = `⚠️ 初始化错误: ${e.message}`; } 
         };
+
+        document.addEventListener('click', function(event) {
+            const wrap = document.querySelector('.hero-date-wrap');
+            const popover = document.getElementById('date-calendar-popover');
+            if (!wrap || !popover || !popover.classList.contains('show')) return;
+            if (!wrap.contains(event.target)) closeDatePicker();
+        });
 
         function updateAvatarUI(name) {
             const base64Data = localStorage.getItem('avatar_' + name);
@@ -766,6 +1568,7 @@
             }
             if (currentProfileName === name) {
                 const profileAvatar = document.getElementById('profile-avatar-icon');
+                if (!profileAvatar) return;
                 if (base64Data) { profileAvatar.style.backgroundImage = `url('${base64Data}')`; profileAvatar.style.backgroundSize = 'cover'; profileAvatar.style.backgroundPosition = 'center'; profileAvatar.style.color = 'transparent'; profileAvatar.innerText = ''; }
                 else { profileAvatar.style.backgroundImage = 'none'; profileAvatar.style.color = 'var(--text-main)'; profileAvatar.innerText = name.charAt(name.length - 1); }
             }
@@ -778,51 +1581,58 @@
                 let avatarStyle = savedAvatar ? `style="background-image: url('${savedAvatar}'); background-size: cover; color: transparent;"` : "";
                 const card = document.createElement('div'); card.className = 'member-card'; card.id = `card-${name}`;
                 
-                card.innerHTML = `<div class="member-header"><div class="avatar" onclick="showProfile('${name}')" ${avatarStyle}>${savedAvatar ? '' : name.charAt(name.length-1)}</div><div class="member-name">${name}</div></div><div class="btn-group">
+                card.innerHTML = `<div class="member-header"><div class="member-identity"><div class="avatar" onclick="showProfile('${name}')" ${avatarStyle}>${savedAvatar ? '' : name.charAt(name.length-1)}</div><div class="member-name">${name}</div></div><button class="member-testimonial-btn" onclick="openTestimonialModal('${escapeJs(name)}')">得着<span class="member-testimonial-count" data-testimonial-count="${escapeHtml(name)}"></span></button></div><div class="btn-group">
                 <button class="action-btn btn-daily" id="daily-${name}" onclick="submitCheckin('${name}', '每日灵修', this)">灵修</button>
                 <button class="action-btn btn-reading" id="reading-${name}" onclick="submitCheckin('${name}', '每日读经', this)">读经</button>
                 <button class="action-btn btn-weekly" id="weekly-${name}" onclick="submitCheckin('${name}', '周任务', this)">周课</button></div>`;
                 container.appendChild(card);
             });
+            updateMemberTestimonialBadges();
         }
 
         async function fetchStatus() {
             const loadingEl = document.getElementById('loading-status');
-            if (globalRecords.length === 0) { loadingEl.style.display = 'block'; loadingEl.innerHTML = "🔄 正在连接云端数据库..."; } 
-            else { loadingEl.style.display = 'block'; loadingEl.innerHTML = "<span style='font-size:12px; color:var(--text-sub);'>🔄 后台数据同步中...</span>"; }
+            if (globalRecords.length === 0) { loadingEl.style.display = 'block'; loadingEl.innerHTML = "🔄 正在读取本地 JSON 记录..."; }
+            else { loadingEl.style.display = 'block'; loadingEl.innerHTML = "<span style='font-size:12px; color:var(--text-sub);'>🔄 正在刷新本地 JSON 记录...</span>"; }
 
             try {
-                let allRecords = [];
-                let offset = 0;
-                const limit = 1000;
-                let hasMore = true;
-                
-                while(hasMore) {
-                    const response = await fetchWithRetry(`${NOCODB_API_URL}?limit=${limit}&offset=${offset}&_t=${Date.now()}`, { 
-                        method: 'GET', headers: { 'xc-token': API_TOKEN, 'Cache-Control': 'no-cache, no-store, must-revalidate' } 
-                    }, 3);
-                    const data = await response.json();
-                    
-                    if (data.list && data.list.length > 0) {
-                        allRecords.push(...data.list);
-                        if (data.list.length < limit) hasMore = false;
-                        else offset += limit;
-                    } else {
-                        hasMore = false;
-                    }
+                if (isBoundLocalJsonMode()) {
+                    const records = await readBoundJsonRecords();
+                    globalRecords = Array.isArray(records) ? records : [];
+                    currentStorageInfo = { mode: 'json-file', label: `本地 JSON 文件 · ${boundJsonFileName || 'records.json'}` };
+                    lastSyncTime = new Date();
+                    refreshFromRecords();
+                    return;
                 }
-                
-                globalRecords = allRecords; 
-                localStorage.setItem('zw_checkin_cache', JSON.stringify(globalRecords));
+                const state = await requestApiJson(`/state?_t=${Date.now()}`, {
+                    method: 'GET',
+                    headers: { 'Cache-Control': 'no-cache, no-store, must-revalidate' }
+                }, 3, !apiBaseChecked);
+                if (!state.ok) throw new Error(state.error || '当前打卡库不可用');
+                if (!Array.isArray(state.records)) throw new Error('当前打卡库返回格式不正确');
 
-                resetButtons(); renderStatus(); renderDashboard(); 
+                globalRecords = state.records;
+                if (Array.isArray(state.weeklySchedule) && state.weeklySchedule.length > 0) {
+                    applyWeeklySchedule(state.weeklySchedule);
+                    updateDateUI();
+                    if (adminAuthenticated) renderWeekPlanOptions();
+                }
+                if (Array.isArray(state.testimonials)) {
+                    globalTestimonials = mergeTestimonials(state.testimonials, loadLocalTestimonialsCache());
+                    if (document.getElementById('testimonial-overlay')?.classList.contains('show')) renderTestimonials();
+                }
+                await syncPendingTestimonialsCache();
+                currentStorageInfo = state.storage || currentStorageInfo;
+                lastSyncTime = new Date();
+                refreshFromRecords();
             } catch (error) { 
                 if (globalRecords.length === 0) {
-                    loadingEl.innerHTML = "⚠️ 网络延迟或连接失败<br><span style='font-size:12px; font-weight:normal;'>请检查您的网络、NAS 状态。</span>"; 
+                    loadingEl.innerHTML = `⚠️ 本地 JSON 读取失败<br><span style='font-size:12px; font-weight:normal;'>${escapeHtml(error.message || '请检查 6717 服务是否正在运行。')}</span>`;
                 } else {
-                    loadingEl.innerHTML = "⚠️ 后台同步延迟，当前显示为本地缓存数据";
-                    setTimeout(() => { loadingEl.style.display = 'none'; }, 4000);
+                    loadingEl.innerHTML = "<span style='font-size:12px; color:var(--text-sub);'>本地 JSON 暂时未刷新，继续显示当前记录</span>";
+                    setTimeout(() => { loadingEl.style.display = 'none'; }, 1800);
                 }
+                updateAdminStorageStatus(error.message);
             }
         }
 
@@ -856,13 +1666,8 @@
             const isPast = getSafeDateString(viewingDate) < getSafeDateString(REAL_TODAY);
             const oldHtml = btn.innerHTML; const oldClass = btn.className;
             
-            btn.innerHTML = isPast ? "✔ 已补签" : "✔ 已完成"; 
-            
-            btn.className = "action-btn btn-success"; 
-            btn.disabled = false;
-            
-            document.getElementById('modal-action-title').innerText = isPast ? "补签成功！" : "打卡成功！"; 
-            showSuccess(); 
+            btn.innerHTML = "保存中...";
+            btn.disabled = true;
             
             const vMonth = viewingDate.getMonth() + 1; const vDay = viewingDate.getDate();
             let detailStr = (isPast ? "【补签】" : "【按时】") + `${vMonth}月${vDay}日 ` + type;
@@ -871,12 +1676,15 @@
                 "姓名": name, "打卡时间": getIsoWithTimezoneForViewing(), "是否补签": isPast ? "是" : "否", 
                 [type]: "已完成", "打卡详情": detailStr
             };
-            
-            fetchWithRetry(NOCODB_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', 'xc-token': API_TOKEN }, body: JSON.stringify([payload]) }, 3)
-            .then(() => { setTimeout(() => { fetchStatus(); }, 1000); })
-            .catch(e => {
-                btn.innerHTML = oldHtml; btn.className = oldClass;
-                alert("严重网络异常，打卡未保存，请检查网络！");
+            openCheckinNoteModal({
+                name,
+                type,
+                btn,
+                isPast,
+                oldHtml,
+                oldClass,
+                detailStr,
+                payload
             });
         }
 
@@ -899,10 +1707,13 @@
                 let detailStr = "【撤销】" + `${vMonth}月${vDay}日 ` + type;
                 let cancelPayload = { "姓名": name, "打卡时间": getIsoWithTimezoneForViewing(), "是否补签": isPast ? "是" : "否", [type]: "已撤回", "打卡详情": detailStr };
                 
-                Promise.all([
-                    fetchWithRetry(NOCODB_API_URL, { method: 'DELETE', headers: { 'Content-Type': 'application/json', 'xc-token': API_TOKEN }, body: JSON.stringify([{ "Id": recordToCancel.Id }]) }, 3),
-                    fetchWithRetry(NOCODB_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', 'xc-token': API_TOKEN }, body: JSON.stringify([cancelPayload]) }, 3)
-                ]).then(() => {
+                deleteRecord(recordToCancel)
+                .then(() => createRecord(cancelPayload))
+                .then((savedCancelRecord) => {
+                    globalRecords = globalRecords.filter(record => String(record.Id) !== String(recordToCancel.Id));
+                    globalRecords.push(savedCancelRecord);
+                    lastSyncTime = new Date();
+                    refreshFromRecords();
                     setTimeout(() => { fetchStatus(); }, 1000); 
                 }).catch(e => {
                     btn.innerHTML = originalText; btn.className = oldClass; btn.disabled = false;
@@ -924,7 +1735,8 @@
         async function handleAvatarUpload(event) {
             const file = event.target.files[0];
             if (!file || !file.type.startsWith('image/')) return;
-            document.getElementById('profile-edit-status').innerText = "处理中...";
+            const statusEl = document.getElementById('profile-edit-status');
+            if (statusEl) statusEl.innerText = "处理中...";
             const reader = new FileReader();
             reader.onload = function(e) {
                 const img = new Image();
@@ -936,8 +1748,10 @@
                     const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7); 
                     localStorage.setItem('avatar_' + currentProfileName, compressedBase64);
                     updateAvatarUI(currentProfileName);
-                    document.getElementById('profile-edit-status').innerText = "更换成功！";
-                    setTimeout(() => { document.getElementById('profile-edit-status').innerText = "更换本地头像"; }, 2000);
+                    if (statusEl) {
+                        statusEl.innerText = "更换成功！";
+                        setTimeout(() => { statusEl.innerText = "更换本地头像"; }, 2000);
+                    }
                 }
                 img.src = e.target.result;
             }
@@ -970,31 +1784,831 @@
         function closeCancelModal() { document.getElementById('cancel-modal-overlay').classList.remove('show'); pendingCancel = null; }
         function closeProfile() { document.getElementById('profile-overlay').classList.remove('show'); }
 
+        function openAdminPanel() {
+            renderAdminAuthState();
+            document.getElementById('admin-overlay').classList.add('show');
+            const input = document.getElementById('admin-password-input');
+            if (!adminAuthenticated && input) setTimeout(() => input.focus(), 50);
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('admin-overlay').classList.remove('show');
+        }
+
+        function getRecordCompletedType(record) {
+            if (record['每日灵修']) return `灵修 ${record['每日灵修']}`;
+            if (record['每日读经']) return `读经 ${record['每日读经']}`;
+            if (record['周任务']) return `周课 ${record['周任务']}`;
+            return '记录';
+        }
+
+        function updateAdminStorageStatus(errorMessage = '') {
+            const storageLabel = document.getElementById('admin-storage-label');
+            const recordCount = document.getElementById('admin-record-count');
+            const syncStatus = document.getElementById('admin-sync-status');
+            const recentList = document.getElementById('admin-recent-records');
+            const jsonFileStatus = document.getElementById('admin-json-file-status');
+            if (storageLabel) storageLabel.innerText = currentStorageInfo?.label || '本地 JSON';
+            if (recordCount) recordCount.innerText = String(globalRecords.length);
+            if (syncStatus) {
+                syncStatus.classList.toggle('admin-status-warn', Boolean(errorMessage));
+                syncStatus.classList.toggle('admin-status-ok', !errorMessage);
+                syncStatus.innerText = errorMessage ? `异常：${errorMessage}` : (lastSyncTime ? `正常 ${lastSyncTime.toLocaleTimeString('zh-CN', { hour12: false })}` : '本地缓存');
+            }
+            if (jsonFileStatus) {
+                jsonFileStatus.innerText = boundJsonFileHandle
+                    ? `本地 JSON：${boundJsonFileName || boundJsonFileHandle.name || '已绑定'}`
+                    : '本地 JSON：未绑定';
+            }
+            if (!recentList) return;
+            const recent = [...globalRecords]
+                .filter(record => record && record['姓名'])
+                .filter(matchesAdminRecordFilters)
+                .sort((a, b) => String(b['打卡时间'] || '').localeCompare(String(a['打卡时间'] || '')))
+                .slice(0, 6);
+            recentList.innerHTML = recent.length ? recent.map(record => `
+                <div class="admin-recent-item">
+                    <strong>${escapeHtml(record['姓名'])}</strong>
+                    <span>${escapeHtml(formatRecordDisplayTime(record))} · ${escapeHtml(getRecordActionLabel(record))} ${escapeHtml(getRecordActionStatus(record))}</span>
+                    ${getRecordNoteText(record) ? `<div class="admin-recent-note">${escapeHtml(getRecordNoteText(record))}</div>` : ''}
+                </div>
+            `).join('') : '<div class="admin-note">暂无打卡记录。</div>';
+        }
+
+        function getRecordTypeLabel(record) {
+            if (!record) return '记录';
+            if (record['每日灵修'] === '已完成') return '灵修';
+            if (record['每日读经'] === '已完成') return '读经';
+            if (record['周任务'] === '已完成') return '周课';
+            return '记录';
+        }
+
+        function getRecordBadgeText(record) {
+            if (!record) return '未标记';
+            if (record['是否补签'] === '是') return '补签';
+            if (record['是否补签'] === '否') return '按时';
+            return '未标记';
+        }
+
+        function formatRecordDisplayTime(record) {
+            const rawTime = record && record['打卡时间'];
+            if (!rawTime) return '-';
+            const date = new Date(rawTime);
+            if (isNaN(date.getTime())) return String(rawTime);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const hours = String(date.getHours()).padStart(2, '0');
+            const minutes = String(date.getMinutes()).padStart(2, '0');
+            const seconds = String(date.getSeconds()).padStart(2, '0');
+            return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        }
+
+        function formatRecordLogicalDate(record) {
+            const logicalDate = getLogicalDateStr(record);
+            return logicalDate || '-';
+        }
+
+        function getRecordActionLabel(record) {
+            if (!record) return '记录';
+            if (record['每日灵修']) return '灵修';
+            if (record['每日读经']) return '读经';
+            if (record['周任务']) return '周课';
+            return '记录';
+        }
+
+        function getRecordActionStatus(record) {
+            if (!record) return '-';
+            if (record['每日灵修']) return record['每日灵修'];
+            if (record['每日读经']) return record['每日读经'];
+            if (record['周任务']) return record['周任务'];
+            return record['打卡详情'] || '-';
+        }
+
+        function getRecordNoteText(record) {
+            if (!record) return '';
+            return String(record['打卡备注'] || record['分享备注'] || record['备注'] || '').trim();
+        }
+
+        function getRecordFilterType(record) {
+            if (!record) return '';
+            if (record['每日灵修']) return '灵修';
+            if (record['每日读经']) return '读经';
+            if (record['周任务']) return '周任务';
+            return '';
+        }
+
+        function matchesAdminRecordFilters(record) {
+            const nameQuery = adminRecordFilters.name.trim().toLowerCase();
+            const typeQuery = adminRecordFilters.type.trim();
+            if (nameQuery && !(record['姓名'] || '').toLowerCase().includes(nameQuery)) return false;
+            if (typeQuery && getRecordFilterType(record) !== typeQuery) return false;
+            return true;
+        }
+
+        function applyAdminRecordFilters() {
+            const nameInput = document.getElementById('admin-record-name-filter');
+            const typeSelect = document.getElementById('admin-record-type-filter');
+            adminRecordFilters.name = nameInput ? nameInput.value : adminRecordFilters.name;
+            adminRecordFilters.type = typeSelect ? typeSelect.value : adminRecordFilters.type;
+            updateAdminStorageStatus();
+            if (document.getElementById('records-viewer-overlay')?.classList.contains('show')) {
+                renderRecordsViewer();
+            }
+        }
+
+        function formatRecordViewerLine(record) {
+            const name = record?.['姓名'] || '-';
+            const time = formatRecordDisplayTime(record);
+            const action = getRecordActionLabel(record);
+            const status = getRecordActionStatus(record);
+            return `${name} ${time} · ${action} ${status}`;
+        }
+
+        function isBoundLocalJsonMode() {
+            return Boolean(boundJsonFileHandle);
+        }
+
+        async function readBoundJsonRecords() {
+            if (!boundJsonFileHandle) throw new Error('未绑定本地 JSON 文件');
+            const file = await boundJsonFileHandle.getFile();
+            const text = await file.text();
+            if (!text.trim()) return [];
+            const parsed = JSON.parse(text);
+            if (Array.isArray(parsed)) return parsed;
+            if (parsed && Array.isArray(parsed.records)) return parsed.records;
+            throw new Error('绑定的 JSON 格式不正确');
+        }
+
+        async function writeBoundJsonRecords(records) {
+            if (!boundJsonFileHandle) throw new Error('未绑定本地 JSON 文件');
+            const writable = await boundJsonFileHandle.createWritable();
+            await writable.write(`${JSON.stringify(records, null, 2)}\n`);
+            await writable.close();
+        }
+
+        async function bindLocalRecordsJsonFile() {
+            if (!window.showOpenFilePicker) {
+                alert('当前浏览器不支持直接绑定本地 JSON 文件，请改用本地服务模式。');
+                return;
+            }
+            try {
+                const [handle] = await window.showOpenFilePicker({
+                    multiple: false,
+                    types: [{ description: 'JSON 文件', accept: { 'application/json': ['.json'] } }]
+                });
+                boundJsonFileHandle = handle;
+                boundJsonFileName = handle.name || 'records.json';
+                localStorage.setItem('zw_bound_json_name', boundJsonFileName);
+                await fetchStatus();
+            } catch (error) {
+                if (error && error.name !== 'AbortError') {
+                    alert(`绑定失败：${error.message || '无法打开 JSON 文件'}`);
+                }
+            }
+        }
+
+        async function unbindLocalRecordsJsonFile() {
+            boundJsonFileHandle = null;
+            boundJsonFileName = '';
+            localStorage.removeItem('zw_bound_json_name');
+            updateAdminStorageStatus();
+        }
+
+        function getApiBaseCandidates() {
+            if (location.hostname === '127.0.0.1' || location.hostname === 'localhost') {
+                return [DEFAULT_API_BASE];
+            }
+
+            return [...new Set([
+                resolvedApiBase,
+                ...(location.protocol === 'file:' ? [] : [DEFAULT_API_BASE]),
+                FALLBACK_API_BASE,
+                NAS_API_BASE,
+                ...LOCAL_API_BASES
+            ].filter(Boolean))];
+        }
+
+        async function requestApiJson(path, options, retries = 3, forceRediscovery = false) {
+            const candidates = forceRediscovery
+                ? (location.protocol === 'file:'
+                    ? [NAS_API_BASE, ...LOCAL_API_BASES]
+                    : (location.hostname === '127.0.0.1' || location.hostname === 'localhost'
+                        ? [DEFAULT_API_BASE]
+                        : [DEFAULT_API_BASE, FALLBACK_API_BASE, NAS_API_BASE, ...LOCAL_API_BASES]))
+                : getApiBaseCandidates();
+            let lastErr = null;
+
+            for (const base of candidates) {
+                try {
+                    const response = await fetchWithRetry(`${base}${path}`, options, retries);
+                    const data = await response.json();
+                    resolvedApiBase = base;
+                    apiBaseChecked = true;
+                    localStorage.setItem('zw_api_base', base);
+                    return data;
+                } catch (err) {
+                    lastErr = err;
+                }
+            }
+
+            apiBaseChecked = true;
+            throw lastErr || new Error('API unavailable');
+        }
+
+        function openRecordsViewer() {
+            const overlay = document.getElementById('records-viewer-overlay');
+            if (!overlay) return;
+            overlay.classList.add('show');
+            const search = document.getElementById('records-viewer-search');
+            if (search && !search.value) search.value = '';
+            renderRecordsViewer();
+            setTimeout(() => search && search.focus(), 50);
+        }
+
+        function closeRecordsViewer() {
+            const overlay = document.getElementById('records-viewer-overlay');
+            if (overlay) overlay.classList.remove('show');
+        }
+
+        function refreshRecordsViewer() {
+            fetchStatus().finally(() => renderRecordsViewer());
+        }
+
+        function renderRecordsViewer() {
+            const body = document.getElementById('records-viewer-body');
+            const empty = document.getElementById('records-viewer-empty');
+            const countEl = document.getElementById('records-viewer-count');
+            const storageEl = document.getElementById('records-viewer-storage');
+            const syncEl = document.getElementById('records-viewer-sync');
+            if (!body || !empty || !countEl || !storageEl || !syncEl) return;
+
+            const keyword = (document.getElementById('records-viewer-search')?.value || '').trim().toLowerCase();
+            const records = [...globalRecords]
+                .filter(record => record && record['姓名'])
+                .filter(matchesAdminRecordFilters)
+                .sort((a, b) => String(b['打卡时间'] || '').localeCompare(String(a['打卡时间'] || '')));
+
+            const filtered = keyword ? records.filter(record => {
+                const haystack = [
+                    record.Id,
+                    record['姓名'],
+                    record['打卡时间'],
+                    formatRecordDisplayTime(record),
+                    formatRecordViewerLine(record),
+                    getRecordNoteText(record),
+                    record['打卡详情']
+                ].filter(Boolean).join(' ').toLowerCase();
+                return haystack.includes(keyword);
+            }) : records;
+
+            countEl.innerText = `${filtered.length} 条记录`;
+            storageEl.innerText = `当前存储：${currentStorageInfo?.label || '本地 JSON'}`;
+            syncEl.innerText = `${lastSyncTime ? `读取状态：${lastSyncTime.toLocaleString('zh-CN', { hour12: false })}` : '读取状态：未刷新'} · JSON 服务：${resolvedApiBase}`;
+
+            body.innerHTML = filtered.length ? filtered.map(record => `
+                <div class="records-list-item">
+                    <div class="records-list-id">${escapeHtml(String(record.Id ?? '-'))}</div>
+                    <div class="records-list-main">
+                        <span class="records-list-name">${escapeHtml(record['姓名'] || '-')}</span>
+                        <span class="records-list-time">${escapeHtml(formatRecordDisplayTime(record))}</span>
+                        <span class="records-list-meta">· ${escapeHtml(getRecordActionLabel(record))} ${escapeHtml(getRecordActionStatus(record))}</span>
+                        ${getRecordNoteText(record) ? `<div class="records-list-note">${escapeHtml(getRecordNoteText(record))}</div>` : ''}
+                    </div>
+                </div>
+            `).join('') : '';
+
+            empty.classList.toggle('admin-hidden', filtered.length > 0);
+            body.parentElement.classList.toggle('admin-hidden', filtered.length === 0);
+        }
+
+        function getAdminPassword() {
+            return localStorage.getItem('zw_admin_password') || '';
+        }
+
+        function renderAdminAuthState() {
+            const hasPassword = Boolean(getAdminPassword());
+            const loginPanel = document.getElementById('admin-login-panel');
+            const toolsPanel = document.getElementById('admin-tools-panel');
+            const title = document.getElementById('admin-login-title');
+            const note = document.getElementById('admin-login-note');
+            if (loginPanel) loginPanel.classList.toggle('admin-hidden', adminAuthenticated);
+            if (toolsPanel) toolsPanel.classList.toggle('admin-hidden', !adminAuthenticated);
+            if (title) title.innerText = hasPassword ? '管理员登录' : '首次设置管理员密码';
+            if (note) note.innerText = hasPassword ? '输入本机保存的管理员密码后进入后台。' : '首次使用时会把你输入的密码保存到当前浏览器，请记住它。';
+            if (adminAuthenticated) {
+                renderAdminMembers();
+                renderWeekPlanOptions();
+                applyAdminRecordFilters();
+                updateAdminStorageStatus();
+            }
+        }
+
+        function adminLogin() {
+            const input = document.getElementById('admin-password-input');
+            const value = input.value.trim();
+            if (!value) {
+                alert("请输入管理员密码。");
+                return;
+            }
+            const savedPassword = getAdminPassword();
+            if (!savedPassword) {
+                localStorage.setItem('zw_admin_password', value);
+                adminAuthenticated = true;
+            } else if (value === savedPassword) {
+                adminAuthenticated = true;
+            } else {
+                alert("管理员密码不正确。");
+                return;
+            }
+            input.value = '';
+            renderAdminAuthState();
+        }
+
+        function adminLogout() {
+            adminAuthenticated = false;
+            renderAdminAuthState();
+        }
+
+        function changeAdminPassword() {
+            const next = prompt("请输入新的管理员密码：");
+            if (!next || !next.trim()) return;
+            localStorage.setItem('zw_admin_password', next.trim());
+            alert("管理员密码已更新。");
+        }
+
+        function renderAdminMembers() {
+            const list = document.getElementById('admin-member-list');
+            if (!list) return;
+            list.innerHTML = MEMBERS.map(name => `
+                <span class="admin-member-chip">
+                    ${escapeHtml(name)}
+                    <button title="删除成员" onclick="removeAdminMember('${escapeJs(name)}')">×</button>
+                </span>
+            `).join('');
+        }
+
+        function addAdminMember() {
+            const input = document.getElementById('admin-new-member');
+            const name = input.value.trim();
+            if (!name) return;
+            if (MEMBERS.includes(name)) {
+                alert("成员已存在。");
+                return;
+            }
+            MEMBERS.push(name);
+            input.value = '';
+            persistMembersConfig();
+        }
+
+        function removeAdminMember(name) {
+            if (!confirm(`确定从页面中隐藏 ${name} 吗？历史打卡记录不会删除。`)) return;
+            MEMBERS = MEMBERS.filter(member => member !== name);
+            persistMembersConfig();
+        }
+
+        function resetAdminMembers() {
+            if (!confirm("确定恢复默认成员名单吗？")) return;
+            MEMBERS = [...DEFAULT_MEMBERS];
+            persistMembersConfig();
+        }
+
+        function renderWeekPlanOptions() {
+            const select = document.getElementById('admin-week-select');
+            if (!select) return;
+            select.innerHTML = WEEKLY_SCHEDULE.map((plan, index) => `<option value="${index}">${escapeHtml(plan.start)} ~ ${escapeHtml(plan.end)}｜${escapeHtml(plan.title)}</option>`).join('');
+            loadSelectedWeekForEdit();
+        }
+
+        function loadSelectedWeekForEdit() {
+            const select = document.getElementById('admin-week-select');
+            if (!select || !WEEKLY_SCHEDULE.length) return;
+            const plan = WEEKLY_SCHEDULE[Number(select.value)] || WEEKLY_SCHEDULE[0];
+            document.getElementById('admin-week-start').value = plan.start || '';
+            document.getElementById('admin-week-end').value = plan.end || '';
+            document.getElementById('admin-week-title').value = plan.title || '';
+            document.getElementById('admin-week-verse').value = plan.verse || '';
+            document.getElementById('admin-week-video').value = plan.video || '';
+            document.getElementById('admin-week-url').value = plan.url || '';
+        }
+
+        function readWeekPlanForm() {
+            return normalizeWeekPlan({
+                start: document.getElementById('admin-week-start').value,
+                end: document.getElementById('admin-week-end').value,
+                title: document.getElementById('admin-week-title').value,
+                verse: document.getElementById('admin-week-verse').value,
+                video: document.getElementById('admin-week-video').value,
+                url: document.getElementById('admin-week-url').value
+            });
+        }
+
+        function saveWeekPlanFromAdmin() {
+            const select = document.getElementById('admin-week-select');
+            const index = Number(select.value);
+            const nextPlan = readWeekPlanForm();
+            if (!nextPlan.start || !nextPlan.end || !nextPlan.title) {
+                alert("请填写开始日期、结束日期和周课标题。");
+                return;
+            }
+            WEEKLY_SCHEDULE[index] = nextPlan;
+            persistWeeklySchedule();
+        }
+
+        function addWeekPlanFromAdmin() {
+            const nextPlan = readWeekPlanForm();
+            if (!nextPlan.start || !nextPlan.end || !nextPlan.title) {
+                alert("请填写开始日期、结束日期和周课标题。");
+                return;
+            }
+            WEEKLY_SCHEDULE.push(nextPlan);
+            persistWeeklySchedule();
+            const select = document.getElementById('admin-week-select');
+            if (select) select.value = String(WEEKLY_SCHEDULE.findIndex(plan => plan.start === nextPlan.start && plan.title === nextPlan.title));
+        }
+
+        function deleteWeekPlanFromAdmin() {
+            const select = document.getElementById('admin-week-select');
+            if (!select || WEEKLY_SCHEDULE.length <= 1) {
+                alert("至少需要保留一周任务。");
+                return;
+            }
+            if (!confirm("确定删除当前周任务吗？")) return;
+            WEEKLY_SCHEDULE.splice(Number(select.value), 1);
+            persistWeeklySchedule();
+        }
+
+        function resetWeekPlans() {
+            if (!confirm("确定恢复默认周任务安排吗？")) return;
+            WEEKLY_SCHEDULE = DEFAULT_WEEKLY_SCHEDULE.map(normalizeWeekPlan);
+            persistWeeklySchedule();
+        }
+
+        function exportRecordsCsv() {
+            const headers = ['Id', '姓名', '打卡时间', '逻辑日期', '是否补签', '每日灵修', '每日读经', '周任务', '打卡详情', '打卡备注'];
+            const rows = globalRecords.map(r => [
+                r.Id,
+                r['姓名'],
+                r['打卡时间'],
+                getLogicalDateStr(r),
+                r['是否补签'],
+                r['每日灵修'],
+                r['每日读经'],
+                r['周任务'],
+                r['打卡详情'],
+                getRecordNoteText(r)
+            ].map(csvCell).join(','));
+            downloadTextFile(`zw-checkin-records-${getSafeDateString(new Date())}.csv`, [headers.map(csvCell).join(','), ...rows].join('\n'), 'text/csv');
+        }
+
+        function exportDailySummaryCsv() {
+            const dates = [...new Set(globalRecords.map(getLogicalDateStr).filter(Boolean))].sort();
+            const headers = ['日期', '灵修人数', '读经人数', '周任务人数', '灵修名单', '读经名单', '周任务名单'];
+            const rows = dates.map(date => {
+                const daily = new Set(), reading = new Set(), weekly = new Set();
+                globalRecords.forEach(r => {
+                    if (getLogicalDateStr(r) !== date) return;
+                    if (r['每日灵修'] === '已完成') daily.add(r['姓名']);
+                    if (r['每日读经'] === '已完成') reading.add(r['姓名']);
+                    if (r['周任务'] === '已完成') weekly.add(r['姓名']);
+                });
+                return [date, daily.size, reading.size, weekly.size, [...daily].join('、'), [...reading].join('、'), [...weekly].join('、')].map(csvCell).join(',');
+            });
+            downloadTextFile(`zw-checkin-summary-${getSafeDateString(new Date())}.csv`, [headers.map(csvCell).join(','), ...rows].join('\n'), 'text/csv');
+        }
+
+        function exportBackupJson() {
+            const backup = {
+                exportedAt: new Date().toISOString(),
+                members: MEMBERS,
+                weeklySchedule: WEEKLY_SCHEDULE,
+                testimonials: globalTestimonials,
+                records: globalRecords
+            };
+            downloadTextFile(`zw-checkin-backup-${getSafeDateString(new Date())}.json`, JSON.stringify(backup, null, 2), 'application/json');
+        }
+
+        function importBackupJson(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const backup = JSON.parse(e.target.result);
+                    if (!Array.isArray(backup.members) || !Array.isArray(backup.records)) throw new Error("格式不正确");
+                    MEMBERS = backup.members.map(name => String(name).trim()).filter(Boolean);
+                    TOTAL_MEMBERS = MEMBERS.length || 1;
+                    if (Array.isArray(backup.weeklySchedule)) WEEKLY_SCHEDULE = backup.weeklySchedule.map(normalizeWeekPlan);
+                    if (Array.isArray(backup.testimonials)) globalTestimonials = backup.testimonials;
+                    globalRecords = backup.records;
+                    localStorage.setItem('zw_members', JSON.stringify(MEMBERS));
+                    localStorage.setItem('zw_weekly_schedule', JSON.stringify(WEEKLY_SCHEDULE));
+                    localStorage.setItem('zw_checkin_cache', JSON.stringify(globalRecords));
+                    updateMemberTotalLabels();
+                    updateDateUI();
+                    renderMembers();
+                    resetButtons();
+                    renderStatus();
+                    renderDashboard();
+                    renderAdminAuthState();
+                    alert("本地备份已导入。");
+                } catch (error) {
+                    alert("导入失败：请确认 JSON 格式正确。");
+                }
+            };
+            reader.readAsText(file, 'utf-8');
+            event.target.value = '';
+        }
+
+        function loadLocalTestimonialsCache() {
+            try {
+                const cached = JSON.parse(localStorage.getItem('zw_testimonials_cache') || '[]');
+                return Array.isArray(cached) ? cached : [];
+            } catch (error) {
+                return [];
+            }
+        }
+
+        function saveLocalTestimonialsCache(items) {
+            localStorage.setItem('zw_testimonials_cache', JSON.stringify(mergeTestimonials(items)));
+        }
+
+        function testimonialKey(item) {
+            return [
+                item?.id || '',
+                item?.name || '',
+                item?.date || '',
+                item?.createdAt || '',
+                item?.content || ''
+            ].join('|');
+        }
+
+        function mergeTestimonials(...lists) {
+            const merged = [];
+            const seen = new Set();
+            lists.flat().forEach(item => {
+                if (!item || !item.name || !item.content) return;
+                const normalized = {
+                    id: item.id || `local-${Date.now()}-${merged.length}`,
+                    name: String(item.name).trim(),
+                    content: String(item.content).trim(),
+                    date: String(item.date || '').slice(0, 10),
+                    createdAt: item.createdAt || new Date().toISOString(),
+                    pendingSync: Boolean(item.pendingSync)
+                };
+                const key = testimonialKey(normalized);
+                if (seen.has(key)) return;
+                seen.add(key);
+                merged.push(normalized);
+            });
+            return merged.sort((a, b) => String(b.createdAt || '').localeCompare(String(a.createdAt || '')));
+        }
+
+        let testimonialsSyncing = false;
+
+        async function syncPendingTestimonialsCache() {
+            const pending = loadLocalTestimonialsCache().filter(item => item && item.pendingSync);
+            if (testimonialsSyncing || pending.length === 0) return { synced: 0, remaining: pending.length };
+
+            testimonialsSyncing = true;
+            const synced = [];
+            const syncedLocalIds = new Set();
+            const remaining = [];
+
+            try {
+                for (const item of pending) {
+                    try {
+                        const data = await requestApiJson('/testimonials', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                name: item.name,
+                                content: item.content,
+                                date: item.date || getSafeDateString(viewingDate)
+                            })
+                        }, 1);
+                        if (!data || data.ok !== true || !data.testimonial) {
+                            throw new Error(data?.error || 'testimonial sync failed');
+                        }
+                        synced.push(data.testimonial);
+                        syncedLocalIds.add(item.id);
+                    } catch (error) {
+                        remaining.push(item);
+                    }
+                }
+
+                saveLocalTestimonialsCache(remaining);
+                if (synced.length > 0) {
+                    globalTestimonials = mergeTestimonials(
+                        globalTestimonials.filter(item => !syncedLocalIds.has(item.id)),
+                        synced,
+                        remaining
+                    );
+                    if (document.getElementById('testimonial-overlay')?.classList.contains('show')) {
+                        renderTestimonials();
+                    }
+                }
+                return { synced: synced.length, remaining: remaining.length };
+            } finally {
+                testimonialsSyncing = false;
+            }
+        }
+
+        function getTestimonialsForName(name) {
+            return globalTestimonials
+                .filter(item => item && item.name === name && item.content)
+                .sort((a, b) => String(b.createdAt || '').localeCompare(String(a.createdAt || '')));
+        }
+
+        function updateMemberTestimonialBadges() {
+            document.querySelectorAll('[data-testimonial-count]').forEach(badge => {
+                const name = badge.getAttribute('data-testimonial-count') || '';
+                const count = getTestimonialsForName(name).length;
+                const button = badge.closest('.member-testimonial-btn');
+                badge.textContent = count > 99 ? '99+' : String(count);
+                badge.classList.toggle('show', count > 0);
+                if (button) button.classList.toggle('has-testimonial', count > 0);
+                badge.setAttribute('aria-label', `${count} 条得着`);
+            });
+        }
+
+        function renderTestimonials() {
+            const list = document.getElementById('testimonial-list');
+            if (!list || !currentProfileName) return;
+            const items = getTestimonialsForName(currentProfileName);
+            list.innerHTML = items.length ? items.map(item => `
+                <div class="testimonial-item">
+                    <div class="testimonial-meta">${escapeHtml(item.date || String(item.createdAt || '').slice(0, 10) || '-')}${item.pendingSync ? ' · 待同步' : ''}</div>
+                    <div class="testimonial-body">${escapeHtml(item.content)}</div>
+                </div>
+            `).join('') : '<div class="testimonial-empty">还没有得着，第一句话可以从这里开始。</div>';
+            updateMemberTestimonialBadges();
+        }
+
+        async function refreshTestimonialsForCurrentProfile() {
+            if (!currentProfileName) return;
+            const data = await requestApiJson(`/testimonials?name=${encodeURIComponent(currentProfileName)}&_t=${Date.now()}`, {
+                method: 'GET',
+                headers: { 'Cache-Control': 'no-cache, no-store, must-revalidate' }
+            }, 2);
+            if (!data || data.ok !== true || !Array.isArray(data.testimonials)) {
+                throw new Error(data?.error || '得着 JSON 读取失败');
+            }
+            const otherTestimonials = globalTestimonials.filter(item => item && item.name !== currentProfileName);
+            globalTestimonials = mergeTestimonials(otherTestimonials, data.testimonials, loadLocalTestimonialsCache());
+            await syncPendingTestimonialsCache();
+            renderTestimonials();
+        }
+
+        function openTestimonialModal(name = currentProfileName) {
+            if (name) currentProfileName = name;
+            if (!currentProfileName) return;
+            const overlay = document.getElementById('testimonial-overlay');
+            const title = document.getElementById('testimonial-title');
+            const input = document.getElementById('testimonial-input');
+            if (!overlay || !input) return;
+            if (title) title.innerText = `${currentProfileName}的得着`;
+            input.value = '';
+            globalTestimonials = mergeTestimonials(globalTestimonials, loadLocalTestimonialsCache());
+            renderTestimonials();
+            overlay.classList.add('show');
+            setTimeout(() => input.focus(), 50);
+            refreshTestimonialsForCurrentProfile().catch(error => {
+                const list = document.getElementById('testimonial-list');
+                const cachedItems = getTestimonialsForName(currentProfileName);
+                if (cachedItems.length > 0) {
+                    renderTestimonials();
+                } else if (list) {
+                    list.innerHTML = `<div class="testimonial-empty">得着暂时读取失败：${escapeHtml(error.message || '服务不可用')}</div>`;
+                }
+            });
+        }
+
+        function closeTestimonialModal() {
+            const overlay = document.getElementById('testimonial-overlay');
+            if (overlay) overlay.classList.remove('show');
+        }
+
+        async function submitTestimonial() {
+            if (!currentProfileName) return;
+            const input = document.getElementById('testimonial-input');
+            const content = (input?.value || '').trim();
+            if (!content) {
+                alert("请先写一点得着。");
+                return;
+            }
+            try {
+                const data = await requestApiJson('/testimonials', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: currentProfileName,
+                        content,
+                        date: getSafeDateString(viewingDate)
+                    })
+                }, 2);
+                if (!data || data.ok !== true || !data.testimonial) {
+                    throw new Error(data?.error || '得着 JSON 没有确认保存成功');
+                }
+                globalTestimonials = mergeTestimonials(globalTestimonials, data.testimonial);
+                if (input) input.value = '';
+                renderTestimonials();
+            } catch (error) {
+                const localItem = {
+                    id: `local-${Date.now()}`,
+                    name: currentProfileName,
+                    content,
+                    date: getSafeDateString(viewingDate),
+                    createdAt: new Date().toISOString(),
+                    pendingSync: true
+                };
+                globalTestimonials = mergeTestimonials(globalTestimonials, localItem);
+                saveLocalTestimonialsCache(globalTestimonials.filter(item => item.pendingSync));
+                if (input) input.value = '';
+                renderTestimonials();
+                alert(`NAS 暂时连不上，得着已先保存在本机缓存。\n原因：${error.message || '服务不可用'}`);
+            }
+        }
+
         function showProfile(name) {
             currentProfileName = name; 
             document.getElementById('profile-name').innerText = name;
-            updateAvatarUI(name);
+            profileMonthDate = new Date(viewingDate.getFullYear(), viewingDate.getMonth(), 1);
+            renderProfileCalendar();
+            document.getElementById('profile-overlay').classList.add('show');
+        }
 
-            const activeDates = new Set();
+        function changeProfileMonth(offset) {
+            profileMonthDate = new Date(profileMonthDate.getFullYear(), profileMonthDate.getMonth() + offset, 1);
+            renderProfileCalendar();
+        }
+
+        function jumpToProfileDate(year, month, day) {
+            viewingDate = new Date(year, month, day);
+            profileMonthDate = new Date(year, month, 1);
+            closeProfile();
+            updateDateUI();
+            resetButtons();
+            renderStatus();
+            renderDashboard();
+        }
+
+        function getMemberDayCompletion(name, dateStr) {
+            let daily = false, reading = false, weekly = false;
+            const targetDate = parseDateString(dateStr);
+            const targetWeekStart = targetDate ? getWeekStart(targetDate) : '';
+            const todayStr = getSafeDateString(REAL_TODAY);
             globalRecords.forEach(r => {
-                if(r['姓名'] === name && (r['每日灵修'] === '已完成' || r['每日读经'] === '已完成')) {
-                    activeDates.add(getLogicalDateStr(r));
+                if (r['姓名'] !== name) return;
+                const rDateStr = getLogicalDateStr(r);
+                if (!rDateStr) return;
+                if (rDateStr === dateStr) {
+                    if (r['每日灵修'] === '已完成') daily = true;
+                    if (r['每日读经'] === '已完成') reading = true;
+                }
+                if (r['周任务'] === '已完成' && targetWeekStart && dateStr <= todayStr) {
+                    const recordDate = parseDateString(rDateStr);
+                    if (recordDate && getWeekStart(recordDate) === targetWeekStart) weekly = true;
                 }
             });
-            let recent7Count = 0; let calendarHTML = '';
-            for(let i = 6; i >= 0; i--) {
-                let d = new Date(REAL_TODAY); d.setDate(d.getDate() - i);
-                let dStr = getSafeDateString(d); let isDone = activeDates.has(dStr);
-                if(isDone) recent7Count++;
-                calendarHTML += `<div class="cal-day"><div class="${isDone ? 'cal-dot done' : 'cal-dot'}">${isDone ? '✔' : ''}</div><div class="cal-label">${i === 0 ? '今' : d.getDate()}</div></div>`;
+            const totalCount = [daily, reading, weekly].filter(Boolean).length;
+            return { daily, reading, weekly, totalCount };
+        }
+
+        function renderProfileCalendar() {
+            const grid = document.getElementById('profile-calendar');
+            const title = document.getElementById('profile-month-title');
+            if (!grid || !title || !currentProfileName) return;
+
+            const year = profileMonthDate.getFullYear();
+            const month = profileMonthDate.getMonth();
+            title.innerText = `${year}年${month + 1}月`;
+
+            const firstDay = new Date(year, month, 1);
+            const calendarStart = new Date(year, month, 1 - firstDay.getDay());
+            const todayStr = getSafeDateString(REAL_TODAY);
+            let html = '';
+
+            for (let i = 0; i < 42; i++) {
+                const cellDate = new Date(calendarStart);
+                cellDate.setDate(calendarStart.getDate() + i);
+                const dateStr = getSafeDateString(cellDate);
+                const completion = getMemberDayCompletion(currentProfileName, dateStr);
+
+                const classes = ['profile-day'];
+                if (cellDate.getMonth() !== month) classes.push('outside');
+                if (dateStr === todayStr) classes.push('today');
+                if (completion.totalCount > 0) classes.push('daily-done');
+                if (completion.totalCount >= 2) classes.push('complete');
+
+                html += `
+                    <button type="button" class="${classes.join(' ')}" onclick="jumpToProfileDate(${cellDate.getFullYear()}, ${cellDate.getMonth()}, ${cellDate.getDate()})">
+                        <div class="profile-day-number">${cellDate.getDate()}</div>
+                        ${completion.totalCount > 0 ? `<div class="profile-day-badge">已完成 ${completion.totalCount}/3</div>` : ''}
+                    </button>
+                `;
             }
-            document.getElementById('p-calendar').innerHTML = calendarHTML;
-            document.getElementById('p-rate').innerText = recent7Count;
-            let streak = 0; let checkDate = new Date(REAL_TODAY);
-            if (!activeDates.has(getSafeDateString(checkDate))) checkDate.setDate(checkDate.getDate() - 1);
-            while (activeDates.has(getSafeDateString(checkDate))) { streak++; checkDate.setDate(checkDate.getDate() - 1); }
-            document.getElementById('p-streak').innerText = streak;
-            document.getElementById('profile-overlay').classList.add('show');
+            grid.innerHTML = html;
         }
 
         // ================= 📊 底部数据大盘渲染引擎 (带严格去重) =================
@@ -1003,6 +2617,76 @@
             document.querySelectorAll('.dash-content').forEach(c => c.classList.remove('active'));
             btnEl.classList.add('active');
             document.getElementById('dash-' + tabId).classList.add('active');
+        }
+
+        function renderWeeklySummaryDashboard() {
+            const listEl = document.getElementById('weekly-summary-list');
+            const chartEl = document.getElementById('chart-weekly-summary');
+            if (!listEl || !chartEl) return;
+
+            const todayStr = getSafeDateString(REAL_TODAY);
+            const sevenDaysAgo = new Date(REAL_TODAY);
+            sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 6);
+            const sevenDaysAgoStr = getSafeDateString(sevenDaysAgo);
+
+            const taskItems = [
+                { key: 'daily', label: '灵修' },
+                { key: 'reading', label: '读经' },
+                { key: 'weekly', label: '周课' }
+            ];
+            const summary = {};
+            MEMBERS.forEach(name => { summary[name] = { daily: 0, reading: 0, weekly: 0 }; });
+
+            globalRecords.forEach(record => {
+                const name = record['姓名'];
+                if (!summary[name]) return;
+                const dateStr = getLogicalDateStr(record);
+                if (!dateStr || dateStr < sevenDaysAgoStr || dateStr > todayStr) return;
+                if (record['每日灵修'] === '已完成') summary[name].daily++;
+                if (record['每日读经'] === '已完成') summary[name].reading++;
+                if (record['周任务'] === '已完成') summary[name].weekly++;
+            });
+
+            const sorted = MEMBERS.slice().sort((a, b) => {
+                const totalA = taskItems.reduce((sum, item) => sum + summary[a][item.key], 0);
+                const totalB = taskItems.reduce((sum, item) => sum + summary[b][item.key], 0);
+                return totalB - totalA;
+            });
+
+            listEl.innerHTML = sorted.length ? sorted.map(name => `
+                <div class="weekly-summary-item">
+                    <div class="weekly-summary-name">${escapeHtml(name)}</div>
+                    <ul class="weekly-summary-points">
+                        ${taskItems.map(item => `<li>${item.label} <b>${summary[name][item.key]}</b> 次</li>`).join('')}
+                    </ul>
+                </div>
+            `).join('') : '<div class="weekly-summary-empty">暂无可统计的近七日数据。</div>';
+
+            const totals = taskItems.map(item => sorted.reduce((sum, name) => sum + summary[name][item.key], 0));
+            const hasData = totals.some(value => value > 0);
+
+            if (chartInstances['weekly-summary']) chartInstances['weekly-summary'].destroy();
+            chartInstances['weekly-summary'] = new Chart(chartEl, {
+                type: 'pie',
+                data: {
+                    labels: hasData ? taskItems.map(item => item.label) : ['暂无数据'],
+                    datasets: [{
+                        data: hasData ? totals : [1],
+                        backgroundColor: hasData ? ['#10b981', '#ec4899', '#38b2ac'] : ['#e5edf5'],
+                        borderColor: '#ffffff',
+                        borderWidth: 4,
+                        hoverOffset: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 12, weight: '800' } } },
+                        tooltip: { enabled: hasData }
+                    }
+                }
+            });
         }
 
         function renderDashboard() {
@@ -1070,7 +2754,7 @@
             let sortedByLast7 = MEMBERS.slice().sort((a, b) => stats[b].last7 - stats[a].last7);
             chartInstances['7days'] = new Chart(document.getElementById('chart-7days'), {
                 type: 'bar',
-                data: { labels: sortedByLast7, datasets: [{ label: '近七日活跃天数', data: sortedByLast7.map(m => stats[m].last7), backgroundColor: 'rgba(90, 103, 216, 0.8)', borderRadius: 6 }] },
+                data: { labels: sortedByLast7, datasets: [{ label: '近七日活跃天数', data: sortedByLast7.map(m => stats[m].last7), backgroundColor: 'rgba(2, 117, 82, 0.82)', borderRadius: 6 }] },
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { autoSkip: false, maxRotation: 45, minRotation: 45 } }, y: { beginAtZero: true, max: 7, ticks: { stepSize: 1 } } } }
             });
 
@@ -1080,6 +2764,7 @@
                 data: { labels: sortedByStreak, datasets: [{ label: '当前连续天数', data: sortedByStreak.map(m => stats[m].streak), backgroundColor: '#f59e0b', borderRadius: 4 }] },
                options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, ticks: { stepSize: 1 } }, y: { ticks: { autoSkip: false } } } }
             });
+            renderWeeklySummaryDashboard();
         }
     </script>
 </body>

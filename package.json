@@ -1,0 +1,19 @@
+{
+  "name": "zw-checkin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "浙外门训打卡 NAS 部署服务",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "import:nocodb": "node migrate-nocodb.js",
+    "deploy:safe": "sh ./deploy.sh",
+    "restore:records": "sh ./restore-records.sh"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^4.18.3"
+  }
+}

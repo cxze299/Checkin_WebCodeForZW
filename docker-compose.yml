@@ -1,0 +1,17 @@
+name: zw-disciple-checkin
+
+services:
+  zw-checkin:
+    build: .
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DATABASE_PATH: /app/data/app.json
+      SESSION_SECRET: ${SESSION_SECRET:-please-change-this-to-a-long-random-string}
+    ports:
+      - "777:6717"
+    volumes:
+      - ./data:/app/data
+      - ./Yonghuo.md:/app/Yonghuo.md:ro
+      - ./weekly_task.md:/app/weekly_task.md:ro
