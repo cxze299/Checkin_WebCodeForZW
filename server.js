@@ -8,6 +8,7 @@ const host = process.env.HOST || '0.0.0.0';
 const staticDir = path.resolve(process.env.STATIC_DIR || __dirname);
 const dataDir = path.resolve(process.env.DATA_DIR || path.join(__dirname, 'data'));
 const recordsPath = path.join(dataDir, 'records.json');
+<<<<<<< HEAD
 const weeklySchedulePath = path.join(dataDir, 'weekly-schedule.json');
 const testimonialsPath = path.join(dataDir, 'testimonials.json');
 const backupDir = path.join(dataDir, 'backups');
@@ -28,10 +29,13 @@ const defaultWeeklySchedule = [
   { start: '2026-07-06', end: '2026-07-11', title: '永活之泉', verse: '', video: '约翰福音（上）、基督是神的儿子（神儿子的生命—真理-光）', url: '' },
   { start: '2026-07-13', end: '2026-07-18', title: '永活之泉', verse: '', video: '约翰福音（下）、基督是神的儿子（赐给我们的生命）', url: '' }
 ];
+=======
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
 
 app.disable('x-powered-by');
 app.use(express.json({ limit: '10mb' }));
 
+<<<<<<< HEAD
 app.use('/api', (req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
@@ -44,6 +48,8 @@ app.use('/api', (req, res, next) => {
 
 // ======================= 数据持久化基础工具 =======================
 
+=======
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
 function readJsonFile(filePath, fallback) {
   try {
     return JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -52,6 +58,7 @@ function readJsonFile(filePath, fallback) {
   }
 }
 
+<<<<<<< HEAD
 function ensureDataDir() {
   fs.mkdirSync(dataDir, { recursive: true });
 }
@@ -340,6 +347,17 @@ app.delete('/api/records', async (req, res) => {
 });
 
 // 静态文件与缓存控制
+=======
+app.get('/health', (req, res) => {
+  res.json({ ok: true, service: 'zw-checkin' });
+});
+
+app.get('/api/state', (req, res) => {
+  const records = readJsonFile(recordsPath, []);
+  res.json({ records });
+});
+
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
 app.use((req, res, next) => {
   if (/\.(html|md|json)$/i.test(req.path)) {
     res.setHeader('Cache-Control', 'no-store');
@@ -361,7 +379,13 @@ app.get('*', (req, res) => {
 });
 
 app.listen(port, host, () => {
+<<<<<<< HEAD
   console.log(`ZW checkin (Pure Local JSON Mode) is running at http://${host}:${port}`);
   console.log(`Serving static files from ${staticDir}`);
   console.log(`Saving data to ${dataDir}`);
 });
+=======
+  console.log(`ZW checkin is running at http://${host}:${port}`);
+  console.log(`Serving static files from ${staticDir}`);
+});
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5

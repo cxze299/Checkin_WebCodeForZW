@@ -117,8 +117,12 @@
         @media (min-width: 950px) { #members-container { grid-template-columns: repeat(3, 1fr); } }
 
         .member-card { background: linear-gradient(180deg, #ffffff 0%, #f7fcfa 100%); border-radius: 20px; padding: 18px; border: 1px solid rgba(2,117,82,0.09); display: flex; flex-direction: column; box-shadow: 0 10px 24px rgba(2,117,82,0.045); }
+<<<<<<< HEAD
         .member-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 15px; }
         .member-identity { display: flex; align-items: center; gap: 12px; min-width: 0; }
+=======
+        .member-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
         .avatar { width: 44px; height: 44px; background: var(--primary-light); color: var(--primary); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 16px; font-weight: 800; border: 2px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.2s; }
         .avatar:active { transform: scale(0.9); }
         .member-name { font-size: 17px; font-weight: 800; min-width: 0; overflow-wrap: anywhere; }
@@ -217,7 +221,11 @@
         .profile-weekdays, .profile-calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; }
         .profile-weekdays { margin-bottom: 10px; }
         .profile-weekday { text-align: center; color: var(--text-sub); font-size: 13px; font-weight: 900; }
+<<<<<<< HEAD
         .profile-day { min-height: 68px; border: 1px solid #eef0f5; border-radius: 10px; background: #ffffff; position: relative; padding: 10px 9px; box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-start; appearance: none; font: inherit; cursor: pointer; width: 100%; text-align: left; }
+=======
+        .profile-day { min-height: 68px; border: 1px solid #eef0f5; border-radius: 10px; background: #ffffff; position: relative; padding: 10px 9px; box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-start; }
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
         .profile-day.outside { color: #b8bdc7; background: #fcfcfd; }
         .profile-day.today { border-color: var(--hero-accent); box-shadow: inset 0 0 0 1px var(--hero-accent); }
         .profile-day.daily-done { background: var(--hero-accent-soft); border-color: rgba(2, 117, 82, 0.35); }
@@ -296,6 +304,7 @@
         .admin-login-box, #admin-tools-panel .admin-section { background: rgba(255,255,255,0.64); border: 1px solid rgba(2,117,82,0.10); border-radius: 18px; padding: 16px; box-shadow: 0 10px 24px rgba(2,117,82,0.045); }
         #admin-tools-panel .admin-section:first-of-type { border-top: 1px solid rgba(2,117,82,0.10); padding-top: 16px; }
         .admin-note { color: #5f7d74; font-size: 12px; line-height: 1.6; margin-top: 10px; }
+<<<<<<< HEAD
         .admin-data-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 12px; }
         .admin-data-card { background: rgba(255,255,255,0.9); border: 1px solid rgba(2,117,82,0.12); border-radius: 12px; padding: 12px; min-height: 64px; }
         .admin-data-label { color: #5f7d74; font-size: 11px; font-weight: 900; margin-bottom: 6px; }
@@ -354,6 +363,13 @@
             .records-list-item { grid-template-columns: 1fr; gap: 6px; }
             .records-list-note { grid-column: 1 / -1; }
             .checkin-note-actions { flex-direction: column; }
+=======
+        .admin-hidden { display: none !important; }
+        @media (max-width: 600px) {
+            .container { padding: 8px 10px calc(28px + env(safe-area-inset-bottom)) 10px; }
+            .admin-actions, .admin-field-grid { grid-template-columns: 1fr; }
+            .admin-input-row { flex-direction: column; }
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
             .header { padding: calc(22px + env(safe-area-inset-top)) 18px 22px 18px; }
             .hero-topline { flex-direction: column; }
             .header h1 { font-size: 34px; }
@@ -603,6 +619,7 @@
         </div>
     </div>
 
+<<<<<<< HEAD
     <div id="testimonial-overlay" class="modal-overlay" onclick="closeTestimonialModal()">
         <div class="modal-content testimonial-content" onclick="event.stopPropagation()">
             <div class="testimonial-title" id="testimonial-title">个人得着</div>
@@ -620,6 +637,12 @@
         <div class="modal-content admin-content" onclick="event.stopPropagation()">
             <h2 class="admin-title">管理员后台</h2>
             <p class="admin-subtitle">成员、周任务、导出和当前记录都在这里维护。设置会保存到当前浏览器，打卡记录来自同一后端。</p>
+=======
+    <div id="admin-overlay" class="modal-overlay" onclick="closeAdminPanel()">
+        <div class="modal-content admin-content" onclick="event.stopPropagation()">
+            <h2 class="admin-title">管理员后台</h2>
+            <p class="admin-subtitle">成员、周任务、同步和导出都在这里维护。设置会保存到当前浏览器，不影响云端历史打卡记录。</p>
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
 
             <div id="admin-login-panel" class="admin-login-box">
                 <div class="admin-section">
@@ -643,6 +666,7 @@
                 </div>
 
                 <div class="admin-section">
+<<<<<<< HEAD
                     <h3>打卡记录库</h3>
                     <div class="admin-data-grid">
                         <div class="admin-data-card">
@@ -683,6 +707,8 @@
                 </div>
 
                 <div class="admin-section">
+=======
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
                     <h3>成员名单</h3>
                     <div id="admin-member-list" class="admin-member-list"></div>
                     <div class="admin-input-row">
@@ -715,6 +741,7 @@
                             <label for="admin-week-verse">背经范围</label>
                             <input id="admin-week-verse" type="text" placeholder="例如：约翰福音17:6-8">
                         </div>
+<<<<<<< HEAD
                         <div class="admin-field full">
                             <label for="admin-week-video">视频标题</label>
                             <input id="admin-week-video" type="text" placeholder="例如：四福音合参（上）">
@@ -723,6 +750,8 @@
                             <label for="admin-week-url">视频地址</label>
                             <input id="admin-week-url" type="url" placeholder="例如：http://nas.example.com/video.mp4">
                         </div>
+=======
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
                     </div>
                     <div class="admin-actions" style="margin-top:12px;">
                         <button class="admin-action-btn" onclick="saveWeekPlanFromAdmin()">保存当前周</button>
@@ -736,7 +765,10 @@
                 <div class="admin-section">
                     <h3>数据导出</h3>
                     <div class="admin-actions">
+<<<<<<< HEAD
                         <button class="admin-action-btn" onclick="openRecordsViewer()">查看打卡记录</button>
+=======
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
                         <button class="admin-action-btn" onclick="exportRecordsCsv()">导出打卡明细 CSV</button>
                         <button class="admin-action-btn" onclick="exportDailySummaryCsv()">导出每日汇总 CSV</button>
                         <button class="admin-action-btn secondary" onclick="exportBackupJson()">导出本地备份 JSON</button>
@@ -748,7 +780,11 @@
                 <div class="admin-section">
                     <h3>同步</h3>
                     <div class="admin-actions">
+<<<<<<< HEAD
                         <button class="admin-action-btn secondary" onclick="fetchStatus()">刷新当前记录</button>
+=======
+                        <button class="admin-action-btn secondary" onclick="fetchStatus()">重新同步云端数据</button>
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
                         <button class="admin-action-btn warning" onclick="resetAdminMembers()">恢复默认成员</button>
                     </div>
                 </div>
@@ -821,6 +857,7 @@
         };
 
         // ============================ ZW 2026门训专属配置区 ============================
+<<<<<<< HEAD
         const DEFAULT_API_BASE = "/api";
         const NAS_API_BASE = "http://mouss.synology.me:777/api";
         const LOCAL_API_BASES = ["http://127.0.0.1:6717/api", "http://localhost:6717/api"];
@@ -829,6 +866,11 @@
             : `${location.protocol}//${location.hostname}:6717/api`;
         let resolvedApiBase = location.protocol === 'file:' ? NAS_API_BASE : DEFAULT_API_BASE;
         let apiBaseChecked = false;
+=======
+        const API_TOKEN = "awAGCSLcP-P-ABUja1yMxNopjD_cX4OnfbKO2cR0"; 
+        const NOCODB_API_URL = "http://mouss.synology.me:32771/api/v2/tables/md6q8riiyslkw6p/records"; 
+        const NAS_API_BASE = "/api";
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
         
         const DEFAULT_MEMBERS = ["迦密", "恩惠","以琳", "陈蜜", "诚志", "信凯", "周睿", "家乐", "可心", "佳音", "李好", "文琪",  "奕豪", "爱赐", "梓楠", "思恩", "浙君", "丹萍", "天宇", "恩悯", "翠翠", "慕智", "蒙恩", "贝贝"]; 
         let MEMBERS = loadMembersConfig();
@@ -885,6 +927,7 @@
         }
 
         const DEFAULT_WEEKLY_SCHEDULE = [
+<<<<<<< HEAD
             { start: "2026-04-13", end: "2026-04-18", title: "永活之泉", verse: "约翰福音17:1-2", video: "", url: "" },
             { start: "2026-04-20", end: "2026-04-25", title: "永活之泉", verse: "约翰福音17:3-5", video: "", url: "" },
             { start: "2026-04-27", end: "2026-05-02", title: "永活之泉", verse: "约翰福音17:6-8", video: "", url: "" },
@@ -907,6 +950,25 @@
         let boundJsonFileName = localStorage.getItem('zw_bound_json_name') || '';
         let adminAuthenticated = false;
         let adminRecordFilters = { name: '', type: '' };
+=======
+            { start: "2026-04-12", end: "2026-04-18", title: "《基督是一切》01", verse: "约翰福音17:1-2" },
+            { start: "2026-04-19", end: "2026-04-25", title: "《基督是一切》02", verse: "约翰福音17:3-5" },
+            { start: "2026-04-26", end: "2026-05-02", title: "《基督是一切》03", verse: "约翰福音17:6-8" },
+            { start: "2026-05-03", end: "2026-05-09", title: "《基督是一切》04", verse: "约翰福音17:9-10" },
+            { start: "2026-05-10", end: "2026-05-16", title: "《基督是一切》05", verse: "约翰福音17:11-12" },
+            { start: "2026-05-17", end: "2026-05-23", title: "《基督是一切》06", verse: "约翰福音17:13-14" },
+            { start: "2026-05-24", end: "2026-05-30", title: "《基督是一切》07", verse: "约翰福音17:15-16" },
+            { start: "2026-05-31", end: "2026-06-06", title: "《基督是一切》08", verse: "约翰福音17:17-18" },
+            { start: "2026-06-07", end: "2026-06-13", title: "《基督是一切》09", verse: "约翰福音17:19-20" },
+            { start: "2026-06-14", end: "2026-06-20", title: "《基督是一切》10", verse: "约翰福音17:21-22" },
+            { start: "2026-06-21", end: "2026-06-27", title: "《基督是一切》11", verse: "约翰福音17:23-24" },
+            { start: "2026-06-28", end: "2026-07-04", title: "《基督是一切》12", verse: "约翰福音17:25-26" }
+        ];
+        let WEEKLY_SCHEDULE = loadWeeklySchedule();
+
+        let REAL_TODAY = new Date(), viewingDate = new Date(), profileMonthDate = new Date(), datePickerMonthDate = new Date(), globalRecords = [], currentProfileName = "", pendingCancel = null;
+        let adminAuthenticated = false;
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
         const fontStackQuotes = `"Noto Serif SC", "Kaiti SC", STKaiti, "Songti SC", FangSong, STFangsong, serif`;
         let chartInstances = {}; 
 
@@ -938,9 +1000,13 @@
                 start: String(plan.start || '').trim(),
                 end: String(plan.end || '').trim(),
                 title: String(plan.title || '').trim(),
+<<<<<<< HEAD
                 verse: String(plan.verse || '').trim(),
                 video: String(plan.video || '').trim(),
                 url: String(plan.url || plan.videoUrl || '').trim()
+=======
+                verse: String(plan.verse || '').trim()
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
             };
         }
 
@@ -955,6 +1021,7 @@
             return DEFAULT_WEEKLY_SCHEDULE.map(normalizeWeekPlan);
         }
 
+<<<<<<< HEAD
         function applyWeeklySchedule(schedule, saveLocal = true) {
             const cleaned = Array.isArray(schedule)
                 ? schedule.map(normalizeWeekPlan).filter(plan => plan.start && plan.end && plan.title).sort((a, b) => a.start.localeCompare(b.start))
@@ -979,6 +1046,9 @@
         }
 
         async function persistWeeklySchedule() {
+=======
+        function persistWeeklySchedule() {
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
             WEEKLY_SCHEDULE = WEEKLY_SCHEDULE.map(normalizeWeekPlan)
                 .filter(plan => plan.start && plan.end && plan.title)
                 .sort((a, b) => a.start.localeCompare(b.start));
@@ -988,11 +1058,14 @@
             renderStatus();
             renderDashboard();
             renderWeekPlanOptions();
+<<<<<<< HEAD
             try {
                 await saveWeeklyScheduleToServer();
             } catch (error) {
                 alert(`周任务已先保存到当前浏览器，但写入 NAS JSON 失败：${error.message || '服务不可用'}`);
             }
+=======
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
         }
 
         function escapeHtml(value) {
@@ -1273,14 +1346,22 @@
             const videoStr = currentWeekData.video;
             const videoUrl = currentWeekData.url;
             
+<<<<<<< HEAD
             const verseUI = verseStr ? `<div class="task-extra-line"><span>📖</span><span>背经：</span><a onclick="openScriptureOnline('${escapeJs(verseStr)}')">${escapeHtml(verseStr)} (背诵)</a></div>` : '';
             const videoUI = videoStr ? `<div class="task-extra-line"><span>▶️</span><span>视频：</span><a onclick="openVideo('${escapeJs(videoUrl)}', '${escapeJs(videoStr)}')">${escapeHtml(videoStr)}${videoUrl ? ' (播放)' : ' (待配置)'}</a></div>` : '';
             const tagUI = `${videoUI}${verseUI}`;
+=======
+            const tagUI = `<div class="task-extra-line"><span>📖</span><span>背经：</span><a onclick="openScriptureOnline('${verseStr}')">${verseStr} (背诵)</a></div>`;
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
             
             return { 
                 devotion: `<div class="clickable-task" onclick="openDailyReading()">📖 旷野灵修（<span class="task-highlight">${month}月${day}日</span>）<span class="read-badge">点击阅读</span></div>`, 
                 reading: `<span style="color:var(--hero-accent); font-size:15px; font-weight:700;">愿神的话向你发出亮光！✨</span>`,
+<<<<<<< HEAD
                 weekly: `<div class="clickable-task" style="margin-bottom:6px;" onclick="openWeeklyReading('${escapeJs(weeklyTitleStr)}')">📚 ${escapeHtml(weeklyTitleStr)}<span class="read-badge weekly-badge">点击阅读</span></div>${tagUI}` 
+=======
+                weekly: `<div class="clickable-task" style="margin-bottom:6px;" onclick="openWeeklyReading('${weeklyTitleStr}')">📚 ${weeklyTitleStr}<span class="read-badge weekly-badge">点击阅读</span></div>${tagUI}` 
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
             };
         }
 
@@ -1596,6 +1677,7 @@
             else { loadingEl.style.display = 'block'; loadingEl.innerHTML = "<span style='font-size:12px; color:var(--text-sub);'>🔄 正在刷新本地 JSON 记录...</span>"; }
 
             try {
+<<<<<<< HEAD
                 if (isBoundLocalJsonMode()) {
                     const records = await readBoundJsonRecords();
                     globalRecords = Array.isArray(records) ? records : [];
@@ -1603,6 +1685,44 @@
                     lastSyncTime = new Date();
                     refreshFromRecords();
                     return;
+=======
+                if (location.protocol !== 'file:') {
+                    try {
+                        const stateResponse = await fetchWithRetry(`${NAS_API_BASE}/state?_t=${Date.now()}`, {
+                            method: 'GET',
+                            headers: { 'Cache-Control': 'no-cache, no-store, must-revalidate' }
+                        }, 2);
+                        const state = await stateResponse.json();
+                        if (Array.isArray(state.records)) {
+                            globalRecords = state.records;
+                            localStorage.setItem('zw_checkin_cache', JSON.stringify(globalRecords));
+                            resetButtons(); renderStatus(); renderDashboard();
+                            return;
+                        }
+                    } catch (apiError) {
+                        console.warn('NAS API unavailable, fallback to NocoDB', apiError);
+                    }
+                }
+
+                let allRecords = [];
+                let offset = 0;
+                const limit = 1000;
+                let hasMore = true;
+                
+                while(hasMore) {
+                    const response = await fetchWithRetry(`${NOCODB_API_URL}?limit=${limit}&offset=${offset}&_t=${Date.now()}`, { 
+                        method: 'GET', headers: { 'xc-token': API_TOKEN, 'Cache-Control': 'no-cache, no-store, must-revalidate' } 
+                    }, 3);
+                    const data = await response.json();
+                    
+                    if (data.list && data.list.length > 0) {
+                        allRecords.push(...data.list);
+                        if (data.list.length < limit) hasMore = false;
+                        else offset += limit;
+                    } else {
+                        hasMore = false;
+                    }
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
                 }
                 const state = await requestApiJson(`/state?_t=${Date.now()}`, {
                     method: 'GET',
@@ -1795,6 +1915,7 @@
             document.getElementById('admin-overlay').classList.remove('show');
         }
 
+<<<<<<< HEAD
         function getRecordCompletedType(record) {
             if (record['每日灵修']) return `灵修 ${record['每日灵修']}`;
             if (record['每日读经']) return `读经 ${record['每日读经']}`;
@@ -2082,6 +2203,8 @@
             body.parentElement.classList.toggle('admin-hidden', filtered.length === 0);
         }
 
+=======
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
         function getAdminPassword() {
             return localStorage.getItem('zw_admin_password') || '';
         }
@@ -2099,8 +2222,11 @@
             if (adminAuthenticated) {
                 renderAdminMembers();
                 renderWeekPlanOptions();
+<<<<<<< HEAD
                 applyAdminRecordFilters();
                 updateAdminStorageStatus();
+=======
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
             }
         }
 
@@ -2188,8 +2314,11 @@
             document.getElementById('admin-week-end').value = plan.end || '';
             document.getElementById('admin-week-title').value = plan.title || '';
             document.getElementById('admin-week-verse').value = plan.verse || '';
+<<<<<<< HEAD
             document.getElementById('admin-week-video').value = plan.video || '';
             document.getElementById('admin-week-url').value = plan.url || '';
+=======
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
         }
 
         function readWeekPlanForm() {
@@ -2197,9 +2326,13 @@
                 start: document.getElementById('admin-week-start').value,
                 end: document.getElementById('admin-week-end').value,
                 title: document.getElementById('admin-week-title').value,
+<<<<<<< HEAD
                 verse: document.getElementById('admin-week-verse').value,
                 video: document.getElementById('admin-week-video').value,
                 url: document.getElementById('admin-week-url').value
+=======
+                verse: document.getElementById('admin-week-verse').value
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
             });
         }
 
@@ -2245,7 +2378,11 @@
         }
 
         function exportRecordsCsv() {
+<<<<<<< HEAD
             const headers = ['Id', '姓名', '打卡时间', '逻辑日期', '是否补签', '每日灵修', '每日读经', '周任务', '打卡详情', '打卡备注'];
+=======
+            const headers = ['Id', '姓名', '打卡时间', '逻辑日期', '是否补签', '每日灵修', '每日读经', '周任务', '打卡详情'];
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
             const rows = globalRecords.map(r => [
                 r.Id,
                 r['姓名'],
@@ -2255,8 +2392,12 @@
                 r['每日灵修'],
                 r['每日读经'],
                 r['周任务'],
+<<<<<<< HEAD
                 r['打卡详情'],
                 getRecordNoteText(r)
+=======
+                r['打卡详情']
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
             ].map(csvCell).join(','));
             downloadTextFile(`zw-checkin-records-${getSafeDateString(new Date())}.csv`, [headers.map(csvCell).join(','), ...rows].join('\n'), 'text/csv');
         }
@@ -2282,7 +2423,10 @@
                 exportedAt: new Date().toISOString(),
                 members: MEMBERS,
                 weeklySchedule: WEEKLY_SCHEDULE,
+<<<<<<< HEAD
                 testimonials: globalTestimonials,
+=======
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
                 records: globalRecords
             };
             downloadTextFile(`zw-checkin-backup-${getSafeDateString(new Date())}.json`, JSON.stringify(backup, null, 2), 'application/json');
@@ -2299,7 +2443,10 @@
                     MEMBERS = backup.members.map(name => String(name).trim()).filter(Boolean);
                     TOTAL_MEMBERS = MEMBERS.length || 1;
                     if (Array.isArray(backup.weeklySchedule)) WEEKLY_SCHEDULE = backup.weeklySchedule.map(normalizeWeekPlan);
+<<<<<<< HEAD
                     if (Array.isArray(backup.testimonials)) globalTestimonials = backup.testimonials;
+=======
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
                     globalRecords = backup.records;
                     localStorage.setItem('zw_members', JSON.stringify(MEMBERS));
                     localStorage.setItem('zw_weekly_schedule', JSON.stringify(WEEKLY_SCHEDULE));
@@ -2320,6 +2467,7 @@
             event.target.value = '';
         }
 
+<<<<<<< HEAD
         function loadLocalTestimonialsCache() {
             try {
                 const cached = JSON.parse(localStorage.getItem('zw_testimonials_cache') || '[]');
@@ -2530,12 +2678,15 @@
             }
         }
 
+=======
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
         function showProfile(name) {
             currentProfileName = name; 
             document.getElementById('profile-name').innerText = name;
             profileMonthDate = new Date(viewingDate.getFullYear(), viewingDate.getMonth(), 1);
             renderProfileCalendar();
             document.getElementById('profile-overlay').classList.add('show');
+<<<<<<< HEAD
         }
 
         function changeProfileMonth(offset) {
@@ -2606,6 +2757,63 @@
                         <div class="profile-day-number">${cellDate.getDate()}</div>
                         ${completion.totalCount > 0 ? `<div class="profile-day-badge">已完成 ${completion.totalCount}/3</div>` : ''}
                     </button>
+                `;
+            }
+            grid.innerHTML = html;
+=======
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
+        }
+
+        function changeProfileMonth(offset) {
+            profileMonthDate = new Date(profileMonthDate.getFullYear(), profileMonthDate.getMonth() + offset, 1);
+            renderProfileCalendar();
+        }
+
+        function getMemberDayCompletion(name, dateStr) {
+            let daily = false, reading = false, weekly = false;
+            globalRecords.forEach(r => {
+                if (r['姓名'] !== name) return;
+                const rDateStr = getLogicalDateStr(r);
+                if (rDateStr !== dateStr) return;
+                if (r['每日灵修'] === '已完成') daily = true;
+                if (r['每日读经'] === '已完成') reading = true;
+                if (r['周任务'] === '已完成') weekly = true;
+            });
+            const totalCount = [daily, reading, weekly].filter(Boolean).length;
+            return { daily, reading, weekly, totalCount };
+        }
+
+        function renderProfileCalendar() {
+            const grid = document.getElementById('profile-calendar');
+            const title = document.getElementById('profile-month-title');
+            if (!grid || !title || !currentProfileName) return;
+
+            const year = profileMonthDate.getFullYear();
+            const month = profileMonthDate.getMonth();
+            title.innerText = `${year}年${month + 1}月`;
+
+            const firstDay = new Date(year, month, 1);
+            const calendarStart = new Date(year, month, 1 - firstDay.getDay());
+            const todayStr = getSafeDateString(REAL_TODAY);
+            let html = '';
+
+            for (let i = 0; i < 42; i++) {
+                const cellDate = new Date(calendarStart);
+                cellDate.setDate(calendarStart.getDate() + i);
+                const dateStr = getSafeDateString(cellDate);
+                const completion = getMemberDayCompletion(currentProfileName, dateStr);
+
+                const classes = ['profile-day'];
+                if (cellDate.getMonth() !== month) classes.push('outside');
+                if (dateStr === todayStr) classes.push('today');
+                if (completion.totalCount > 0) classes.push('daily-done');
+                if (completion.totalCount >= 2) classes.push('complete');
+
+                html += `
+                    <div class="${classes.join(' ')}">
+                        <div class="profile-day-number">${cellDate.getDate()}</div>
+                        ${completion.totalCount > 0 ? `<div class="profile-day-badge">已完成 ${completion.totalCount}/3</div>` : ''}
+                    </div>
                 `;
             }
             grid.innerHTML = html;

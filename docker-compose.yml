@@ -6,11 +6,16 @@ services:
     restart: unless-stopped
     env_file:
       - .env
+<<<<<<< HEAD
     environment:
       DATABASE_PATH: /app/data/app.json
       SESSION_SECRET: ${SESSION_SECRET:-please-change-this-to-a-long-random-string}
     ports:
       - "777:6717"
+=======
+    ports:
+      - "9717:6717"
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
     volumes:
       - ./data:/app/data
       - ./Yonghuo.md:/app/Yonghuo.md:ro

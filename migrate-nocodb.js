@@ -21,6 +21,7 @@ const apiUrl = process.env.NOCODB_API_URL || 'http://mouss.synology.me:32771/api
 const apiToken = process.env.NOCODB_API_TOKEN || process.env.API_TOKEN || 'awAGCSLcP-P-ABUja1yMxNopjD_cX4OnfbKO2cR0';
 const dataDir = path.resolve(process.env.DATA_DIR || path.join(__dirname, 'data'));
 const recordsPath = path.join(dataDir, 'records.json');
+<<<<<<< HEAD
 const databasePath = path.resolve(process.env.DATABASE_PATH || path.join(dataDir, 'app.json'));
 const backupDir = path.join(dataDir, 'backups');
 const defaultMembers = ['迦密', '恩惠', '以琳', '陈蜜', '诚志', '信凯', '周睿', '家乐', '可心', '佳音', '李好', '文琪', '奕豪', '爱赐', '梓楠', '思恩', '浙君', '丹萍', '天宇', '恩悯', '翠翠', '慕智', '蒙恩', '贝贝'];
@@ -80,6 +81,8 @@ function countUniqueRecords(records) {
   }
   return seen.size;
 }
+=======
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
 
 async function fetchAllRecords() {
   const records = [];
@@ -117,6 +120,7 @@ async function fetchAllRecords() {
 async function main() {
   fs.mkdirSync(dataDir, { recursive: true });
   const records = await fetchAllRecords();
+<<<<<<< HEAD
   const normalizedRecords = records.map(normalizeRecord).filter(record => record && record['姓名']);
   const existingStore = readJsonFile(databasePath, {});
   const existingRecordsFile = readJsonFile(recordsPath, []);
@@ -155,6 +159,15 @@ async function main() {
     'utf8'
   );
   console.log(`Imported ${normalizedRecords.length} NocoDB records and preserved ${existingRecords.length} local records to ${databasePath}`);
+=======
+  fs.writeFileSync(recordsPath, JSON.stringify(records, null, 2), 'utf8');
+  fs.writeFileSync(
+    path.join(dataDir, 'nocodb-import-meta.json'),
+    JSON.stringify({ importedAt: new Date().toISOString(), count: records.length, source: apiUrl }, null, 2),
+    'utf8'
+  );
+  console.log(`Imported ${records.length} records to ${recordsPath}`);
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
 }
 
 main().catch(error => {

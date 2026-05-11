@@ -1,6 +1,10 @@
 # 2026 门训打卡
 
+<<<<<<< HEAD
 这是一个面向门训小组的每日打卡网页，包含每日灵修、每日读经、周课任务、人物月历、数据中心统计和管理员后台。项目可以直接作为静态页面打开，也可以部署到 NAS / Docker 上，通过本地 JSON 数据库和 NocoDB 导入脚本维护历史记录。
+=======
+这是一个面向门训小组的每日打卡网页，包含每日灵修、每日读经、周课任务、人物月历、数据中心统计和管理员后台。项目可以直接作为静态页面打开，也可以部署到 NAS / Docker 上，通过本地 JSON 数据缓存和 NocoDB 导入脚本维护历史记录。
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
 
 ## 功能
 
@@ -11,14 +15,22 @@
 - 数据中心：提供总打卡榜、近七日活跃、连续天数和周总结。
 - 管理员后台：维护成员、周计划、导出 CSV/JSON、本地备份导入。
 - NAS 部署：内置 `Dockerfile`、`docker-compose.yml`、`server.js`。
+<<<<<<< HEAD
 - NocoDB 导入：通过 `migrate-nocodb.js` 将历史记录导入 `data/app.json`。
+=======
+- NocoDB 导入：通过 `migrate-nocodb.js` 将历史记录导入 `data/records.json`。
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
 
 ## 文件说明
 
 - `index.html`：主页面和前端逻辑。
 - `Yonghuo.md`：每日灵修内容，日期标题需保持 `### 一月一日 标题` 格式。
 - `weekly_task.md`：周课阅读内容。
+<<<<<<< HEAD
 - `server.js`：NAS / Docker 静态服务、打卡记录 API 和管理员 API。
+=======
+- `server.js`：NAS / Docker 静态服务和 `/api/state` 接口。
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
 - `migrate-nocodb.js`：从 NocoDB 导入历史记录。
 - `docker-compose.yml`：NAS Docker Compose 配置。
 - `.env.example`：环境变量模板。
@@ -79,8 +91,11 @@ http://你的NAS地址:9717
 NOCODB_API_URL=http://mouss.synology.me:32771/api/v2/tables/md6q8riiyslkw6p/records
 NOCODB_API_TOKEN=你的NocoDBToken
 DATA_DIR=./data
+<<<<<<< HEAD
 DATABASE_PATH=./data/app.json
 SESSION_SECRET=请改成一串很长的随机字符
+=======
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
 ```
 
 然后执行：
@@ -93,12 +108,19 @@ docker compose up -d --build
 导入后会生成：
 
 ```text
+<<<<<<< HEAD
 data/app.json
+=======
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
 data/records.json
 data/nocodb-import-meta.json
 ```
 
+<<<<<<< HEAD
 部署在 NAS 上访问时，页面会优先通过 `/api` 读写 NAS 本地 `data/app.json`；如果本地 API 不可用，会回退到原来的 NocoDB 读取接口。
+=======
+部署在 NAS 上访问时，页面会优先读取 `/api/state` 中的本地记录；如果本地 API 不可用，会回退到原来的 NocoDB 接口。
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
 
 ## 内容格式约定
 
@@ -121,4 +143,8 @@ docker compose up -d --build
 
 ## 备份建议
 
+<<<<<<< HEAD
 建议定期在管理员后台导出 JSON 和 CSV。NAS 本地完整数据库文件是 `data/app.json`，也建议定期备份这个文件。
+=======
+建议定期在管理员后台导出 JSON 和 CSV。若 NAS 使用本地 JSON 记录，也建议定期备份 `data/records.json`。
+>>>>>>> 35c63edc5b9b4f4d55b15cd6683885eca450e1c5
